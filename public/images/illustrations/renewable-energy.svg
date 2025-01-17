@@ -1,0 +1,10 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="400" cy="300" r="200" fill="#FCD34D" fill-opacity="0.2"/>
+  <circle cx="400" cy="300" r="150" fill="#FBBF24" fill-opacity="0.4"/>
+  <circle cx="400" cy="300" r="100" fill="#F59E0B"/>
+  <path d="M400 150L450 250H350L400 150Z" fill="#F59E0B"/>
+  <path d="M550 300L450 350V250L550 300Z" fill="#F59E0B"/>
+  <path d="M400 450L350 350H450L400 450Z" fill="#F59E0B"/>
+  <path d="M250 300L350 250V350L250 300Z" fill="#F59E0B"/>
+  <circle cx="400" cy="300" r="40" fill="#D97706"/>
+</svg> 
