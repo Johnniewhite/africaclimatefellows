@@ -57,53 +57,54 @@ const blogPosts = [
   }
 ]
 
-const fellowships = [
-  {
-    title: "Lake Chad Climate Justice Youth Fellowship",
-    status: "Current",
-    description: "Focused on the Lake Chad region facing severe challenges from climate change, including a 90% reduction in lake size, desertification, and resource scarcity.",
-    regions: ["Chad", "Nigeria", "Cameroon", "Niger"],
-    metrics: {
-      fellows: 20,
-      duration: "24 months",
-      focus: "Lake Chad Basin"
-    }
-  },
-  {
-    title: "Future Fellowship Programs",
-    status: "Upcoming",
-    description: "Expanding our impact across Africa with new regional fellowships to address unique climate challenges and empower local youth leaders.",
-    regions: ["East Africa", "Southern Africa", "West Africa"],
-    metrics: {
-      fellows: "TBA",
-      duration: "24 months",
-      focus: "Regional Climate Action"
-    }
-  }
-]
-
 export default function Home() {
   const [currentImage, setCurrentImage] = useState(0)
-  const heroImages = ['/images/hero1.jpg', '/images/hero2.png']
+  const heroImages = [
+    '/images/ClimateConvofold/Climate Convo12.jpeg',
+    '/images/ClimateConvofold/D56E2701.jpg',
+    '/images/ClimateConvofold/Climate Convo13.jpeg',
+    '/images/ClimateConvofold/D56E2640.jpg',
+    '/images/ClimateConvofold/Climate Convo14.jpeg'
+  ]
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % heroImages.length)
-    }, 5000)
+    }, 5000) // Change image every 5 seconds
 
     return () => clearInterval(timer)
   }, [heroImages.length])
 
   return (
     <main className="min-h-screen">
+      <div className="relative py-16 px-4 text-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/banner.jpeg"
+            alt="Hero background"
+            fill
+            className="object-cover brightness-50"
+            priority
+          />
+        </div>
+        <div className="relative z-10">
+          <h1 className="text-4xl lg:text-6xl font-bold mb-8 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] animate-fade-in-up">
+            Climate Justice <span className="text-green-400">Youth Fellowship</span>
+          </h1>
+          <p className="text-xl lg:text-2xl max-w-3xl mx-auto text-white font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] animate-fade-in-up-delay">
+            Empowering Africa&apos;s Youth for Climate Justice Action
+          </p>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-green-400/40 via-white/60 to-green-400/40"></div>
+      </div>
       {/* Hero Section with Split Layout */}
-      <section className="relative min-h-[600px] flex flex-col md:flex-row justify-between">
-        {/* Image Carousel - Full width on mobile, 60% on desktop */}
+      <section className="relative min-h-[600px] flex justify-between">
+        {/* Image Carousel - Left side (60%) */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full md:w-[60%] relative h-[400px] md:h-auto"
+          className="w-[60%] relative"
         >
           {heroImages.map((src, index) => (
             <motion.div
@@ -115,46 +116,84 @@ export default function Home() {
             >
               <Image
                 src={src}
-                alt={`Hero image ${index + 1}`}
+                alt={`Climate Justice Fellowship image ${index + 1}`}
                 fill
                 className="object-cover"
                 priority={index === 0}
               />
             </motion.div>
           ))}
+          {/* Image Navigation Dots */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+            {heroImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImage(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  currentImage === index 
+                    ? 'bg-white w-4' 
+                    : 'bg-white/50 hover:bg-white/75'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </motion.div>
 
-        {/* Text Content - Full width on mobile, 40% on desktop */}
-        <div className="w-full md:w-[40%] bg-green-50 dark:bg-green-950/30 flex items-center py-12 md:py-0">
+        {/* Text Content - Right side (30%) */}
+        <div className="w-[40%] bg-green-50 dark:bg-green-950/30 flex items-center pt-3">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="px-6 md:px-8 lg:px-12 w-full"
+            className="px-8 lg:px-12"
           >
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 text-green-950 dark:text-green-50">
-              Empowering Africa&apos;s Youth for Climate Justice Action
-            </h1>
-            <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 mb-6 md:mb-8 leading-relaxed">
-              A transformative fellowship equipping young African leaders to champion climate justice,
-              tackle systemic challenges, and drive grassroots resilience.
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-green-950 dark:text-green-50">
+              The Climate Justice Youth Fellowship
+            </h2>
+            <p className="text-lg text-green-800/80 dark:text-green-100/80 mb-6 leading-relaxed">
+              A transformative initiative dedicated to harnessing the adventurous spirit, resilience, and innovative leadership of African youth. We connect young climate advocates with critical resources, sharpened skills, professional networks, and international exposure.
             </p>
+            <div className="space-y-6 mb-8">
+              
+              <div className="space-y-2">
+                <h3 className="font-semibold text-green-700 dark:text-green-300">Program Details:</h3>
+                <div className="grid grid-cols-2 gap-4 text-green-800/80 dark:text-green-100/80">
+                  <div>
+                    <span className="font-medium block">Duration</span>
+                    <span>24 Months</span>
+                  </div>
+                  <div>
+                    <span className="font-medium block">Fellows</span>
+                    <span>20 Leaders</span>
+                  </div>
+                  <div>
+                    <span className="font-medium block">Focus Area</span>
+                    <span>Lake Chad Region</span>
+                  </div>
+                  <div>
+                    <span className="font-medium block">Age Range</span>
+                    <span>18-35 years</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <Link 
-              href="/about"
-              className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 text-base sm:text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md"
+              href="/fellowship"
+              className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md"
             >
-              Learn More
-              <ArrowRight className="ml-2 w-4 sm:w-5 h-4 sm:h-5" />
+              Apply Now
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* Features Section with Interactive Cards */}
-      <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-background to-muted/50">
+      <section className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-muted/50">
         <div className="absolute inset-0 bg-grid-light dark:bg-grid-dark opacity-50" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -162,17 +201,17 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.05 }}
                 className="card card-hover group cursor-pointer"
               >
-                <div className="p-4 sm:p-6 relative overflow-hidden">
-                  <div className={`w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-gradient-to-br ${feature.gradient} p-2 sm:p-2.5 mb-3 sm:mb-4 transform group-hover:scale-110 transition-transform duration-300`}>
+                <div className="p-6 relative overflow-hidden">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} p-2.5 mb-4 transform group-hover:scale-110 transition-transform duration-300`}>
                     <feature.icon className="w-full h-full text-white" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-muted-foreground group-hover:text-foreground transition-colors">
+                  <p className="text-muted-foreground group-hover:text-foreground transition-colors">
                     {feature.description}
                   </p>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-green-300 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
@@ -183,117 +222,136 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Fellowship Programs Section - NEW */}
-      <section className="py-16 md:py-24 relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 md:mb-16">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent"
+      {/* Lake Chad Fellowship Section */}
+      <section className="relative min-h-[600px] flex justify-between bg-gradient-to-br from-green-50/50 to-transparent dark:from-green-950/30 dark:to-transparent">
+        {/* Image Carousel - Left side (60%) */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="w-[60%] relative"
+        >
+          {[
+            '/images/LakeChadPhotos/lake1.png',
+            '/images/LakeChadPhotos/lake3.png',
+            '/images/LakeChadPhotos/lake4.png',
+          ].map((src, index) => (
+            <motion.div
+              key={src}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: currentImage === index ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0"
             >
-              Fellowship Programs
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="text-base sm:text-lg text-foreground/80 px-4"
-            >
-              Empowering youth leaders across Africa through targeted regional fellowships
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            {fellowships.map((fellowship, index) => (
-              <motion.div
-                key={fellowship.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-full">
-                  <div className="p-6 sm:p-8">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl sm:text-2xl font-bold text-green-600 dark:text-green-400">
-                        {fellowship.title}
-                      </h3>
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        fellowship.status === "Current" 
-                          ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-                          : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
-                      }`}>
-                        {fellowship.status}
-                      </span>
-                    </div>
-                    <p className="text-foreground/70 mb-6">
-                      {fellowship.description}
-                    </p>
-                    <div className="grid grid-cols-3 gap-4 mb-6">
-                      <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                        <div className="text-lg font-bold text-green-600 dark:text-green-400">
-                          {fellowship.metrics.fellows}
-                        </div>
-                        <div className="text-sm text-foreground/60">Fellows</div>
-                      </div>
-                      <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                        <div className="text-lg font-bold text-green-600 dark:text-green-400">
-                          {fellowship.metrics.duration}
-                        </div>
-                        <div className="text-sm text-foreground/60">Duration</div>
-                      </div>
-                      <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                        <div className="text-lg font-bold text-green-600 dark:text-green-400">
-                          {fellowship.metrics.focus}
-                        </div>
-                        <div className="text-sm text-foreground/60">Focus</div>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {fellowship.regions.map((region) => (
-                        <span 
-                          key={region}
-                          className="px-3 py-1 bg-green-50 dark:bg-green-900/20 rounded-full text-sm text-green-600 dark:text-green-400"
-                        >
-                          {region}
-                        </span>
-                      ))}
-                    </div>
-                    <Link
-                      href={fellowship.status === "Current" ? "/fellowship" : "#"}
-                      className={`inline-flex items-center text-base font-medium transition-colors ${
-                        fellowship.status === "Current"
-                          ? "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
-                          : "text-gray-500 dark:text-gray-400 cursor-not-allowed"
-                      }`}
-                    >
-                      {fellowship.status === "Current" ? "Learn More" : "Coming Soon"}
-                      {fellowship.status === "Current" && <ArrowRight className="ml-2 w-4 h-4" />}
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
+              <Image
+                src={src}
+                alt={`Lake Chad Region image ${index + 1}`}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+            </motion.div>
+          ))}
+          {/* Image Navigation Dots */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+            {[...Array(5)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImage(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  currentImage === index 
+                    ? 'bg-white w-4' 
+                    : 'bg-white/50 hover:bg-white/75'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
             ))}
           </div>
+        </motion.div>
+
+        {/* Text Content - Right side (40%) */}
+        <div className="w-[40%] bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm flex items-center">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="px-8 lg:px-12 py-8"
+          >
+            <div className="inline-block mb-6 px-4 py-2 bg-green-100 dark:bg-green-900/30 rounded-full">
+              <span className="text-sm font-medium text-green-800 dark:text-green-200">
+                First Fellowship Call
+              </span>
+            </div>
+            
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-green-950 dark:text-green-50">
+              The Lake Chad Climate Justice Youth Fellowship
+            </h2>
+            
+            <p className="text-lg text-green-800/80 dark:text-green-100/80 mb-6 leading-relaxed">
+              The Lake Chad region faces severe challenges from climate change, including a 90% reduction in lake size, leading to desertification and resource scarcity. Our fellowship aims to empower youth to address these critical issues.
+            </p>
+            
+            <div className="space-y-6 mb-8">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-green-700 dark:text-green-300">Key Challenges:</h3>
+                <ul className="space-y-2 text-green-800/80 dark:text-green-100/80">
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    Desertification and water scarcity
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    Displacement and resource conflicts
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    Gender-based vulnerabilities
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4 text-green-800/80 dark:text-green-100/80">
+                <div>
+                  <span className="font-medium block">Target Region</span>
+                  <span>Lake Chad Basin</span>
+                </div>
+                <div>
+                  <span className="font-medium block">Countries</span>
+                  <span>4 Nations</span>
+                </div>
+                <div>
+                  <span className="font-medium block">Duration</span>
+                  <span>24 Months</span>
+                </div>
+                <div>
+                  <span className="font-medium block">Fellows</span>
+                  <span>20 Leaders</span>
+                </div>
+              </div>
+            </div>
+            
+            <Link 
+              href="/fellowship"
+              className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md shadow-lg hover:shadow-xl"
+            >
+              Learn More
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
       {/* Blog Section */}
-      <section className="py-16 md:py-24 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-12 md:mb-16">
+          <div className="text-center mb-16">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent"
+              className="text-4xl font-bold mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent"
             >
               Latest Insights
             </motion.h2>
@@ -302,14 +360,14 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="text-base sm:text-lg text-foreground/80 px-4"
+              className="text-lg text-foreground/80"
             >
               Explore our latest articles on climate action and environmental justice
             </motion.p>
           </div>
 
           {/* Blog Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post, index) => (
               <motion.div
                 key={post.title}
@@ -319,8 +377,8 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="group"
               >
-                <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-                  <div className="relative h-40 sm:h-48 overflow-hidden">
+                <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <div className="relative h-48 overflow-hidden">
                     <Image
                       src={post.image}
                       alt={post.title}
@@ -329,8 +387,8 @@ export default function Home() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <div className="p-4 sm:p-6">
-                    <div className="flex items-center mb-3 sm:mb-4">
+                  <div className="p-6">
+                    <div className="flex items-center mb-4">
                       <span className="text-sm text-green-600 dark:text-green-400 font-medium">
                         {post.category}
                       </span>
@@ -339,18 +397,18 @@ export default function Home() {
                         {post.date}
                       </span>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300 line-clamp-2">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">
                       {post.title}
                     </h3>
-                    <p className="text-sm sm:text-base text-foreground/70 mb-4 line-clamp-2">
+                    <p className="text-foreground/70 mb-4 line-clamp-2">
                       {post.excerpt}
                     </p>
                     <Link 
                       href="#" 
-                      className="inline-flex items-center text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors text-sm sm:text-base"
+                      className="inline-flex items-center text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors"
                     >
                       Read More
-                      <ArrowRight className="ml-1.5 sm:ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-2 w-4 h-4" />
                     </Link>
                   </div>
                 </div>
@@ -364,14 +422,14 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="text-center mt-8 sm:mt-12"
+            className="text-center mt-12"
           >
             <Link
               href="/blog"
-              className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium text-white bg-green-600 hover:bg-green-700 transition-colors rounded-lg sm:rounded-xl shadow-md hover:shadow-lg"
+              className="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-green-600 hover:bg-green-700 transition-colors rounded-xl shadow-lg hover:shadow-xl"
             >
               View All Articles
-              <ArrowRight className="ml-2 w-4 sm:w-5 h-4 sm:h-5" />
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </motion.div>
         </div>
@@ -401,7 +459,7 @@ export default function Home() {
                   href="/get-involved"
                   className="btn btn-primary group relative overflow-hidden"
                 >
-                  <span className="relative z-10">Apply Now</span>
+                  <span className="relative z-10">Get Involved</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                   <ArrowRight className="ml-2 w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                 </Link>
