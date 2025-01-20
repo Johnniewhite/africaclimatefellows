@@ -68,8 +68,10 @@ export function Header() {
       href: "/fellowship",
       dropdownItems: [
         { name: "Program Overview", href: "/fellowship#overview" },
+        { name: "Background", href: "/fellowship#background" },
+        { name: "Core Components", href: "/fellowship#components" },
         { name: "Application Process", href: "/fellowship#apply" },
-        { name: "Current Fellows", href: "/fellowship#current-fellows" },
+        { name: "Key Challenges", href: "/fellowship#challenges" },
       ]
     },
     { 
@@ -94,9 +96,9 @@ export function Header() {
       name: "Get Involved", 
       href: "/get-involved",
       dropdownItems: [
-        { name: "Volunteer", href: "/get-involved#volunteer" },
+        { name: "Apply Now", href: "/get-involved#apply" },
+        { name: "Support Us", href: "/get-involved#support" },
         { name: "Partner With Us", href: "/get-involved#partner" },
-        { name: "Donate", href: "/get-involved#donate" },
       ]
     },
     { 

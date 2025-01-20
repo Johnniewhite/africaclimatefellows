@@ -57,6 +57,31 @@ const blogPosts = [
   }
 ]
 
+const fellowships = [
+  {
+    title: "Lake Chad Climate Justice Youth Fellowship",
+    status: "Current",
+    description: "Focused on the Lake Chad region facing severe challenges from climate change, including a 90% reduction in lake size, desertification, and resource scarcity.",
+    regions: ["Chad", "Nigeria", "Cameroon", "Niger"],
+    metrics: {
+      fellows: 20,
+      duration: "24 months",
+      focus: "Lake Chad Basin"
+    }
+  },
+  {
+    title: "Future Fellowship Programs",
+    status: "Upcoming",
+    description: "Expanding our impact across Africa with new regional fellowships to address unique climate challenges and empower local youth leaders.",
+    regions: ["East Africa", "Southern Africa", "West Africa"],
+    metrics: {
+      fellows: "TBA",
+      duration: "24 months",
+      focus: "Regional Climate Action"
+    }
+  }
+]
+
 export default function Home() {
   const [currentImage, setCurrentImage] = useState(0)
   const heroImages = ['/images/hero1.jpg', '/images/hero2.png']
@@ -151,6 +176,106 @@ export default function Home() {
                     {feature.description}
                   </p>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-green-300 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Fellowship Programs Section - NEW */}
+      <section className="py-16 md:py-24 relative overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 md:mb-16">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent"
+            >
+              Fellowship Programs
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-base sm:text-lg text-foreground/80 px-4"
+            >
+              Empowering youth leaders across Africa through targeted regional fellowships
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            {fellowships.map((fellowship, index) => (
+              <motion.div
+                key={fellowship.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group"
+              >
+                <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-full">
+                  <div className="p-6 sm:p-8">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-xl sm:text-2xl font-bold text-green-600 dark:text-green-400">
+                        {fellowship.title}
+                      </h3>
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        fellowship.status === "Current" 
+                          ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                          : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
+                      }`}>
+                        {fellowship.status}
+                      </span>
+                    </div>
+                    <p className="text-foreground/70 mb-6">
+                      {fellowship.description}
+                    </p>
+                    <div className="grid grid-cols-3 gap-4 mb-6">
+                      <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                        <div className="text-lg font-bold text-green-600 dark:text-green-400">
+                          {fellowship.metrics.fellows}
+                        </div>
+                        <div className="text-sm text-foreground/60">Fellows</div>
+                      </div>
+                      <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                        <div className="text-lg font-bold text-green-600 dark:text-green-400">
+                          {fellowship.metrics.duration}
+                        </div>
+                        <div className="text-sm text-foreground/60">Duration</div>
+                      </div>
+                      <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                        <div className="text-lg font-bold text-green-600 dark:text-green-400">
+                          {fellowship.metrics.focus}
+                        </div>
+                        <div className="text-sm text-foreground/60">Focus</div>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {fellowship.regions.map((region) => (
+                        <span 
+                          key={region}
+                          className="px-3 py-1 bg-green-50 dark:bg-green-900/20 rounded-full text-sm text-green-600 dark:text-green-400"
+                        >
+                          {region}
+                        </span>
+                      ))}
+                    </div>
+                    <Link
+                      href={fellowship.status === "Current" ? "/fellowship" : "#"}
+                      className={`inline-flex items-center text-base font-medium transition-colors ${
+                        fellowship.status === "Current"
+                          ? "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
+                          : "text-gray-500 dark:text-gray-400 cursor-not-allowed"
+                      }`}
+                    >
+                      {fellowship.status === "Current" ? "Learn More" : "Coming Soon"}
+                      {fellowship.status === "Current" && <ArrowRight className="ml-2 w-4 h-4" />}
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             ))}
