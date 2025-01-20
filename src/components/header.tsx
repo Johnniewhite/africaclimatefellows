@@ -38,6 +38,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navigation = [
+    { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Fellowship', href: '/fellowship' },
     { name: 'Faculty', href: '/faculty' },
