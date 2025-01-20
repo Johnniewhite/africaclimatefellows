@@ -67,6 +67,13 @@ export default function Home() {
     '/images/ClimateConvofold/Climate Convo14.jpeg'
   ]
 
+  const [lakeImageIndex, setLakeImageIndex] = useState(0)
+  const lakeImages = [
+    '/images/LakeChadPhotos/lake1.png',
+    '/images/LakeChadPhotos/lake3.png',
+    '/images/LakeChadPhotos/lake4.png',
+  ]
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % heroImages.length)
@@ -74,6 +81,14 @@ export default function Home() {
 
     return () => clearInterval(timer)
   }, [heroImages.length])
+
+  useEffect(() => {
+    const lakeTimer = setInterval(() => {
+      setLakeImageIndex((prev) => (prev + 1) % lakeImages.length)
+    }, 5000)
+
+    return () => clearInterval(lakeTimer)
+  }, [])
 
   return (
     <main className="min-h-screen">
@@ -229,17 +244,13 @@ export default function Home() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-[60%] relative"
+          className="w-[60%] relative h-[600px]"
         >
-          {[
-            '/images/LakeChadPhotos/lake1.png',
-            '/images/LakeChadPhotos/lake3.png',
-            '/images/LakeChadPhotos/lake4.png',
-          ].map((src, index) => (
+          {lakeImages.map((src, index) => (
             <motion.div
               key={src}
               initial={{ opacity: 0 }}
-              animate={{ opacity: currentImage === index ? 1 : 0 }}
+              animate={{ opacity: lakeImageIndex === index ? 1 : 0 }}
               transition={{ duration: 0.5 }}
               className="absolute inset-0"
             >
@@ -249,17 +260,18 @@ export default function Home() {
                 fill
                 className="object-cover"
                 priority={index === 0}
+                sizes="(max-width: 768px) 100vw, 60vw"
               />
             </motion.div>
           ))}
           {/* Image Navigation Dots */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
-            {[...Array(5)].map((_, index) => (
+            {lakeImages.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentImage(index)}
+                onClick={() => setLakeImageIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  currentImage === index 
+                  lakeImageIndex === index 
                     ? 'bg-white w-4' 
                     : 'bg-white/50 hover:bg-white/75'
                 }`}
