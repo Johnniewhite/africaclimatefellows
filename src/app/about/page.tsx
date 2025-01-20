@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Leaf, Globe2, Users2, Sparkles } from 'lucide-react'
+import { ArrowRight, Building2, Globe2, Users2 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 

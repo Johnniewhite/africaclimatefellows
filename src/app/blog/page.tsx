@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowRight, Search, Filter } from "lucide-react"
+import { ArrowRight, Search } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"

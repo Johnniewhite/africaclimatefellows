@@ -64,7 +64,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % heroImages.length)
-    }, 5000) // Change image every 5 seconds
+    }, 5000)
 
     return () => clearInterval(timer)
   }, [heroImages.length])
@@ -72,13 +72,13 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section with Split Layout */}
-      <section className="relative min-h-[600px] flex justify-between">
-        {/* Image Carousel - Left side (60%) */}
+      <section className="relative min-h-[600px] flex flex-col md:flex-row justify-between">
+        {/* Image Carousel - Full width on mobile, 60% on desktop */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-[60%] relative"
+          className="w-full md:w-[60%] relative h-[400px] md:h-auto"
         >
           {heroImages.map((src, index) => (
             <motion.div
@@ -99,37 +99,37 @@ export default function Home() {
           ))}
         </motion.div>
 
-        {/* Text Content - Right side (30%) */}
-        <div className="w-[40%] bg-green-50 dark:bg-green-950/30 flex items-center">
+        {/* Text Content - Full width on mobile, 40% on desktop */}
+        <div className="w-full md:w-[40%] bg-green-50 dark:bg-green-950/30 flex items-center py-12 md:py-0">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="px-8 lg:px-12"
+            className="px-6 md:px-8 lg:px-12 w-full"
           >
-            <h1 className="text-3xl lg:text-4xl font-bold mb-6 text-green-950 dark:text-green-50">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 text-green-950 dark:text-green-50">
               Empowering Africa&apos;s Youth for Climate Justice Action
             </h1>
-            <p className="text-lg text-green-800/80 dark:text-green-100/80 mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 mb-6 md:mb-8 leading-relaxed">
               A transformative fellowship equipping young African leaders to champion climate justice,
               tackle systemic challenges, and drive grassroots resilience.
             </p>
             <Link 
               href="/about"
-              className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md"
+              className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 text-base sm:text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md"
             >
               Learn More
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="ml-2 w-4 sm:w-5 h-4 sm:h-5" />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* Features Section with Interactive Cards */}
-      <section className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-muted/50">
+      <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-background to-muted/50">
         <div className="absolute inset-0 bg-grid-light dark:bg-grid-dark opacity-50" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -137,17 +137,17 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.02 }}
                 className="card card-hover group cursor-pointer"
               >
-                <div className="p-6 relative overflow-hidden">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} p-2.5 mb-4 transform group-hover:scale-110 transition-transform duration-300`}>
+                <div className="p-4 sm:p-6 relative overflow-hidden">
+                  <div className={`w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-gradient-to-br ${feature.gradient} p-2 sm:p-2.5 mb-3 sm:mb-4 transform group-hover:scale-110 transition-transform duration-300`}>
                     <feature.icon className="w-full h-full text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-muted-foreground group-hover:text-foreground transition-colors">
+                  <p className="text-sm sm:text-base text-muted-foreground group-hover:text-foreground transition-colors">
                     {feature.description}
                   </p>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-green-300 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
@@ -159,16 +159,16 @@ export default function Home() {
       </section>
 
       {/* Blog Section */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-16 md:py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-16">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-4xl font-bold mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent"
+              className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent"
             >
               Latest Insights
             </motion.h2>
@@ -177,14 +177,14 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="text-lg text-foreground/80"
+              className="text-base sm:text-lg text-foreground/80 px-4"
             >
               Explore our latest articles on climate action and environmental justice
             </motion.p>
           </div>
 
           {/* Blog Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {blogPosts.map((post, index) => (
               <motion.div
                 key={post.title}
@@ -194,8 +194,8 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="group"
               >
-                <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="relative h-48 overflow-hidden">
+                <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                  <div className="relative h-40 sm:h-48 overflow-hidden">
                     <Image
                       src={post.image}
                       alt={post.title}
@@ -204,8 +204,8 @@ export default function Home() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-center mb-4">
+                  <div className="p-4 sm:p-6">
+                    <div className="flex items-center mb-3 sm:mb-4">
                       <span className="text-sm text-green-600 dark:text-green-400 font-medium">
                         {post.category}
                       </span>
@@ -214,18 +214,18 @@ export default function Home() {
                         {post.date}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300 line-clamp-2">
                       {post.title}
                     </h3>
-                    <p className="text-foreground/70 mb-4 line-clamp-2">
+                    <p className="text-sm sm:text-base text-foreground/70 mb-4 line-clamp-2">
                       {post.excerpt}
                     </p>
                     <Link 
                       href="#" 
-                      className="inline-flex items-center text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors"
+                      className="inline-flex items-center text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors text-sm sm:text-base"
                     >
                       Read More
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-1.5 sm:ml-2 w-4 h-4" />
                     </Link>
                   </div>
                 </div>
@@ -239,14 +239,14 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="text-center mt-12"
+            className="text-center mt-8 sm:mt-12"
           >
             <Link
               href="/blog"
-              className="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-green-600 hover:bg-green-700 transition-colors rounded-xl shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium text-white bg-green-600 hover:bg-green-700 transition-colors rounded-lg sm:rounded-xl shadow-md hover:shadow-lg"
             >
               View All Articles
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="ml-2 w-4 sm:w-5 h-4 sm:h-5" />
             </Link>
           </motion.div>
         </div>
