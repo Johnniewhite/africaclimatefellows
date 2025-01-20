@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight, Users2, Globe2, BookOpen, Target } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 const coreComponents = [
   {
@@ -30,62 +31,112 @@ const coreComponents = [
 export default function Fellowship() {
   return (
     <main className="min-h-screen pt-24">
-      {/* Program Overview Section */}
-      <section id="overview" className="py-24 relative">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center mb-16"
-          >
-            <h1 className="text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-              Lake Chad Climate Justice Youth Fellowship
-            </h1>
-            <p className="text-xl text-foreground/80 mb-8">
-              A transformative 24-month fellowship empowering young African leaders to address climate justice 
-              and environmental challenges in the Lake Chad region.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { label: "Duration", value: "24 Months" },
-                { label: "Fellows", value: "20 Leaders" },
-                { label: "Focus", value: "Lake Chad Basin" },
-                { label: "Countries", value: "4 Nations" }
-              ].map((stat) => (
-                <div key={stat.label} className="bg-green-50 dark:bg-green-900/30 rounded-lg p-4">
-                  <div className="text-2xl font-bold text-green-600 dark:text-green-400">{stat.value}</div>
-                  <div className="text-sm text-foreground/60">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+      {/* Hero Section with Parallax */}
+      <section className="relative h-[80vh] overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/LakeChadPhotos/lake1.png"
+            alt="Lake Chad Region"
+            fill
+            className="object-cover brightness-50"
+            priority
+          />
         </div>
-      </section>
-
-      {/* Background Section */}
-      <section id="background" className="py-24 relative">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4 text-green-600 dark:text-green-400">Background</h2>
-            <p className="text-foreground/80 mb-6 leading-relaxed">
-              The Lake Chad region faces severe challenges stemming from climate change, including a 90% reduction 
-              in the lake&apos;s size, leading to desertification, resource scarcity, and the collapse of traditional 
-              livelihoods such as agriculture and fishing. These environmental impacts have heightened social tensions, 
-              fueled insecurity, and displaced communities, leaving women and girls particularly vulnerable.
-            </p>
-            <p className="text-foreground/80 leading-relaxed">
-              Youth in the region, though disproportionately affected, are underrepresented in climate action due 
-              to barriers like limited resources, inadequate skills, and lack of access to advocacy platforms.
-            </p>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent" />
+        <div className="relative h-full flex items-center">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-4xl"
+            >
+              <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-white">
+                Lake Chad Climate Justice Youth Fellowship
+              </h1>
+              <p className="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
+                A transformative 24-month fellowship empowering young African leaders to address climate justice 
+                and environmental challenges in the Lake Chad region.
+              </p>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { label: "Duration", value: "24 Months" },
+                  { label: "Fellows", value: "20 Leaders" },
+                  { label: "Focus", value: "Lake Chad Basin" },
+                  { label: "Countries", value: "4 Nations" }
+                ].map((stat) => (
+                  <div key={stat.label} className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+                    <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
+                    <div className="text-sm text-white/70">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Core Components Section */}
-      <section id="components" className="py-24 bg-gray-50 dark:bg-gray-900/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Background Section with Image Grid */}
+      <section id="background" className="py-24 relative bg-gradient-to-b from-green-50/50 to-white dark:from-green-950/30 dark:to-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <h2 className="text-4xl font-bold text-green-800 dark:text-green-400">Background</h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                The Lake Chad region faces severe challenges stemming from climate change, including a 90% reduction 
+                in the lake&apos;s size, leading to desertification, resource scarcity, and the collapse of traditional 
+                livelihoods such as agriculture and fishing. These environmental impacts have heightened social tensions, 
+                fueled insecurity, and displaced communities, leaving women and girls particularly vulnerable.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                Youth in the region, though disproportionately affected, are underrepresented in climate action due 
+                to barriers like limited resources, inadequate skills, and lack of access to advocacy platforms.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="grid grid-cols-2 gap-4"
+            >
+              {[
+                '/images/LakeChadPhotos/lake2.png',
+                '/images/ClimateConvoFold/ClimateConvo1.jpeg',
+                '/images/LakeChadPhotos/lake3.png',
+                '/images/ClimateConvoFold/ClimateConvo2.jpeg'
+              ].map((src, index) => (
+                <div key={src} className={`relative h-48 ${index === 1 ? 'mt-12' : ''} ${index === 2 ? '-mt-12' : ''}`}>
+                  <Image
+                    src={src}
+                    alt="Lake Chad Region"
+                    fill
+                    className="object-cover rounded-lg shadow-xl"
+                  />
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Components with Visual Enhancement */}
+      <section id="components" className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/ClimateConvoFold/climate3.png"
+            alt="Background"
+            fill
+            className="object-cover opacity-10"
+          />
+        </div>
+        <div className="relative container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -122,8 +173,8 @@ export default function Fellowship() {
         </div>
       </section>
 
-      {/* Application Process Section */}
-      <section id="apply" className="py-24">
+      {/* Application Process with Timeline Visual */}
+      <section id="apply" className="py-24 bg-gradient-to-br from-green-50 to-white dark:from-green-950/30 dark:to-gray-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -252,9 +303,17 @@ export default function Fellowship() {
         </div>
       </section>
 
-      {/* Key Challenges Section */}
-      <section id="challenges" className="py-24 bg-gray-50 dark:bg-gray-900/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Key Challenges with Image Overlay */}
+      <section id="challenges" className="py-24 relative">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/LakeChadPhotos/lake4.png"
+            alt="Lake Chad Challenges"
+            fill
+            className="object-cover brightness-25"
+          />
+        </div>
+        <div className="relative container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -298,6 +357,39 @@ export default function Fellowship() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Call to Action Section */}
+      <section className="py-24 bg-green-900 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/ClimateConvoFold/climate4.png"
+            alt="Call to Action Background"
+            fill
+            className="object-cover opacity-20"
+          />
+        </div>
+        <div className="relative container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto"
+          >
+            <h2 className="text-4xl font-bold text-white mb-6">Join the Movement</h2>
+            <p className="text-xl text-white/80 mb-8">
+              Be part of the solution. Apply now to become a Climate Justice Youth Fellow.
+            </p>
+            <Link 
+              href="/get-involved#apply"
+              className="inline-flex items-center px-8 py-4 text-lg font-medium text-green-900 bg-white hover:bg-green-50 rounded-lg transition-colors shadow-lg"
+            >
+              Apply Now
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
       </section>
     </main>
