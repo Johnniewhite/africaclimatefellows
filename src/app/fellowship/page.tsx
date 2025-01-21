@@ -30,9 +30,9 @@ const coreComponents = [
 
 export default function Fellowship() {
   return (
-    <main className="min-h-screen pt-24">
+    <main className="min-h-screen pt-16 md:pt-24">
       {/* Hero Section with Parallax */}
-      <section className="relative h-[80vh] overflow-hidden">
+      <section className="relative h-[60vh] md:h-[80vh] overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/LakeChadPhotos/lake1.png"
@@ -51,23 +51,23 @@ export default function Fellowship() {
               transition={{ duration: 0.8 }}
               className="max-w-4xl"
             >
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-white">
+              <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-6 text-white">
                 Lake Chad Climate Justice Youth Fellowship
               </h1>
-              <p className="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-6 md:mb-8 leading-relaxed">
                 A transformative 24-month fellowship empowering young African leaders to address climate justice 
                 and environmental challenges in the Lake Chad region.
               </p>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                 {[
                   { label: "Duration", value: "24 Months" },
                   { label: "Fellows", value: "20 Leaders" },
                   { label: "Focus", value: "Lake Chad Basin" },
                   { label: "Countries", value: "4 Nations" }
                 ].map((stat) => (
-                  <div key={stat.label} className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-                    <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
-                    <div className="text-sm text-white/70">{stat.label}</div>
+                  <div key={stat.label} className="bg-white/10 backdrop-blur-sm rounded-lg p-4 md:p-6 border border-white/20">
+                    <div className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">{stat.value}</div>
+                    <div className="text-xs md:text-sm text-white/70">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -77,24 +77,24 @@ export default function Fellowship() {
       </section>
 
       {/* Background Section with Image Grid */}
-      <section id="background" className="py-24 relative bg-gradient-to-b from-green-50/50 to-white dark:from-green-950/30 dark:to-gray-900">
+      <section className="py-12 md:py-24 relative bg-gradient-to-b from-green-50/50 to-white dark:from-green-950/30 dark:to-gray-900">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="space-y-6"
+              className="space-y-4 md:space-y-6"
             >
-              <h2 className="text-4xl font-bold text-green-800 dark:text-green-400">Background</h2>
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+              <h2 className="text-3xl md:text-4xl font-bold text-green-800 dark:text-green-400">Background</h2>
+              <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                 The Lake Chad region faces severe challenges stemming from climate change, including a 90% reduction 
                 in the lake&apos;s size, leading to desertification, resource scarcity, and the collapse of traditional 
                 livelihoods such as agriculture and fishing. These environmental impacts have heightened social tensions, 
                 fueled insecurity, and displaced communities, leaving women and girls particularly vulnerable.
               </p>
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+              <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                 Youth in the region, though disproportionately affected, are underrepresented in climate action due 
                 to barriers like limited resources, inadequate skills, and lack of access to advocacy platforms.
               </p>
@@ -104,15 +104,22 @@ export default function Fellowship() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="grid grid-cols-2 gap-4"
+              className="grid grid-cols-2 gap-3 md:gap-4"
             >
               {[
                 '/images/LakeChadPhotos/lake2.png',
-                '/images/ClimateConvoFold/ClimateConvo1.jpeg',
+                '/images/ClimateConvoFold/climate1.png',
                 '/images/LakeChadPhotos/lake3.png',
-                '/images/ClimateConvoFold/ClimateConvo2.jpeg'
+                '/images/ClimateConvoFold/climate2.png'
               ].map((src, index) => (
-                <div key={src} className={`relative h-48 ${index === 1 ? 'mt-12' : ''} ${index === 2 ? '-mt-12' : ''}`}>
+                <div 
+                  key={src} 
+                  className={`relative h-32 md:h-48 ${
+                    index === 1 ? 'mt-6 md:mt-12' : ''
+                  } ${
+                    index === 2 ? '-mt-6 md:-mt-12' : ''
+                  }`}
+                >
                   <Image
                     src={src}
                     alt="Lake Chad Region"
@@ -361,7 +368,7 @@ export default function Fellowship() {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-24 bg-green-900 relative overflow-hidden">
+      <section className="py-12 md:py-24 bg-green-900 relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/ClimateConvoFold/climate4.png"
@@ -378,16 +385,16 @@ export default function Fellowship() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">Join the Movement</h2>
-            <p className="text-xl text-white/80 mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">Join the Movement</h2>
+            <p className="text-base md:text-xl text-white/80 mb-6 md:mb-8">
               Be part of the solution. Apply now to become a Climate Justice Youth Fellow.
             </p>
             <Link 
               href="/get-involved#apply"
-              className="inline-flex items-center px-8 py-4 text-lg font-medium text-green-900 bg-white hover:bg-green-50 rounded-lg transition-colors shadow-lg"
+              className="inline-flex items-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-medium text-green-900 bg-white hover:bg-green-50 rounded-lg transition-colors shadow-lg"
             >
               Apply Now
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
             </Link>
           </motion.div>
         </div>

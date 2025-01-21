@@ -92,7 +92,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      <div className="relative py-16 px-4 text-center overflow-hidden">
+      {/* Hero Banner - Mobile Friendly */}
+      <div className="relative py-12 md:py-16 px-4 text-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/banner.jpeg"
@@ -103,23 +104,24 @@ export default function Home() {
           />
         </div>
         <div className="relative z-10">
-          <h1 className="text-4xl lg:text-6xl font-bold mb-8 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] animate-fade-in-up">
+          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 md:mb-8 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] animate-fade-in-up">
             Climate Justice <span className="text-green-400">Youth Fellowship</span>
           </h1>
-          <p className="text-xl lg:text-2xl max-w-3xl mx-auto text-white font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] animate-fade-in-up-delay">
+          <p className="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto text-white font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] animate-fade-in-up-delay px-4">
             Empowering Africa&apos;s Youth for Climate Justice Action
           </p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-green-400/40 via-white/60 to-green-400/40"></div>
       </div>
-      {/* Hero Section with Split Layout */}
-      <section className="relative min-h-[600px] flex justify-between">
-        {/* Image Carousel - Left side (60%) */}
+
+      {/* Hero Section with Split Layout - Mobile Friendly */}
+      <section className="relative min-h-[600px] flex flex-col lg:flex-row justify-between">
+        {/* Image Carousel - Full width on mobile, 60% on desktop */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-[60%] relative"
+          className="w-full lg:w-[60%] relative h-[400px] lg:h-auto"
         >
           {heroImages.map((src, index) => (
             <motion.div
@@ -155,25 +157,24 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Text Content - Right side (30%) */}
-        <div className="w-[40%] bg-green-50 dark:bg-green-950/30 flex items-center pt-3">
+        {/* Text Content - Full width on mobile, 40% on desktop */}
+        <div className="w-full lg:w-[40%] bg-green-50 dark:bg-green-950/30 p-6 md:p-8 lg:p-12">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="px-8 lg:px-12"
+            className="space-y-6"
           >
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-green-950 dark:text-green-50">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-950 dark:text-green-50">
               The Climate Justice Youth Fellowship
             </h2>
-            <p className="text-lg text-green-800/80 dark:text-green-100/80 mb-6 leading-relaxed">
+            <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
               A transformative initiative dedicated to harnessing the adventurous spirit, resilience, and innovative leadership of African youth. We connect young climate advocates with critical resources, sharpened skills, professional networks, and international exposure.
             </p>
-            <div className="space-y-6 mb-8">
-              
-              <div className="space-y-2">
+            <div className="space-y-6">
+              <div className="space-y-4">
                 <h3 className="font-semibold text-green-700 dark:text-green-300">Program Details:</h3>
-                <div className="grid grid-cols-2 gap-4 text-green-800/80 dark:text-green-100/80">
+                <div className="grid grid-cols-2 gap-4 text-sm sm:text-base text-green-800/80 dark:text-green-100/80">
                   <div>
                     <span className="font-medium block">Duration</span>
                     <span>24 Months</span>
@@ -204,11 +205,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section with Interactive Cards */}
-      <section className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-muted/50">
-        <div className="absolute inset-0 bg-grid-light dark:bg-grid-dark opacity-50" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* Features Grid - Mobile Friendly */}
+      <section className="py-12 md:py-24 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -216,8 +216,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                className="card card-hover group cursor-pointer"
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg"
               >
                 <div className="p-6 relative overflow-hidden">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} p-2.5 mb-4 transform group-hover:scale-110 transition-transform duration-300`}>
@@ -238,13 +237,13 @@ export default function Home() {
       </section>
 
       {/* Lake Chad Fellowship Section */}
-      <section className="relative min-h-[600px] flex justify-between bg-gradient-to-br from-green-50/50 to-transparent dark:from-green-950/30 dark:to-transparent">
-        {/* Image Carousel - Left side (60%) */}
+      <section className="relative min-h-[600px] flex flex-col lg:flex-row justify-between bg-gradient-to-br from-green-50/50 to-transparent dark:from-green-950/30 dark:to-transparent">
+        {/* Image Carousel - Full width on mobile, 60% on desktop */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-[60%] relative h-[600px]"
+          className="w-full lg:w-[60%] relative h-[400px] lg:h-[600px]"
         >
           {lakeImages.map((src, index) => (
             <motion.div
@@ -281,29 +280,29 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Text Content - Right side (40%) */}
-        <div className="w-[40%] bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm flex items-center">
+        {/* Text Content - Full width on mobile, 40% on desktop */}
+        <div className="w-full lg:w-[40%] bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-6 md:p-8 lg:p-12">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="px-8 lg:px-12 py-8"
+            className="space-y-6"
           >
-            <div className="inline-block mb-6 px-4 py-2 bg-green-100 dark:bg-green-900/30 rounded-full">
+            <div className="inline-block mb-4 md:mb-6 px-4 py-2 bg-green-100 dark:bg-green-900/30 rounded-full">
               <span className="text-sm font-medium text-green-800 dark:text-green-200">
                 First Fellowship Call
               </span>
             </div>
             
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-green-950 dark:text-green-50">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-950 dark:text-green-50">
               The Lake Chad Climate Justice Youth Fellowship
             </h2>
             
-            <p className="text-lg text-green-800/80 dark:text-green-100/80 mb-6 leading-relaxed">
+            <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
               The Lake Chad region faces severe challenges from climate change, including a 90% reduction in lake size, leading to desertification and resource scarcity. Our fellowship aims to empower youth to address these critical issues.
             </p>
             
-            <div className="space-y-6 mb-8">
+            <div className="space-y-6">
               <div className="space-y-4">
                 <h3 className="font-semibold text-green-700 dark:text-green-300">Key Challenges:</h3>
                 <ul className="space-y-2 text-green-800/80 dark:text-green-100/80">
@@ -322,7 +321,7 @@ export default function Home() {
                 </ul>
               </div>
               
-              <div className="grid grid-cols-2 gap-4 text-green-800/80 dark:text-green-100/80">
+              <div className="grid grid-cols-2 gap-4 text-sm sm:text-base text-green-800/80 dark:text-green-100/80">
                 <div>
                   <span className="font-medium block">Target Region</span>
                   <span>Lake Chad Basin</span>
@@ -344,20 +343,19 @@ export default function Home() {
             
             <Link 
               href="/fellowship"
-              className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 text-base sm:text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md shadow-lg hover:shadow-xl"
             >
               Learn More
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Blog Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center mb-16">
+      {/* Blog Section - Mobile Friendly */}
+      <section className="py-12 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -377,9 +375,7 @@ export default function Home() {
               Explore our latest articles on climate action and environmental justice
             </motion.p>
           </div>
-
-          {/* Blog Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {blogPosts.map((post, index) => (
               <motion.div
                 key={post.title}
@@ -427,36 +423,18 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-
-          {/* View All Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <Link
-              href="/blog"
-              className="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-green-600 hover:bg-green-700 transition-colors rounded-xl shadow-lg hover:shadow-xl"
-            >
-              View All Articles
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-          </motion.div>
         </div>
       </section>
 
-      {/* CTA Section with Innovative Design */}
-      <section className="relative py-24 overflow-hidden bg-gradient-to-b from-background to-muted/50">
-        <div className="absolute inset-0 bg-grid-light dark:bg-grid-dark opacity-50" />
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+      {/* CTA Section - Mobile Friendly */}
+      <section className="relative py-12 md:py-24 overflow-hidden bg-gradient-to-b from-background to-muted/50">
+        <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="relative bg-white dark:bg-gray-800 rounded-3xl p-12 overflow-hidden eco-shadow"
+            className="relative bg-white dark:bg-gray-800 rounded-3xl p-6 md:p-12"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent" />
             <div className="relative z-10 max-w-4xl mx-auto text-center">
