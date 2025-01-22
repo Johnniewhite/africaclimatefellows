@@ -137,7 +137,7 @@ export default function Fellowship() {
       <section id="components" className="py-24 relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/ClimateConvoFold/ClimateConvo1.jpeg"
+            src="/images/ClimateConvofold/ClimateConvo1.jpeg"
             alt="Background"
             fill
             className="object-cover opacity-10"
@@ -371,7 +371,7 @@ export default function Fellowship() {
       <section className="py-12 md:py-24 bg-green-900 relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/ClimateConvoFold/ClimateConvo6.jpeg"
+            src="/images/ClimateConvofold/ClimateConvo6.jpeg"
             alt="Call to Action Background"
             fill
             className="object-cover opacity-20"
