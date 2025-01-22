@@ -7,53 +7,54 @@ import Image from 'next/image'
 
 export default function About() {
   return (
-    <main className="min-h-screen pt-24">
-      {/* Hero Section with Organic Shapes */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5 }}
-            className="absolute top-0 right-0 w-2/3 h-2/3 bg-gradient-to-br from-green-500/20 to-transparent rounded-full transform translate-x-1/3 -translate-y-1/3"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, delay: 0.2 }}
-            className="absolute bottom-0 left-0 w-2/3 h-2/3 bg-gradient-to-tr from-green-500/20 to-transparent rounded-full transform -translate-x-1/3 translate-y-1/3"
-          />
+    <main className="min-h-screen">
+      {/* Hero Section with Full Image and Improved Text Visibility */}
+      <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
+        <Image 
+          src="/images/banner.jpeg" 
+          alt="About"
+          fill
+          priority
+          className="absolute inset-0 object-cover brightness-50"
+        />
+        
+        {/* Gradient Overlay for Better Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent" />
+
+        <div className="relative h-full flex items-center">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center max-w-4xl mx-auto"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+                className="relative inline-block mb-8"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-300 blur-2xl opacity-20" />
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                  About the Fellowship
+                </h1>
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed"
+              >
+                A transformative initiative dedicated to harnessing the adventurous spirit, resilience,
+                and innovative leadership of African youth.
+              </motion.p>
+            </motion.div>
+          </div>
         </div>
 
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1 }}
-              className="relative inline-block mb-8"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-300 blur-2xl opacity-20" />
-              <h1 className="relative gradient-text">
-                About the Fellowship
-              </h1>
-            </motion.div>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="text-xl text-foreground/80"
-            >
-              A transformative initiative dedicated to harnessing the adventurous spirit, resilience,
-              and innovative leadership of African youth.
-            </motion.p>
-          </motion.div>
-        </div>
+        {/* Decorative Bottom Border */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-green-400/40 via-white/60 to-green-400/40" />
       </section>
 
       {/* Mission Section */}

@@ -182,8 +182,8 @@ export function Header() {
             <Image 
               src="/images/logo.png" 
               alt="Africa Climate Fellows" 
-              width={100} 
-              height={40}
+              width={150} 
+              height={80}
               className="object-contain"
               priority
             />

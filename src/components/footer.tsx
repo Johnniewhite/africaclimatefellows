@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { Twitter, Facebook, Instagram, Linkedin } from 'lucide-react'
+import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react'
 
 export function Footer() {
   const navigation = {
@@ -16,22 +16,22 @@ export function Footer() {
     social: [
       {
         name: 'Twitter',
-        href: '#',
+        href: 'https://x.com/AfCliFellows',
         icon: Twitter,
       },
       {
         name: 'Facebook',
-        href: '#',
+        href: 'https://web.facebook.com/AfricanClimateFellows',
         icon: Facebook,
       },
       {
         name: 'Instagram',
-        href: '#',
+        href: 'https://www.instagram.com/afclifellows/',
         icon: Instagram,
       },
       {
         name: 'LinkedIn',
-        href: '#',
+        href: 'https://www.linkedin.com/company/africa-climate-fellows/',
         icon: Linkedin,
       },
     ],
