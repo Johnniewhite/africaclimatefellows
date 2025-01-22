@@ -172,27 +172,14 @@ export default function Home() {
               A transformative initiative dedicated to harnessing the adventurous spirit, resilience, and innovative leadership of African youth. We connect young climate advocates with critical resources, sharpened skills, professional networks, and international exposure.
             </p>
             <div className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="font-semibold text-green-700 dark:text-green-300">Program Details:</h3>
-                <div className="grid grid-cols-2 gap-4 text-sm sm:text-base text-green-800/80 dark:text-green-100/80">
-                  <div>
-                    <span className="font-medium block">Duration</span>
-                    <span>24 Months</span>
-                  </div>
-                  <div>
-                    <span className="font-medium block">Fellows</span>
-                    <span>20 Leaders</span>
-                  </div>
-                  <div>
-                    <span className="font-medium block">Focus Area</span>
-                    <span>Lake Chad Region</span>
-                  </div>
-                  <div>
-                    <span className="font-medium block">Age Range</span>
-                    <span>18-35 years</span>
-                  </div>
-                </div>
-              </div>
+            <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
+              At the heart of this program lies a commitment to addressing climate justice and alleviating the burden of care that disproportionately affects African communities. We recognize the immense potential of Africa’s youth as changemakers and aim to empower them to rise above systemic challenges and amplify their voices on the global stage.
+              </p>
+            </div>
+            <div className="space-y-6">
+              <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
+              Through tailored capacity-building sessions, mentorship by seasoned experts, research engagements, funding and opportunities to engage in global forums, the Climate Justice Youth Fellowship is more than a program—it is a movement for creating leaders who will shape a resilient and equitable future for Africa.
+              </p>
             </div>
             <Link 
               href="/fellowship"
