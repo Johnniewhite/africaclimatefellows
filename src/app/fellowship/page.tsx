@@ -30,7 +30,7 @@ const coreComponents = [
 
 export default function Fellowship() {
   return (
-    <main className="min-h-screen pt-16 md:pt-24">
+    <main className="min-h-screen">
       {/* Hero Section with Parallax */}
       <section className="relative h-[60vh] md:h-[80vh] overflow-hidden">
         <div className="absolute inset-0">

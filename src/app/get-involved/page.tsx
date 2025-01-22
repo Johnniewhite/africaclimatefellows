@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { ArrowRight, Users, HandHeart, GraduationCap, Building2 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function GetInvolved() {
@@ -41,25 +42,53 @@ export default function GetInvolved() {
   ]
 
   return (
-    <div className="pt-24 pb-16">
+    <div className="pb-16">
       {/* Hero Section */}
-      <section className="relative bg-muted py-16 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Get <span className="text-accent">Involved</span>
-            </h1>
-            <p className="text-xl text-foreground/80">
-              Join our mission to empower Africa&apos;s youth and create lasting change through climate
-              justice initiatives.
-            </p>
-          </motion.div>
+      <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
+        <Image 
+          src="/images/ClimateConvofold/climatekeeds.jpeg" 
+          alt="About"
+          fill
+          priority
+          className="absolute inset-0 object-cover brightness-50"
+        />
+        
+        {/* Gradient Overlay for Better Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent" />
+
+        <div className="relative h-full flex items-center">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center max-w-4xl mx-auto"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+                className="relative inline-block mb-8"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-300 blur-2xl opacity-20" />
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                  Get Involved
+                </h1>
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed"
+              >
+                Join our mission to empower Africa&apos;s youth and create lasting change through climate justice initiatives.
+              </motion.p>
+            </motion.div>
+          </div>
         </div>
+
+        {/* Decorative Bottom Border */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-green-400/40 via-white/60 to-green-400/40" />
       </section>
 
       {/* Involvement Options */}
