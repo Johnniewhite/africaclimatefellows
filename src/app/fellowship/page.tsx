@@ -137,7 +137,7 @@ export default function Fellowship() {
       <section id="components" className="py-24 relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/ClimateConvoFold/climate3.png"
+            src="/images/ClimateConvoFold/ClimateConvo1.jpeg"
             alt="Background"
             fill
             className="object-cover opacity-10"
@@ -317,7 +317,7 @@ export default function Fellowship() {
             src="/images/LakeChadPhotos/lake4.png"
             alt="Lake Chad Challenges"
             fill
-            className="object-cover brightness-25"
+            className="object-cover brightness-50 blur-sm"
           />
         </div>
         <div className="relative container mx-auto px-4">
@@ -331,7 +331,7 @@ export default function Fellowship() {
             <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
               Key Challenges Addressed
             </h2>
-            <p className="text-xl text-foreground/80">
+            <p className="text-xl text-white">
               Our fellowship focuses on addressing critical environmental and social challenges in the Lake Chad region.
             </p>
           </motion.div>
@@ -371,7 +371,7 @@ export default function Fellowship() {
       <section className="py-12 md:py-24 bg-green-900 relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/ClimateConvoFold/climate4.png"
+            src="/images/ClimateConvoFold/ClimateConvo6.jpeg"
             alt="Call to Action Background"
             fill
             className="object-cover opacity-20"
