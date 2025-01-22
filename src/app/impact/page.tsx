@@ -75,8 +75,18 @@ export default function Impact() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-light dark:bg-grid-dark" />
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[60vh] flex items-center">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/ClimateConvofold/impact.jpeg"
+            alt="Impact Hero Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="absolute inset-0 bg-grid-light dark:bg-grid-dark opacity-25" />
         <div className="absolute inset-0 bg-gradient-to-br from-primary-light/30 via-transparent to-accent-light/30 dark:from-primary-dark/30 dark:to-accent-dark/30" />
         <div className="max-w-7xl mx-auto relative">
           <motion.div
@@ -85,10 +95,10 @@ export default function Impact() {
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <h1 className="gradient-text font-bold mb-6">
+            <h1 className="gradient-text font-bold mb-6 text-white">
               Our Impact
             </h1>
-            <p className="mt-4 text-lg sm:text-xl max-w-3xl mx-auto text-muted-foreground">
+            <p className="mt-4 text-lg sm:text-xl max-w-3xl mx-auto text-white/90">
               Together, we&apos;re building a sustainable future. See how our fellows are making a difference across Africa.
             </p>
           </motion.div>
@@ -161,6 +171,16 @@ export default function Impact() {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 bg-grid-light dark:bg-grid-dark" />
         <div className="absolute inset-0 bg-gradient-to-br from-accent-light/30 via-transparent to-primary-light/30 dark:from-accent-dark/30 dark:to-primary-dark/30" />
+        <div className="absolute inset-0">
+          <Image
+            src="/images/ClimateConvofold/join.jpeg"
+            alt="Impact Hero Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
         <div className="max-w-4xl mx-auto relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
