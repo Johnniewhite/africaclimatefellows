@@ -108,9 +108,9 @@ export default function Fellowship() {
             >
               {[
                 '/images/LakeChadPhotos/lake2.png',
-                '/images/ClimateConvoFold/climate1.png',
+                '/images/ClimateConvoFold/ClimateConvo1.jpeg',
                 '/images/LakeChadPhotos/lake3.png',
-                '/images/ClimateConvoFold/climate2.png'
+                '/images/ClimateConvoFold/ClimateConvo6.jpeg'
               ].map((src, index) => (
                 <div 
                   key={src} 

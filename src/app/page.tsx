@@ -115,7 +115,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section with Split Layout - Mobile Friendly */}
-      <section className="relative min-h-[600px] flex flex-col lg:flex-row justify-between">
+      <section className="relative min-h-[500px] flex flex-col lg:flex-row justify-between">
         {/* Image Carousel - Full width on mobile, 60% on desktop */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -158,7 +158,7 @@ export default function Home() {
         </motion.div>
 
         {/* Text Content - Full width on mobile, 40% on desktop */}
-        <div className="w-full lg:w-[40%] bg-green-50 dark:bg-green-950/30 p-6 md:p-8 lg:p-12">
+        <div className="w-full lg:w-[50%] bg-green-50 dark:bg-green-950/30 p-6 md:p-8 lg:p-12">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -185,7 +185,7 @@ export default function Home() {
               href="/fellowship"
               className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md"
             >
-              Apply Now
+              Learn More
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </motion.div>
@@ -323,7 +323,7 @@ export default function Home() {
                 </div>
                 <div>
                   <span className="font-medium block">Fellows</span>
-                  <span>20 Leaders</span>
+                  <span>20 Youth Leaders</span>
                 </div>
               </div>
             </div>
