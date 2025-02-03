@@ -15,7 +15,7 @@ export default function Contact() {
       icon: Phone,
       title: 'Phone',
       details: '+2347088160467',
-      action: 'tel:+2347088160467,
+      action: 'tel:+2347088160467',
     },
     {
       icon: MapPin,
