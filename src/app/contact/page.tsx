@@ -8,19 +8,19 @@ export default function Contact() {
     {
       icon: Mail,
       title: 'Email',
-      details: 'info@climatejusticefellowship.com',
-      action: 'mailto:info@climatejusticefellowship.org',
+      details: 'ggcc@dean.com.ng',
+      action: 'mailto:ggcc@dean.com.ng',
     },
     {
       icon: Phone,
       title: 'Phone',
-      details: '+234 123 456 7890',
-      action: 'tel:+2341234567890',
+      details: '+234 708 816 0467',
+      action: 'tel:+234 708 816 0467,
     },
     {
       icon: MapPin,
       title: 'Location',
-      details: 'Lake Chad Region, Africa',
+      details: 'Global Goals Community Center, No. 1 Q Close, opposite obana, Gwagwalada Abuja FCT',
       action: '#map',
     },
     {
