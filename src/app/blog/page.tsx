@@ -1,5 +1,5 @@
 "use client";
-
+export const dynamic = 'force-dynamic';
 import BlogSection from "@/components/BlogSection";
 
 export default function Blog() {
