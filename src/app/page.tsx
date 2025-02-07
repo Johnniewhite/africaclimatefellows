@@ -1,5 +1,6 @@
 "use client"
 
+import BlogSection from "../components/BlogSection";
 import { motion } from "framer-motion"
 import { ArrowRight, Leaf, Globe2, Users2, Sparkles } from "lucide-react"
 import Link from "next/link"
@@ -341,6 +342,11 @@ export default function Home() {
 
       {/* Blog Section - Mobile Friendly */}
       <section className="py-12 md:py-24">
+      <BlogSection 
+        postsToShow={3}
+        title="Latest Insights"
+        subtitle="Explore our latest articles on climate action and environmental justice"
+      />
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <motion.h2 
