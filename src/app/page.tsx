@@ -347,76 +347,7 @@ export default function Home() {
         title="Latest Insights"
         subtitle="Explore our latest articles on climate action and environmental justice"
       />
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-4xl font-bold mb-4 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent"
-            >
-              Latest Insights
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="text-lg text-foreground/80"
-            >
-              Explore our latest articles on climate action and environmental justice
-            </motion.p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {blogPosts.map((post, index) => (
-              <motion.div
-                key={post.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover transform group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center mb-4">
-                      <span className="text-sm text-green-600 dark:text-green-400 font-medium">
-                        {post.category}
-                      </span>
-                      <span className="mx-2 text-foreground/30">•</span>
-                      <span className="text-sm text-foreground/60">
-                        {post.date}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">
-                      {post.title}
-                    </h3>
-                    <p className="text-foreground/70 mb-4 line-clamp-2">
-                      {post.excerpt}
-                    </p>
-                    <Link 
-                      href="#" 
-                      className="inline-flex items-center text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors"
-                    >
-                      Read More
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        
       </section>
 
       {/* CTA Section - Mobile Friendly */}

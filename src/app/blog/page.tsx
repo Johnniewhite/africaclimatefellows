@@ -8,8 +8,8 @@ export default function Blog() {
       showSearch={true}
       showCategories={true}
       postsToShow={9}
-      title="Climate Action Blog"
-      subtitle="Stay informed about climate initiatives, success stories, and research insights from across Africa."
+      title="Latest Insights"
+      subtitle="Stay informed about initiatives, success stories, and research insights from across Africa."
     />
   );
 }
