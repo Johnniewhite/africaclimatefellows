@@ -4,8 +4,42 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Building2, Globe2, Users2 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState } from 'react'
+import { Modal } from '@/components/Modal'
 
 export default function About() {
+  const [selectedMember, setSelectedMember] = useState<(typeof teamMembers)[0] | null>(null);
+
+  const teamMembers = [
+    {
+      name: "Uche Arinze",
+      image: "/images/faculty/uche.jpeg",
+      bio: `Uche Arinze is a dynamic educator, development strategist, and communications expert passionately shaping narratives that drive impact. As Communications Manager at Dean Initiative, a youth-led NGO championing transformational change, she leads with creativity and purpose, crafting powerful stories that amplify the organization's mission and influence.
+
+A graduate of Obafemi Awolowo University with a BA and a PGD in Education from the University of Lagos, Uche blends academic excellence with hands-on expertise in education, advocacy, and digital media. Her work in advancing the Sustainable Development Goals (SDGs) since their inception underscores her deep commitment to fostering meaningful progress.
+
+Uche's influence extends beyond Dean Initiative. She has served as Lead of Communications and PR for CYPAN's Leadership Committee, an Alumni Global Ambassador for Theirworld, a member of the Youth SDGs Newsletter editorial board, a Teach for Nigeria mentor, and a Mandela Washington Fellowship application scorer. Her strategic communications skills have also driven successful campaigns for national and international brands.
+
+Whether mentoring young changemakers, managing digital strategies, or telling stories that inspire action, Uche remains dedicated to shaping a future where education and communication fuel sustainable development and empowered communities.`,
+    },
+    {
+      name: "Ngozi Edum",
+      image: "/images/faculty/ngozi.jpeg",
+      bio: `Ngozi leads the Partnership and Innovation at the Development of Educational Action Network. She has over five years of experience leading sustainable development projects, including climate action, gender equality, youth leadership, governance, and education. As a climate justice advocate, she amplifies the voices of marginalised communities and groups in climate discourse to ensure the inclusion of perspectives from those on the frontlines disproportionately affected by the climate crisis. Ngozi has a background in Forestry and Environmental Management, graduating with First Class Honours. She has received multiple scholarships and recently completed an advanced degree in Forest Science with full funding through the Erasmus Mundus Joint Masters Degree Award. Ngozi is an excellent public speaker and facilitator, as evidenced by her role as a panel speaker and facilitator at global and international events.`,
+    },
+    {
+      name: "Doreen Mennom Oho",
+      image: "/images/faculty/doreen.jpeg",
+      bio: `Doreen Mennom Oho is a development practitioner currently serving as the Technical Programs Lead at DEAN Initiative, a youth-led organization dedicated to enhancing healthy communities for young people. In her role, she spearheads projects focused on governance, democracy, youth leadership, climate action, and education.
+
+She holds a Master's degree in International Affairs and Diplomacy and a Bachelor of Arts in English Language from Ahmadu Bello University, Nigeria. She is a People Powered Climate Democracy Accelerator Fellow, focused on using participatory budgeting to help marginalized communities access resources for climate adaptation and mitigation. Doreen is also a Carrington Youth Fellow of the United States Government in Nigeria and a participant in the African Group of Negotiators Experts Support (AGNES) 2025 Climate Governance, Diplomacy, and Negotiations Leadership Program.
+
+She currently oversees the Lake Chad Climate Justice Fellowship, a project aimed at equipping young leaders with the knowledge and tools to advocate for climate justice and resilience in the region.
+
+With extensive experience in NGO leadership, community development, and fundraising, her skill set includes program design, grant proposal writing, and program coordination. She is passionate about climate finance, governance, and ensuring communities in the Lake Chad region have access to resources needed to strengthen their resilience against climate change.`,
+    }
+  ];
+
   return (
     <main className="min-h-screen">
       {/* Hero Section with Full Image and Improved Text Visibility */}
@@ -127,52 +161,65 @@ export default function About() {
               Our Team
             </h2>
             <p className="text-xl text-foreground/80">
-              Meet the dedicated individuals driving our mission forward and making a difference in climate action.
+              Meet our dedicated team of experts driving climate action and empowering the next generation of leaders.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Dr. Sarah Mensah",
-                role: "Executive Director",
-                image: "/images/hero1.jpg"
-              },
-              {
-                name: "John Okonjo",
-                role: "Program Director",
-                image: "/images/hero2.png"
-              },
-              {
-                name: "Dr. Amina Diallo",
-                role: "Research Lead",
-                image: "/images/hero1.jpg"
-              }
-            ].map((member, index) => (
+            {teamMembers.map((member, index) => (
               <motion.div
                 key={member.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg"
+                className="group cursor-pointer"
+                onClick={() => setSelectedMember(member)}
               >
-                <div className="relative h-64">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-                  <p className="text-foreground/70">{member.role}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-500" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className="text-2xl font-bold text-center text-white mb-2">
+                        {member.name}
+                      </h3>
+                      <div className="h-1 w-12 bg-green-500 mx-auto rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center" />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
+
+        {/* Modal */}
+        <Modal isOpen={!!selectedMember} onClose={() => setSelectedMember(null)}>
+          {selectedMember && (
+            <div className="max-h-[80vh] overflow-y-auto">
+              <div className="flex items-center space-x-4 mb-6">
+                <Image
+                  src={selectedMember.image}
+                  alt={selectedMember.name}
+                  width={80}
+                  height={80}
+                  className="rounded-full"
+                />
+                <div>
+                  <h3 className="text-2xl font-bold">{selectedMember.name}</h3>
+                </div>
+              </div>
+              <p className="text-foreground/80 leading-relaxed whitespace-pre-line">
+                {selectedMember.bio}
+              </p>
+            </div>
+          )}
+        </Modal>
       </section>
 
       {/* Partners Section */}
