@@ -42,6 +42,7 @@ export default function Faculty() {
   const facultyMembers = [
     {
       name: "Uche Arinze",
+      position: "Communication Manager",
       image: "/images/faculty/uche.jpeg",
       background: "/images/LakeChadPhotos/lake1.png",
       bio: `Uche Arinze is a dynamic educator, development strategist, and communications expert passionately shaping narratives that drive impact. As Communications Manager at Dean Initiative, a youth-led NGO championing transformational change, she leads with creativity and purpose, crafting powerful stories that amplify the organization's mission and influence.
@@ -54,19 +55,24 @@ Whether mentoring young changemakers, managing digital strategies, or telling st
     },
     {
       name: "Ngozi Edum",
+      position: "Partnership and Innovation Manager",
       image: "/images/faculty/ngozi.jpeg",
       background: "/images/LakeChadPhotos/lake2.png",
       bio: `Ngozi leads the Partnership and Innovation at the Development of Educational Action Network. She has over five years of experience leading sustainable development projects, including climate action, gender equality, youth leadership, governance, and education. As a climate justice advocate, she amplifies the voices of marginalised communities and groups in climate discourse to ensure the inclusion of perspectives from those on the frontlines disproportionately affected by the climate crisis. Ngozi has a background in Forestry and Environmental Management, graduating with First Class Honours. She has received multiple scholarships and recently completed an advanced degree in Forest Science with full funding through the Erasmus Mundus Joint Masters Degree Award. Ngozi is an excellent public speaker and facilitator, as evidenced by her role as a panel speaker and facilitator at global and international events.`,
     },
     {
       name: "Doreen Mennom Oho",
+      position: "Technical Programs Lead",
       image: "/images/faculty/doreen.jpeg",
       background: "/images/LakeChadPhotos/lake3.png",
       bio: `Doreen Mennom Oho is a development practitioner currently serving as the Technical Programs Lead at DEAN Initiative, a youth-led organization dedicated to enhancing healthy communities for young people. In her role, she spearheads projects focused on governance, democracy, youth leadership, climate action, and education.
-She holds a Master's in International Affairs and Diplomacy and a Bachelor of Arts in English Language from Ahmadu Bello University, Nigeria. She is a People Powered Climate Democracy Accelerator Fellow, focused on using participatory budgeting to help marginalized communities access resources for climate adaptation and mitigation. Doreen is also a Carrington Youth Fellow of the United States Government in Nigeria and a participant in the African Group of Negotiators Experts Support (AGNES) 2025 Climate Governance, Diplomacy, and Negotiations Leadership Program.
+
+She holds a Master's degree in International Affairs and Diplomacy and a Bachelor of Arts in English Language from Ahmadu Bello University, Nigeria. She is a People Powered Climate Democracy Accelerator Fellow, focused on using participatory budgeting to help marginalized communities access resources for climate adaptation and mitigation. Doreen is also a Carrington Youth Fellow of the United States Government in Nigeria and a participant in the African Group of Negotiators Experts Support (AGNES) 2025 Climate Governance, Diplomacy, and Negotiations Leadership Program.
+
 She currently oversees the Lake Chad Climate Justice Fellowship, a project aimed at equipping young leaders with the knowledge and tools to advocate for climate justice and resilience in the region.
+
 With extensive experience in NGO leadership, community development, and fundraising, her skill set includes program design, grant proposal writing, and program coordination. She is passionate about climate finance, governance, and ensuring communities in the Lake Chad region have access to resources needed to strengthen their resilience against climate change.`,
-    },
+    }
   ];
 
   return (
@@ -198,6 +204,9 @@ With extensive experience in NGO leadership, community development, and fundrais
                         <h3 className="text-xl font-bold text-white mb-1">
                           {member.name}
                         </h3>
+                        <p className="text-sm text-white/80">
+                          {member.position}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -220,7 +229,10 @@ With extensive experience in NGO leadership, community development, and fundrais
                 height={80}
                 className="rounded-full"
               />
-              <h3 className="text-2xl font-bold">{selectedMember.name}</h3>
+              <div>
+                <h3 className="text-2xl font-bold">{selectedMember.name}</h3>
+                <p className="text-foreground/60">{selectedMember.position}</p>
+              </div>
             </div>
             <p className="text-foreground/80 leading-relaxed whitespace-pre-line">
               {selectedMember.bio}
