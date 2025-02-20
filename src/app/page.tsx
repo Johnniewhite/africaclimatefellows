@@ -34,29 +34,6 @@ const features = [
   },
 ]
 
-const blogPosts = [
-  {
-    title: "Climate Change Impact on African Communities",
-    excerpt: "Exploring how climate change affects local communities and the innovative solutions being developed.",
-    date: "Feb 15, 2024",
-    category: "Research",
-    image: "/images/hero1.jpg"
-  },
-  {
-    title: "Youth Leaders Driving Environmental Change",
-    excerpt: "Meet the young activists who are spearheading climate initiatives across the continent.",
-    date: "Feb 12, 2024",
-    category: "Stories",
-    image: "/images/hero2.png"
-  },
-  {
-    title: "Sustainable Agriculture Practices",
-    excerpt: "How African farmers are adapting to climate change with sustainable farming methods.",
-    date: "Feb 10, 2024",
-    category: "Solutions",
-    image: "/images/hero1.jpg"
-  }
-]
 
 export default function Home() {
   const [currentImage, setCurrentImage] = useState(0)
@@ -349,6 +326,56 @@ export default function Home() {
       />
         
       </section>
+
+{/* Partners Section */}
+<section id="partners" className="py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
+              Our Partners
+            </h2>
+            <p className="text-xl text-foreground/80">
+              Collaborating with leading organizations to create lasting impact in climate action.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {[
+              { name: "CJRF", image: "/images/partners/cjrf.JPG", label: "Funding Partners" },
+              { name: "DEAN", image: "/images/partners/dean.JPG", label: "Initiative of" },
+              { name: "CDBLT", image: "/images/partners/cdblt.JPG", label: "Implemented by" }
+            ].map((partner, index) => (
+              <motion.div
+                key={partner.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white dark:bg-gray-800 rounded-xl p-8 flex flex-col items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <p className="text-foreground/80 font-medium mb-4 text-center">
+                  {partner.label}
+                </p>
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src={partner.image}
+                    alt={partner.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* CTA Section - Mobile Friendly */}
       <section className="relative py-12 md:py-24 overflow-hidden bg-gradient-to-b from-background to-muted/50">
