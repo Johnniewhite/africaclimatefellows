@@ -106,7 +106,15 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
           name: "Semiye Michael",
           position: "Project Director",
           image: "/images/faculty/semiye.jpeg",
-          bio: `Semiye Michael is a man who wears the badge of a two-time United Nations Global Goals Goalkeeper proudly, a recognition bestowed upon him by the esteemed Bill and Melinda Gates Foundation. His name reverberates within the corridors of advocacy and social change, particularly in his homeland of Nigeria. With a fervent dedication, he has become a leading voice in championing the Initiative for Transforming Education in Nigeria, striving tirelessly to elevate educational standards and opportunities for all. But his ambitions extend beyond borders; he's on a mission to drive the adoption of Open Governance Partnerships in the Area Councils scattered across the Federal Capital Territory (FCT). This man's journey is not just about accolades but about igniting tangible change, one initiative at a time, to pave the way for a brighter, more equitable future.`,
+          bio: `Semiye Michael wears the badge of the United Nations Global Goals Goalkeeper proudly, a recognition bestowed upon him by the esteemed Bill and Melinda Gates Foundation. His name reverberates within the corridors of advocacy and social change as a leader with an on-the-ground grasp spanning influence of over a decade. 
+
+With a fervent dedication, Semiye has become a leading voice in championing critical reforms around education, election integrity, local governance, and climate action. 
+
+In 2018, Semiye and his Team led the single-largest SDGs Education Activation that reached over 3 million people directly. Semiye leads a national Youth Volunteers Network of over 5000 Volunteers that leads groundbreaking campaigns and community initiatives. 
+
+As a Climate Change Education strategist and advocate, Semiye has supported Nigeria's Climate Education Action and led Climate Education Activation in more than 300 schools across 10 states in Nigeria. 
+
+Semiye travels widely speaking at conferences and inspiring young people to lead the change they want to see.`,
         },
       ],
     },
