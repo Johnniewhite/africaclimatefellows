@@ -24,13 +24,13 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-2xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl z-50 p-6"
+              className="relative w-full max-w-2xl dark:bg-gray-800 rounded-lg shadow-xl z-50"
             >
               <button
                 onClick={onClose}
-                className="absolute right-4 top-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="absolute right-1 top-1 p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
               {children}
             </motion.div>

@@ -104,7 +104,7 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
         },
         {
           name: "Semiye Michael",
-          position: "Project Advisor",
+          position: "Project Director",
           image: "/images/faculty/semiye.jpeg",
           bio: `Semiye Michael is a man who wears the badge of a two-time United Nations Global Goals Goalkeeper proudly, a recognition bestowed upon him by the esteemed Bill and Melinda Gates Foundation. His name reverberates within the corridors of advocacy and social change, particularly in his homeland of Nigeria. With a fervent dedication, he has become a leading voice in championing the Initiative for Transforming Education in Nigeria, striving tirelessly to elevate educational standards and opportunities for all. But his ambitions extend beyond borders; he's on a mission to drive the adoption of Open Governance Partnerships in the Area Councils scattered across the Federal Capital Territory (FCT). This man's journey is not just about accolades but about igniting tangible change, one initiative at a time, to pave the way for a brighter, more equitable future.`,
         },

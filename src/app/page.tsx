@@ -2,10 +2,11 @@
 
 import BlogSection from "../components/BlogSection";
 import { motion } from "framer-motion"
-import { ArrowRight, Leaf, Globe2, Users2, Sparkles } from "lucide-react"
+import { ArrowRight, Leaf, Globe2, Users2, Sparkles, PlayCircle } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { Modal } from "../components/Modal"
 
 const features = [
   {
@@ -52,6 +53,8 @@ export default function Home() {
     '/images/LakeChadPhotos/lake4.png',
   ]
 
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % heroImages.length)
@@ -66,7 +69,16 @@ export default function Home() {
     }, 5000)
 
     return () => clearInterval(lakeTimer)
-  }, [])
+  }, [lakeImages.length])
+
+  useEffect(() => {
+    // Short delay to ensure smooth page load
+    const timer = setTimeout(() => {
+      setIsVideoModalOpen(true);
+    }, 1000); // Shows modal 1 second after page load
+
+    return () => clearTimeout(timer);
+  }, []); // Empty dependency array means this runs once on mount
 
   return (
     <main className="min-h-screen">
@@ -151,7 +163,7 @@ export default function Home() {
             </p>
             <div className="space-y-6">
             <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
-              At the heart of this program lies a commitment to addressing climate justice and alleviating the burden of care that disproportionately affects African communities. We recognize the immense potential of Africa’s youth as changemakers and aim to empower them to rise above systemic challenges and amplify their voices on the global stage.
+              At the heart of this program lies a commitment to addressing climate justice and alleviating the burden of care that disproportionately affects African communities. We recognize the immense potential of Africa&apos;s youth as changemakers and aim to empower them to rise above systemic challenges and amplify their voices on the global stage.
               </p>
             </div>
             <div className="space-y-6">
@@ -169,6 +181,16 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <div className="relative z-10 mt-8">
+        <button
+          onClick={() => setIsVideoModalOpen(true)}
+          className="inline-flex items-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors duration-300 border border-white/20"
+        >
+          <PlayCircle className="w-5 h-5 mr-2" />
+          Watch Video
+        </button>
+      </div>
 
       {/* Features Grid - Mobile Friendly */}
       <section className="py-12 md:py-24 bg-muted">
@@ -416,6 +438,20 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <Modal isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)}>
+        <div className="aspect-video w-full">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/aJbkSjZuLfw"
+            title="Lake Chad Climate Justice Fellowship Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="rounded-lg"
+          />
+        </div>
+      </Modal>
     </main>
   )
 }
