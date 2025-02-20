@@ -28,13 +28,13 @@ export default function About() {
       members: [
         {
           name: "Ngozi Edum",
-          position: "Partnership and Innovation Manager",
+          position: "Project Manager",
           image: "/images/faculty/ngozi.jpg",
           bio: `Ngozi leads the Partnership and Innovation at the Development of Educational Action Network. She has over five years of experience leading sustainable development projects, including climate action, gender equality, youth leadership, governance, and education. As a climate justice advocate, she amplifies the voices of marginalised communities and groups in climate discourse to ensure the inclusion of perspectives from those on the frontlines disproportionately affected by the climate crisis. Ngozi has a background in Forestry and Environmental Management, graduating with First Class Honours. She has received multiple scholarships and recently completed an advanced degree in Forest Science with full funding through the Erasmus Mundus Joint Masters Degree Award. Ngozi is an excellent public speaker and facilitator, as evidenced by her role as a panel speaker and facilitator at global and international events.`,
         },
         {
           name: "Doreen Mennom Oho",
-          position: "Technical Programs Lead",
+          position: "Project Officer",
           image: "/images/faculty/doreen.jpeg",
           bio: `Doreen Mennom Oho is a development practitioner currently serving as the Technical Programs Lead at DEAN Initiative, a youth-led organization dedicated to enhancing healthy communities for young people. In her role, she spearheads projects focused on governance, democracy, youth leadership, climate action, and education.
 
