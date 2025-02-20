@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { motion } from 'framer-motion'
-import { ArrowRight, Building2, Globe2, Users2 } from 'lucide-react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { useState } from 'react'
-import { Modal } from '@/components/Modal'
+import { motion } from "framer-motion";
+import { ArrowRight, Building2, Globe2, Users2 } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import { Modal } from "@/components/Modal";
 
 type TeamMember = {
   name: string;
@@ -44,11 +44,11 @@ She currently oversees the Lake Chad Climate Justice Fellowship, a project aimed
 
 With extensive experience in NGO leadership, community development, and fundraising, her skill set includes program design, grant proposal writing, and program coordination. She is passionate about climate finance, governance, and ensuring communities in the Lake Chad region have access to resources needed to strengthen their resilience against climate change.`,
         },
-      {
-      name: "Uche Arinze",
-      position: "Project Communications Officer",
-      image: "/images/faculty/uche.jpeg",
-      bio: `Uche Arinze is a dynamic educator, development strategist, and communications expert passionately shaping narratives that drive impact. As Communications Manager at Dean Initiative, a youth-led NGO championing transformational change, she leads with creativity and purpose, crafting powerful stories that amplify the organization's mission and influence.`
+        {
+          name: "Uche Arinze",
+          position: "Project Communications Officer",
+          image: "/images/faculty/uche.jpeg",
+          bio: `Uche Arinze is a dynamic educator, development strategist, and communications expert passionately shaping narratives that drive impact. As Communications Manager at Dean Initiative, a youth-led NGO championing transformational change, she leads with creativity and purpose, crafting powerful stories that amplify the organization's mission and influence.`,
         },
       ],
     },
@@ -105,7 +105,7 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
         {
           name: "Semiye Michael",
           position: "Project Advisor",
-          image: "/images/faculty/semiye.png",
+          image: "/images/faculty/semiye.jpeg",
           bio: `Semiye Michael is a man who wears the badge of a two-time United Nations Global Goals Goalkeeper proudly, a recognition bestowed upon him by the esteemed Bill and Melinda Gates Foundation. His name reverberates within the corridors of advocacy and social change, particularly in his homeland of Nigeria. With a fervent dedication, he has become a leading voice in championing the Initiative for Transforming Education in Nigeria, striving tirelessly to elevate educational standards and opportunities for all. But his ambitions extend beyond borders; he's on a mission to drive the adoption of Open Governance Partnerships in the Area Councils scattered across the Federal Capital Territory (FCT). This man's journey is not just about accolades but about igniting tangible change, one initiative at a time, to pave the way for a brighter, more equitable future.`,
         },
       ],
@@ -116,14 +116,14 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
     <main className="min-h-screen">
       {/* Hero Section with Full Image and Improved Text Visibility */}
       <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
-        <Image 
-          src="/images/banner.jpeg" 
+        <Image
+          src="/images/banner.jpeg"
           alt="About"
           fill
           priority
           className="absolute inset-0 object-cover brightness-50"
         />
-        
+
         {/* Gradient Overlay for Better Text Readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent" />
 
@@ -152,8 +152,9 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
                 transition={{ delay: 0.5 }}
                 className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed"
               >
-                A transformative initiative dedicated to harnessing the adventurous spirit, resilience,
-                and innovative leadership of African youth.
+                A transformative initiative dedicated to harnessing the
+                adventurous spirit, resilience, and innovative leadership of
+                African youth.
               </motion.p>
             </motion.div>
           </div>
@@ -177,8 +178,9 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
               Our Mission
             </h1>
             <p className="text-xl text-foreground/80">
-              To equip young African climate activists with the tools, networks, funding and mentorship
-              needed to address the intersectional challenges of climate change across the continent.
+              To equip young African climate activists with the tools, networks,
+              funding and mentorship needed to address the intersectional
+              challenges of climate change across the continent.
             </p>
           </motion.div>
 
@@ -187,18 +189,21 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
               {
                 icon: Globe2,
                 title: "Climate Action",
-                description: "Leading initiatives for sustainable environmental change across Africa"
+                description:
+                  "Leading initiatives for sustainable environmental change across Africa",
               },
               {
                 icon: Users2,
                 title: "Youth Empowerment",
-                description: "Building the next generation of climate justice leaders"
+                description:
+                  "Building the next generation of climate justice leaders",
               },
               {
                 icon: Building2,
                 title: "Community Impact",
-                description: "Creating lasting positive change in local communities"
-              }
+                description:
+                  "Creating lasting positive change in local communities",
+              },
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -220,7 +225,10 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-24 bg-gradient-to-b from-green-50/50 to-white dark:from-green-950/30 dark:to-background">
+      <section
+        id="team"
+        className="py-24 bg-gradient-to-b from-green-50/50 to-white dark:from-green-950/30 dark:to-background"
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -267,13 +275,15 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
                           />
                           {/* Gradient Overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                          
+
                           {/* Hover Content */}
                           <div className="absolute inset-0 flex flex-col justify-end p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
                             <div className="text-white">
-                              <p className="text-sm font-medium text-green-400 mb-2">View Profile</p>
+                              <p className="text-sm font-medium text-green-400 mb-2">
+                                View Profile
+                              </p>
                               <p className="text-sm opacity-90 line-clamp-3">
-                                {member.bio.split('.')[0]}.
+                                {member.bio.split(".")[0]}.
                               </p>
                             </div>
                           </div>
@@ -289,7 +299,7 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
                               {member.position}
                             </p>
                           </div>
-                          
+
                           {/* Decorative Line */}
                           <div className="mt-4 flex justify-center">
                             <div className="h-1 w-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -305,7 +315,10 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
         </div>
 
         {/* Modal */}
-        <Modal isOpen={!!selectedMember} onClose={() => setSelectedMember(null)}>
+        <Modal
+          isOpen={!!selectedMember}
+          onClose={() => setSelectedMember(null)}
+        >
           {selectedMember && (
             <div className="max-h-[80vh] overflow-y-auto">
               <div className="flex flex-col items-center mb-8">
@@ -317,8 +330,12 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
                     className="rounded-full object-cover"
                   />
                 </div>
-                <h3 className="text-3xl font-bold text-center mb-1">{selectedMember.name}</h3>
-                <p className="text-lg text-foreground/60 mb-4">{selectedMember.position}</p>
+                <h3 className="text-3xl font-bold text-center mb-1">
+                  {selectedMember.name}
+                </h3>
+                <p className="text-lg text-foreground/60 mb-4">
+                  {selectedMember.position}
+                </p>
                 <div className="h-1 w-20 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full" />
               </div>
               <p className="text-foreground/80 leading-relaxed whitespace-pre-line">
@@ -343,18 +360,17 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
             <div className="relative z-10 text-center max-w-4xl mx-auto">
               <h2 className="gradient-text mb-6">Join Our Movement</h2>
               <p className="text-xl text-foreground/80 mb-8">
-                Be part of a transformative journey towards climate justice in Africa. Apply now to
-                become a Climate Justice Fellow.
+                Be part of a transformative journey towards climate justice in
+                Africa. Apply now to become a Climate Justice Fellow.
               </p>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="inline-block"
-              >
+              <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
                 <Link
                   href="/fellowship"
                   className="btn btn-primary group relative overflow-hidden"
                 >
-                  <span className="relative z-10">Learn About the Fellowship</span>
+                  <span className="relative z-10">
+                    Learn About the Fellowship
+                  </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                   <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -364,5 +380,5 @@ As the youngest Nigerian delegate to the United Nations in 2019, Seyifunmi repre
         </div>
       </section>
     </main>
-  )
-} 
+  );
+}
