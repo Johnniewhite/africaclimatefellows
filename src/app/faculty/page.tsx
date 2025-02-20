@@ -41,22 +41,9 @@ export default function Faculty() {
 
   const facultyMembers = [
     {
-      name: "Uche Arinze",
-      position: "Project Communications Officer",
-      image: "/images/faculty/uche.jpeg",
-      background: "/images/LakeChadPhotos/lake1.png",
-      bio: `Uche Arinze is a dynamic educator, development strategist, and communications expert passionately shaping narratives that drive impact. As Communications Manager at Dean Initiative, a youth-led NGO championing transformational change, she leads with creativity and purpose, crafting powerful stories that amplify the organization's mission and influence.
-
-A graduate of Obafemi Awolowo University with a BA and a PGD in Education from the University of Lagos, Uche blends academic excellence with hands-on expertise in education, advocacy, and digital media. Her work in advancing the Sustainable Development Goals (SDGs) since their inception underscores her deep commitment to fostering meaningful progress.
-
-Uche's influence extends beyond Dean Initiative. She has served as Lead of Communications and PR for CYPAN's Leadership Committee, an Alumni Global Ambassador for Theirworld, a member of the Youth SDGs Newsletter editorial board, a Teach for Nigeria mentor, and a Mandela Washington Fellowship application scorer. Her strategic communications skills have also driven successful campaigns for national and international brands.
-
-Whether mentoring young changemakers, managing digital strategies, or telling stories that inspire action, Uche remains dedicated to shaping a future where education and communication fuel sustainable development and empowered communities.`,
-    },
-    {
       name: "Ngozi Edum",
       position: "Project Manager",
-      image: "/images/faculty/ngozi.jpeg",
+      image: "/images/faculty/ngozi.jpg",
       background: "/images/LakeChadPhotos/lake2.png",
       bio: `Ngozi leads the Partnership and Innovation at the Development of Educational Action Network. She has over five years of experience leading sustainable development projects, including climate action, gender equality, youth leadership, governance, and education. As a climate justice advocate, she amplifies the voices of marginalised communities and groups in climate discourse to ensure the inclusion of perspectives from those on the frontlines disproportionately affected by the climate crisis. Ngozi has a background in Forestry and Environmental Management, graduating with First Class Honours. She has received multiple scholarships and recently completed an advanced degree in Forest Science with full funding through the Erasmus Mundus Joint Masters Degree Award. Ngozi is an excellent public speaker and facilitator, as evidenced by her role as a panel speaker and facilitator at global and international events.`,
     },
@@ -72,7 +59,20 @@ She holds a Master's degree in International Affairs and Diplomacy and a Bachelo
 She currently oversees the Lake Chad Climate Justice Fellowship, a project aimed at equipping young leaders with the knowledge and tools to advocate for climate justice and resilience in the region.
 
 With extensive experience in NGO leadership, community development, and fundraising, her skill set includes program design, grant proposal writing, and program coordination. She is passionate about climate finance, governance, and ensuring communities in the Lake Chad region have access to resources needed to strengthen their resilience against climate change.`,
-    }
+    },
+    {
+      name: "Uche Arinze",
+      position: "Project Communications Officer",
+      image: "/images/faculty/uche.jpeg",
+      background: "/images/LakeChadPhotos/lake1.png",
+      bio: `Uche Arinze is a dynamic educator, development strategist, and communications expert passionately shaping narratives that drive impact. As Communications Manager at Dean Initiative, a youth-led NGO championing transformational change, she leads with creativity and purpose, crafting powerful stories that amplify the organization's mission and influence.
+
+A graduate of Obafemi Awolowo University with a BA and a PGD in Education from the University of Lagos, Uche blends academic excellence with hands-on expertise in education, advocacy, and digital media. Her work in advancing the Sustainable Development Goals (SDGs) since their inception underscores her deep commitment to fostering meaningful progress.
+
+Uche's influence extends beyond Dean Initiative. She has served as Lead of Communications and PR for CYPAN's Leadership Committee, an Alumni Global Ambassador for Theirworld, a member of the Youth SDGs Newsletter editorial board, a Teach for Nigeria mentor, and a Mandela Washington Fellowship application scorer. Her strategic communications skills have also driven successful campaigns for national and international brands.
+
+Whether mentoring young changemakers, managing digital strategies, or telling stories that inspire action, Uche remains dedicated to shaping a future where education and communication fuel sustainable development and empowered communities.`,
+    },
   ];
 
   return (
@@ -168,10 +168,10 @@ With extensive experience in NGO leadership, community development, and fundrais
             viewport={{ once: true }}
             className="max-w-6xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-center mb-16">
+            <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
               Our Faculty Members
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
               {facultyMembers.map((member, index) => (
                 <motion.div
                   key={member.name}
@@ -179,34 +179,46 @@ With extensive experience in NGO leadership, community development, and fundrais
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="group cursor-pointer"
+                  className="group cursor-pointer mx-auto w-full max-w-sm"
                   onClick={() => setSelectedMember(member)}
                 >
-                  <div className="relative rounded-2xl overflow-hidden">
-                    <div className="aspect-[3/4] relative">
+                  <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    {/* Image Container */}
+                    <div className="aspect-[4/5] relative overflow-hidden">
                       <Image
-                        src={member.background}
-                        alt={`${member.name} background`}
+                        src={member.image}
+                        alt={member.name}
                         fill
-                        className="object-cover brightness-50"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                      <div className="absolute inset-0 flex flex-col justify-end p-6">
-                        <div className="mb-4">
-                          <Image
-                            src={member.image}
-                            alt={member.name}
-                            width={100}
-                            height={100}
-                            className="rounded-full border-4 border-white/20"
-                          />
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      {/* Hover Content */}
+                      <div className="absolute inset-0 flex flex-col justify-end p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                        <div className="text-white">
+                          <p className="text-sm font-medium text-green-400 mb-2">View Profile</p>
+                          <p className="text-sm opacity-90 line-clamp-3">
+                            {member.bio.split('.')[0]}.
+                          </p>
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-1">
+                      </div>
+                    </div>
+
+                    {/* Info Section */}
+                    <div className="p-6">
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold mb-1 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
                           {member.name}
                         </h3>
-                        <p className="text-sm text-white/80">
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
                           {member.position}
                         </p>
+                      </div>
+                      
+                      {/* Decorative Line */}
+                      <div className="mt-4 flex justify-center">
+                        <div className="h-1 w-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
                       </div>
                     </div>
                   </div>
@@ -221,18 +233,18 @@ With extensive experience in NGO leadership, community development, and fundrais
       <Modal isOpen={!!selectedMember} onClose={() => setSelectedMember(null)}>
         {selectedMember && (
           <div className="max-h-[80vh] overflow-y-auto">
-            <div className="flex items-center space-x-4 mb-6">
-              <Image
-                src={selectedMember.image}
-                alt={selectedMember.name}
-                width={80}
-                height={80}
-                className="rounded-full"
-              />
-              <div>
-                <h3 className="text-2xl font-bold">{selectedMember.name}</h3>
-                <p className="text-foreground/60">{selectedMember.position}</p>
+            <div className="flex flex-col items-center mb-8">
+              <div className="relative w-32 h-32 mb-4">
+                <Image
+                  src={selectedMember.image}
+                  alt={selectedMember.name}
+                  fill
+                  className="rounded-full object-cover"
+                />
               </div>
+              <h3 className="text-3xl font-bold text-center mb-1">{selectedMember.name}</h3>
+              <p className="text-lg text-foreground/60 mb-4">{selectedMember.position}</p>
+              <div className="h-1 w-20 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full" />
             </div>
             <p className="text-foreground/80 leading-relaxed whitespace-pre-line">
               {selectedMember.bio}
