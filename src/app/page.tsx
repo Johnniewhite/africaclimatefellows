@@ -370,7 +370,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
               { name: "CJRF", image: "/images/partners/cjrf.JPG", label: "Project Funded by" },
-              { name: "DEAN", image: "/images/partners/dean.JPG", label: "This is a Project and Initiative of" },
+              { name: "DEAN", image: "/images/partners/dean.png", label: "This is a Project and Initiative of" },
               { name: "CDBLT", image: "/images/partners/cdblt.JPG", label: "Partners" }
             ].map((partner, index) => (
               <motion.div
