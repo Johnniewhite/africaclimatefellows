@@ -83,6 +83,7 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
         'fade-in-up-delay': 'fade-in-up 0.8s ease-out 0.2s forwards',
+        'spin-slow': 'spin 3s linear infinite',
       },
     },
   },

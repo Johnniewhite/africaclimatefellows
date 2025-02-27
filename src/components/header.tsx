@@ -102,6 +102,10 @@ export function Header() {
       ]
     },
     { 
+      name: "Gallery", 
+      href: "/gallery" 
+    },
+    { 
       name: "Contact", 
       href: "/contact",
       dropdownItems: [

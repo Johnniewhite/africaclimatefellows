@@ -29,6 +29,9 @@ export default function BlogPostClient() {
           `https://blog.africaclimatefellows.com/wp-json/wp/v2/posts/${params.id}?_embed`
         );
         const data = await response.json();
+        // Decode HTML entities in the title and content
+        data.title.rendered = decodeHTMLEntities(data.title.rendered);
+        data.content.rendered = data.content.rendered.replace(/\r\n/g, ''); // Remove \r\n characters
         setPost(data);
       } catch (error) {
         console.error("Error fetching post:", error);
@@ -41,6 +44,13 @@ export default function BlogPostClient() {
       fetchPost();
     }
   }, [params.id]);
+
+  // Function to decode HTML entities
+  function decodeHTMLEntities(text: string) {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
+  }
 
   if (loading) {
     return (
