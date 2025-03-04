@@ -2,16 +2,19 @@
 
 import Link from 'next/link'
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export function Footer() {
+  const { t } = useLanguage();
+  
   const navigation = {
     main: [
-      { name: 'About', href: '/about' },
-      { name: 'Fellowship', href: '/fellowship' },
-      { name: 'Faculty', href: '/faculty' },
-      { name: 'Impact', href: '/impact' },
-      { name: 'Get Involved', href: '/get-involved' },
-      { name: 'Contact', href: '/contact' },
+      { name: 'About', href: '/about', translationKey: 'nav.about' },
+      { name: 'Fellowship', href: '/fellowship', translationKey: 'nav.fellowship' },
+      { name: 'Faculty', href: '/faculty', translationKey: 'nav.faculty' },
+      { name: 'Impact', href: '/impact', translationKey: 'nav.impact' },
+      { name: 'Get Involved', href: '/get-involved', translationKey: 'nav.getInvolved' },
+      { name: 'Contact', href: '/contact', translationKey: 'nav.contact' },
     ],
     social: [
       {
@@ -44,11 +47,11 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-accent">Climate Justice Fellowship</h3>
             <p className="text-sm text-foreground/80">
-              Empowering Africa&apos;s Youth for Climate Justice Action
+              {t('home.hero.subtitle')}
             </p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-accent mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-accent mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
               {navigation.main.slice(0, 3).map((item) => (
                 <li key={item.name}>
@@ -56,14 +59,14 @@ export function Footer() {
                     href={item.href}
                     className="text-sm text-foreground/80 hover:text-accent transition-colors duration-200"
                   >
-                    {item.name}
+                    {t(item.translationKey)}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-accent mb-4">Resources</h3>
+            <h3 className="text-lg font-semibold text-accent mb-4">{t('footer.resources')}</h3>
             <ul className="space-y-2">
               {navigation.main.slice(3).map((item) => (
                 <li key={item.name}>
@@ -71,14 +74,14 @@ export function Footer() {
                     href={item.href}
                     className="text-sm text-foreground/80 hover:text-accent transition-colors duration-200"
                   >
-                    {item.name}
+                    {t(item.translationKey)}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-accent mb-4">Connect With Us</h3>
+            <h3 className="text-lg font-semibold text-accent mb-4">{t('footer.follow')}</h3>
             <div className="flex space-x-4">
               {navigation.social.map((item) => {
                 const Icon = item.icon
@@ -98,7 +101,7 @@ export function Footer() {
         </div>
         <div className="mt-8 pt-8 border-t border-muted-foreground/20">
           <p className="text-sm text-center text-foreground/60">
-            © {new Date().getFullYear()} Climate Justice Fellowship. All rights reserved.
+            © {new Date().getFullYear()} Climate Justice Fellowship. {t('footer.rights')}
           </p>
         </div>
       </div>

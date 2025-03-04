@@ -100,7 +100,7 @@ export default function BlogPostClient() {
             <img
               src={featuredImage}
               alt=""
-              className="w-full h-[400px] object-cover rounded-xl mb-8"
+              className="w-full h-[400px] object-contain rounded-xl mb-8"
             />
           )}
 

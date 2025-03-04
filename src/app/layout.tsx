@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body className={`${GeistSans.variable} antialiased min-h-screen`}>
         <Providers>
           <div className="relative min-h-screen flex flex-col">

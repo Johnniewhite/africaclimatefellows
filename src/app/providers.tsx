@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from "next-themes";
 import { useState, useEffect } from "react";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
@@ -12,9 +13,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   if (!mounted) {
     return (
-      <div className="relative min-h-screen flex flex-col bg-background text-foreground">
-        {children}
-      </div>
+      <LanguageProvider>
+        <div className="relative min-h-screen flex flex-col bg-background text-foreground">
+          {children}
+        </div>
+      </LanguageProvider>
     );
   }
 
@@ -25,9 +28,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      <div className="relative min-h-screen flex flex-col bg-background text-foreground transition-colors">
-        {children}
-      </div>
+      <LanguageProvider>
+        <div className="relative min-h-screen flex flex-col bg-background text-foreground transition-colors">
+          {children}
+        </div>
+      </LanguageProvider>
     </ThemeProvider>
   );
 } 

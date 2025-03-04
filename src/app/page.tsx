@@ -7,29 +7,30 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 import { Modal } from "../components/Modal"
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const features = [
   {
-    title: "Climate Action",
-    description: "Drive meaningful change through innovative climate solutions",
+    titleKey: "features.climateAction.title",
+    descriptionKey: "features.climateAction.description",
     icon: Leaf,
     gradient: "from-green-500 to-emerald-600",
   },
   {
-    title: "Pan-African Network",
-    description: "Connect with climate leaders across the continent",
+    titleKey: "features.panAfrican.title",
+    descriptionKey: "features.panAfrican.description",
     icon: Globe2,
     gradient: "from-emerald-500 to-green-600",
   },
   {
-    title: "Expert Mentorship",
-    description: "Learn from seasoned climate justice advocates",
+    titleKey: "features.mentorship.title",
+    descriptionKey: "features.mentorship.description",
     icon: Users2,
     gradient: "from-green-600 to-emerald-500",
   },
   {
-    title: "Project Funding",
-    description: "Access resources to implement your climate initiatives",
+    titleKey: "features.funding.title",
+    descriptionKey: "features.funding.description",
     icon: Sparkles,
     gradient: "from-emerald-600 to-green-500",
   },
@@ -37,6 +38,7 @@ const features = [
 
 
 export default function Home() {
+  const { t } = useLanguage();
   const [currentImage, setCurrentImage] = useState(0)
   const heroImages = [
     '/images/ClimateConvofold/Climate Convo12.jpeg',
@@ -94,11 +96,11 @@ export default function Home() {
           />
         </div>
         <div className="relative z-10">
-          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 md:mb-8 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] animate-fade-in-up">
-            Climate Justice <span className="text-green-400">Youth Fellowship</span>
+          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 md:mb-8 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] animate-fade-in-up" 
+              dangerouslySetInnerHTML={{ __html: t('home.hero.title') }}>
           </h1>
           <p className="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto text-white font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] animate-fade-in-up-delay px-4">
-            Empowering Africa&apos;s Youth for Climate Justice Action
+            {t('home.hero.subtitle')}
           </p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-green-400/40 via-white/60 to-green-400/40"></div>
@@ -156,26 +158,26 @@ export default function Home() {
             className="space-y-6"
           >
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-950 dark:text-green-50">
-              The Climate Justice Youth Fellowship
+              {t('home.section1.title')}
             </h2>
             <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
-              A transformative initiative dedicated to harnessing the adventurous spirit, resilience, and innovative leadership of African youth. We connect young climate advocates with critical resources, sharpened skills, professional networks, and international exposure.
+              {t('home.section1.paragraph1')}
             </p>
             <div className="space-y-6">
             <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
-              At the heart of this program lies a commitment to addressing climate justice and alleviating the burden of care that disproportionately affects African communities. We recognize the immense potential of Africa&apos;s youth as changemakers and aim to empower them to rise above systemic challenges and amplify their voices on the global stage.
+              {t('home.section1.paragraph2')}
               </p>
             </div>
             <div className="space-y-6">
               <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
-              Through tailored capacity-building sessions, mentorship by seasoned experts, research engagements, funding and opportunities to engage in global forums, the Climate Justice Youth Fellowship is more than a program—it is a movement for creating leaders who will shape a resilient and equitable future for Africa.
+              {t('home.section1.paragraph3')}
               </p>
             </div>
             <Link 
               href="/fellowship"
               className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md"
             >
-              Learn More
+              {t('home.section1.learnMore')}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </motion.div>
@@ -188,7 +190,7 @@ export default function Home() {
           className="inline-flex items-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors duration-300 border border-white/20"
         >
           <PlayCircle className="w-5 h-5 mr-2" />
-          Watch Video
+          {t('home.watchVideo')}
         </button>
       </div>
 
@@ -198,7 +200,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {features.map((feature, index) => (
               <motion.div
-                key={feature.title}
+                key={feature.titleKey}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -210,10 +212,10 @@ export default function Home() {
                     <feature.icon className="w-full h-full text-white" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
-                    {feature.title}
+                    {t(feature.titleKey)}
                   </h3>
                   <p className="text-muted-foreground group-hover:text-foreground transition-colors">
-                    {feature.description}
+                    {t(feature.descriptionKey)}
                   </p>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-green-300 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                 </div>
