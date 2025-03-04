@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Building2, Globe2, Users2 } from "lucide-react";
+import { ArrowRight, Building2, Globe2, Users2, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
@@ -328,28 +328,68 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
           onClose={() => setSelectedMember(null)}
         >
           {selectedMember && (
-            <div className="max-h-[80vh] overflow-y-auto">
-              <div className="flex flex-col items-center mb-8">
-                <div className="relative w-32 h-32 mb-4">
-                  <Image
-                    src={selectedMember.image}
-                    alt={selectedMember.name}
-                    fill
-                    className="rounded-full object-cover"
-                  />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="max-h-[90vh] overflow-y-auto"
+            >
+              <div className="relative bg-white dark:bg-gray-900 rounded-2xl overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+                
+                {/* Close Button */}
+                <button
+                  onClick={() => setSelectedMember(null)}
+                  className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:bg-white dark:hover:bg-gray-800"
+                >
+                  <X className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                </button>
+
+                {/* Profile Header with Gradient Background */}
+                <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 p-8">
+                  <div className="absolute inset-0 bg-grid-white-pattern opacity-10" />
+                  <div className="relative flex flex-col items-center">
+                    <div className="relative w-48 h-48 mb-6">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white to-emerald-200 rounded-full blur-2xl opacity-30" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full blur-xl opacity-20" />
+                      <Image
+                        src={selectedMember.image}
+                        alt={selectedMember.name}
+                        fill
+                        className="rounded-full object-cover ring-4 ring-white/80 shadow-2xl"
+                      />
+                    </div>
+                    <h3 className="text-4xl font-bold text-center mb-2 text-white">
+                      {selectedMember.name}
+                    </h3>
+                    <p className="text-lg text-white/90 mb-4">
+                      {selectedMember.position}
+                    </p>
+                    <div className="h-1 w-32 bg-white/30 rounded-full" />
+                  </div>
                 </div>
-                <h3 className="text-3xl font-bold text-center mb-1">
-                  {selectedMember.name}
-                </h3>
-                <p className="text-lg text-foreground/60 mb-4">
-                  {selectedMember.position}
-                </p>
-                <div className="h-1 w-20 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full" />
+
+                {/* Content Section */}
+                <div className="p-8">
+                  {/* Bio Content */}
+                  <div className="prose prose-lg dark:prose-invert max-w-none">
+                    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 mb-8">
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="w-1 h-6 bg-gradient-to-b from-green-500 to-emerald-500 rounded-full" />
+                        <h4 className="text-xl font-semibold text-gray-900 dark:text-white">About</h4>
+                      </div>
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
+                        {selectedMember.bio}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Decorative Bottom Border */}
+                <div className="h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-green-500" />
               </div>
-              <p className="text-foreground/80 leading-relaxed whitespace-pre-line">
-                {selectedMember.bio}
-              </p>
-            </div>
+            </motion.div>
           )}
         </Modal>
       </section>
