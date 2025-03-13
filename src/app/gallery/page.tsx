@@ -1,26 +1,16 @@
 import { Suspense } from 'react';
-import AlbumGrid from './components/AlbumGrid';
 import Loading from './components/Loading';
-
-// Direct server-side fetch to avoid CORS issues
-async function getAlbums() {
-  const response = await fetch('https://gallery.africaclimatefellows.com/ws.php?method=pwg.categories.getList&format=json', { cache: 'no-store' });
-  if (!response.ok) {
-    throw new Error('Failed to fetch albums');
-  }
-  return response.json();
-}
+import GalleryClient from './components/GalleryClient';
 
 export const metadata = {
   title: 'Gallery | Africa Climate Fellows',
   description: 'Browse photos from Africa Climate Fellows events and activities',
 };
 
-export default async function GalleryPage() {
-  // Fetch albums data server-side
-  const albumsData = await getAlbums();
-  const albums = albumsData.result.categories;
+// Make this page static for export
+export const dynamic = "force-static";
 
+export default function GalleryPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="mb-12 text-center">
@@ -36,7 +26,7 @@ export default async function GalleryPage() {
       </div>
       
       <Suspense fallback={<Loading />}>
-        <AlbumGrid albums={albums} />
+        <GalleryClient />
       </Suspense>
     </div>
   );

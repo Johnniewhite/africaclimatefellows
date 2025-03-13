@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 
+// Add this line to make the route compatible with static exports
+export const dynamic = "force-static";
+
 const PIWIGO_API_URL = 'https://gallery.africaclimatefellows.com/ws.php';
 
 export async function GET() {
