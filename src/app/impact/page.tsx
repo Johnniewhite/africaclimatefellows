@@ -4,29 +4,31 @@ import { motion } from "framer-motion"
 import { Award, Globe, Users, Sprout, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { useLanguage } from "@/context/LanguageContext"
+import { useState, useEffect } from "react"
 
 const metrics = [
   {
-    title: "20 Fellows Selected",
-    description: "Bright minds chosen from across Africa",
+    titleKey: "fellows_selected",
+    descriptionKey: "fellows_selected_description",
     icon: Users,
     gradient: "from-blue-500 to-blue-600",
   },
   {
-    title: "15+ Projects Initiated",
-    description: "Impactful climate initiatives launched",
+    titleKey: "projects_initiated",
+    descriptionKey: "projects_initiated_description",
     icon: Sprout,
     gradient: "from-green-500 to-green-600",
   },
   {
-    title: "4 Countries",
-    description: "Pan-African representation and collaboration",
+    titleKey: "countries_count",
+    descriptionKey: "countries_description",
     icon: Globe,
     gradient: "from-purple-500 to-purple-600",
   },
   {
-    title: "1000+ Lives Impacted",
-    description: "Communities transformed through climate action",
+    titleKey: "lives_impacted",
+    descriptionKey: "lives_impacted_description",
     icon: Award,
     gradient: "from-orange-500 to-orange-600",
   },
@@ -34,23 +36,23 @@ const metrics = [
 
 const successStories = [
   {
-    title: "Water Conservation Initiative",
-    location: "Kenya",
-    impact: "50,000 liters of water saved monthly",
+    titleKey: "water_conservation",
+    locationKey: "water_conservation_location",
+    impactKey: "water_conservation_impact",
     image: "/images/illustrations/water-conservation.svg",
     gradient: "from-blue-500 to-blue-600",
   },
   {
-    title: "Renewable Energy Project",
-    location: "Nigeria",
-    impact: "30% reduction in carbon emissions",
+    titleKey: "renewable_energy",
+    locationKey: "renewable_energy_location",
+    impactKey: "renewable_energy_impact",
     image: "/images/illustrations/renewable-energy.svg",
     gradient: "from-green-500 to-green-600",
   },
   {
-    title: "Women&apos;s Climate Leadership",
-    location: "Ghana",
-    impact: "200 women empowered in climate action",
+    titleKey: "women_leadership",
+    locationKey: "women_leadership_location",
+    impactKey: "women_leadership_impact",
     image: "/images/illustrations/women-leadership.svg",
     gradient: "from-purple-500 to-purple-600",
   },
@@ -72,6 +74,13 @@ const item = {
 }
 
 export default function Impact() {
+  const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -96,10 +105,10 @@ export default function Impact() {
             className="text-center"
           >
             <h1 className="gradient-text font-bold mb-6 text-white">
-              Our Impact
+              {mounted ? t('our_impact') : 'Our Impact'}
             </h1>
             <p className="mt-4 text-lg sm:text-xl max-w-3xl mx-auto text-white/90">
-              Together, we&apos;re building a sustainable future. See how our fellows are making a difference across Africa.
+              {mounted ? t('impact_description') : 'Together, we\'re building a sustainable future. See how our fellows are making a difference across Africa.'}
             </p>
           </motion.div>
         </div>
@@ -116,15 +125,15 @@ export default function Impact() {
           >
             {metrics.map((metric) => (
               <motion.div
-                key={metric.title}
+                key={metric.titleKey}
                 variants={item}
                 className="card card-hover p-6"
               >
                 <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${metric.gradient} p-2 mb-4`}>
                   <metric.icon className="w-full h-full text-white" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{metric.title}</h3>
-                <p className="text-muted-foreground">{metric.description}</p>
+                <h3 className="text-xl font-semibold mb-2">{mounted ? t(metric.titleKey) : metric.titleKey}</h3>
+                <p className="text-muted-foreground">{mounted ? t(metric.descriptionKey) : metric.descriptionKey}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -134,7 +143,7 @@ export default function Impact() {
       {/* Success Stories Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-center gradient-text mb-12">Success Stories</h2>
+          <h2 className="text-center gradient-text mb-12">{mounted ? t('success_stories_title') : 'Success Stories'}</h2>
           <motion.div
             variants={container}
             initial="hidden"
@@ -143,7 +152,7 @@ export default function Impact() {
           >
             {successStories.map((story) => (
               <motion.div
-                key={story.title}
+                key={story.titleKey}
                 variants={item}
                 className="card card-hover overflow-hidden"
               >
@@ -151,15 +160,15 @@ export default function Impact() {
                   <div className={`absolute inset-0 bg-gradient-to-br ${story.gradient} opacity-10`} />
                   <Image
                     src={story.image}
-                    alt={story.title}
+                    alt={mounted ? t(story.titleKey) : story.titleKey}
                     fill
                     className="object-cover"
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{story.title}</h3>
-                  <p className="text-muted-foreground mb-2">📍 {story.location}</p>
-                  <p className="text-primary font-medium">{story.impact}</p>
+                  <h3 className="text-xl font-semibold mb-2">{mounted ? t(story.titleKey) : story.titleKey}</h3>
+                  <p className="text-muted-foreground mb-2">📍 {mounted ? t(story.locationKey) : story.locationKey}</p>
+                  <p className="text-primary font-medium">{mounted ? t(story.impactKey) : story.impactKey}</p>
                 </div>
               </motion.div>
             ))}
@@ -189,16 +198,16 @@ export default function Impact() {
             className="text-center"
           >
             <h2 className="text-3xl sm:text-4xl font-bold mb-6 gradient-text">
-              Join Our Movement
+              {mounted ? t('join_movement') : 'Join Our Movement'}
             </h2>
             <p className="text-lg mb-8 text-muted-foreground">
-              Be part of the change. Together, we can create a sustainable future for Africa.
+              {mounted ? t('join_movement_description') : 'Be part of the change. Together, we can create a sustainable future for Africa.'}
             </p>
             <Link
               href="/get-involved"
               className="btn btn-primary inline-flex items-center group"
             >
-              Get Involved
+              {mounted ? t('get_involved_cta') : 'Get Involved'}
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>

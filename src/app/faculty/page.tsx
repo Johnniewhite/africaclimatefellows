@@ -4,35 +4,39 @@ import { motion } from "framer-motion";
 import { ArrowRight, Brain, Target, Presentation } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal } from "@/components/Modal";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Faculty() {
+  const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
   const [selectedMember, setSelectedMember] = useState<
     (typeof facultyMembers)[0] | null
   >(null);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const roles = [
     {
-      title: "Facilitators",
-      description:
-        "Lead workshops and training sessions on climate justice, data visualization, and project management",
+      titleKey: "facilitators",
+      descriptionKey: "facilitators_description",
       icon: Presentation,
       gradient: "from-green-500 to-emerald-600",
       bgImage: "/images/ClimateConvoFold/banner.jpeg",
     },
     {
-      title: "Mentors",
-      description:
-        "Provide one-on-one guidance and support to fellows throughout their journey",
+      titleKey: "mentors",
+      descriptionKey: "mentors_description",
       icon: Brain,
       gradient: "from-emerald-500 to-green-600",
       bgImage: "/images/ClimateConvoFold/ClimateConvo1.jpeg",
     },
     {
-      title: "Thought Leaders",
-      description:
-        "Share expertise and insights on climate justice in Africa through talks and publications",
+      titleKey: "thought_leaders",
+      descriptionKey: "thought_leaders_description",
       icon: Target,
       gradient: "from-green-600 to-emerald-500",
       bgImage: "/images/ClimateConvoFold/ClimateConvo2.jpeg",
@@ -98,11 +102,10 @@ Whether mentoring young changemakers, managing digital strategies, or telling st
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Meet Our Faculty
+              {mounted ? t('meet_our_faculty') : 'Meet Our Faculty'}
             </h1>
             <p className="text-xl md:text-2xl text-white/90">
-              Expert mentors and facilitators dedicated to nurturing the next
-              generation of climate justice leaders.
+              {mounted ? t('faculty_description') : 'Expert mentors and facilitators dedicated to nurturing the next generation of climate justice leaders.'}
             </p>
           </motion.div>
         </div>
@@ -119,12 +122,12 @@ Whether mentoring young changemakers, managing digital strategies, or telling st
             className="max-w-6xl mx-auto"
           >
             <h2 className="text-4xl font-bold text-center mb-16">
-              Faculty Roles
+              {mounted ? t('faculty_roles') : 'Faculty Roles'}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {roles.map((role, index) => (
                 <motion.div
-                  key={role.title}
+                  key={role.titleKey}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -134,7 +137,7 @@ Whether mentoring young changemakers, managing digital strategies, or telling st
                   <div className="absolute inset-0">
                     <Image
                       src={role.bgImage}
-                      alt={role.title}
+                      alt={mounted ? t(role.titleKey) : role.titleKey}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
@@ -147,9 +150,11 @@ Whether mentoring young changemakers, managing digital strategies, or telling st
                       <role.icon className="w-full h-full text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-3">
-                      {role.title}
+                      {mounted ? t(role.titleKey) : role.titleKey}
                     </h3>
-                    <p className="text-white/90">{role.description}</p>
+                    <p className="text-white/80">
+                      {mounted ? t(role.descriptionKey) : role.descriptionKey}
+                    </p>
                   </div>
                 </motion.div>
               ))}
@@ -169,7 +174,7 @@ Whether mentoring young changemakers, managing digital strategies, or telling st
             className="max-w-6xl mx-auto"
           >
             <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-              Our Faculty Members
+              {mounted ? t('core_team') : 'Core Team'}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
               {facultyMembers.map((member, index) => (
@@ -272,11 +277,10 @@ Whether mentoring young changemakers, managing digital strategies, or telling st
             className="max-w-4xl mx-auto text-center"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Join Our Faculty
+              {mounted ? t('join_us') : 'Join Us'}
             </h2>
             <p className="text-xl text-white/90 mb-8">
-              Share your expertise and help shape the next generation of climate
-              justice leaders in Africa.
+              {mounted ? t('join_faculty_description') : 'Share your expertise and help shape the next generation of climate justice leaders.'}
             </p>
             <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
               <Link

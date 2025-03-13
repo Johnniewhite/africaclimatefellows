@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Building2, Globe2, Users2, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal } from "@/components/Modal";
+import { useLanguage } from "@/context/LanguageContext";
 
 type TeamMember = {
   name: string;
@@ -20,7 +21,27 @@ type TeamLayer = {
 };
 
 export default function About() {
+  const { t, isLoaded } = useLanguage();
+  const [mounted, setMounted] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+    
+    // Log translation keys to help debug
+    if (mounted && isLoaded) {
+      console.log("Translation check:", {
+        youth_empowerment_title: t('youth_empowerment_title'),
+        youth_empowerment_description: t('youth_empowerment_description'),
+        community_impact_title: t('community_impact_title'),
+        community_impact_description: t('community_impact_description'),
+        our_team_title: t('our_team_title'),
+        project_team: t('project_team'),
+        project_strategy_support_team: t('project_strategy_support_team'),
+        project_advisors: t('project_advisors')
+      });
+    }
+  }, [mounted, isLoaded, t]);
 
   const teamLayers: TeamLayer[] = [
     {
@@ -151,7 +172,7 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-300 blur-2xl opacity-20" />
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                  About the Fellowship
+                  {mounted ? t('about_the_fellowship') : 'About the Fellowship'}
                 </h1>
               </motion.div>
               <motion.p
@@ -160,9 +181,7 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
                 transition={{ delay: 0.5 }}
                 className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed"
               >
-                A transformative initiative dedicated to harnessing the
-                adventurous spirit, resilience, and innovative leadership of
-                African youth.
+                {mounted ? t('about_fellowship_description') : 'A transformative initiative dedicated to harnessing the adventurous spirit, resilience, and innovative leadership of African youth.'}
               </motion.p>
             </motion.div>
           </div>
@@ -183,12 +202,10 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
             className="max-w-3xl mx-auto text-center mb-16"
           >
             <h1 className="text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-              Our Mission
+              {mounted ? t('our_mission_title') : 'Our Mission'}
             </h1>
             <p className="text-xl text-foreground/80">
-              To equip young African climate activists with the tools, networks,
-              funding and mentorship needed to address the intersectional
-              challenges of climate change across the continent.
+              {mounted ? t('our_mission_description') : 'To equip young African climate activists with the tools, networks, funding and mentorship needed to address the intersectional challenges of climate change across the continent.'}
             </p>
           </motion.div>
 
@@ -196,21 +213,18 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
             {[
               {
                 icon: Globe2,
-                title: "Climate Action",
-                description:
-                  "Leading initiatives for sustainable environmental change across Africa",
+                title: 'climate_action_title',
+                description: 'climate_action_description',
               },
               {
                 icon: Users2,
-                title: "Youth Empowerment",
-                description:
-                  "Building the next generation of climate justice leaders",
+                title: 'youth_empowerment_title',
+                description: 'youth_empowerment_description',
               },
               {
                 icon: Building2,
-                title: "Community Impact",
-                description:
-                  "Creating lasting positive change in local communities",
+                title: 'community_impact_title',
+                description: 'community_impact_description',
               },
             ].map((item, index) => (
               <motion.div
@@ -224,8 +238,12 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
                 <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4">
                   <item.icon className="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-foreground/70">{item.description}</p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {mounted ? t(item.title) : item.title}
+                </h3>
+                <p className="text-foreground/70">
+                  {mounted ? t(item.description) : item.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -246,73 +264,51 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
             className="max-w-7xl mx-auto"
           >
             <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-              Our Team
+              {mounted ? t('our_team_title') : 'Our Team'}
             </h2>
 
             {teamLayers.map((layer, layerIndex) => (
               <div key={layer.title} className="mb-20">
-                <motion.h3
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: layerIndex * 0.1 }}
-                  viewport={{ once: true }}
-                  className="text-2xl font-bold mb-8 text-center bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent"
-                >
-                  {layer.title}
-                </motion.h3>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-                  {layer.members.map((member, index) => (
+                <h3 className="text-2xl font-semibold text-center mb-10">
+                  {mounted ? 
+                    (layer.title === "Project Team" ? t('project_team') : 
+                     layer.title === "Project Strategy Support Team" ? t('project_strategy_support_team') : 
+                     t('project_advisors')) 
+                    : layer.title}
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {layer.members.map((member, memberIndex) => (
                     <motion.div
                       key={member.name}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: memberIndex * 0.1,
+                      }}
                       viewport={{ once: true }}
-                      className="group cursor-pointer mx-auto w-full max-w-sm"
+                      className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
                       onClick={() => setSelectedMember(member)}
                     >
-                      <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                        {/* Image Container */}
-                        <div className="aspect-[4/5] relative overflow-hidden">
-                          <Image
-                            src={member.image}
-                            alt={member.name}
-                            fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                          />
-                          {/* Gradient Overlay */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                          {/* Hover Content */}
-                          <div className="absolute inset-0 flex flex-col justify-end p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                            <div className="text-white">
-                              <p className="text-sm font-medium text-green-400 mb-2">
-                                View Profile
-                              </p>
-                              <p className="text-sm opacity-90 line-clamp-3">
-                                {member.bio.split(".")[0]}.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Info Section */}
-                        <div className="p-6">
-                          <div className="text-center">
-                            <h3 className="text-xl font-bold mb-1 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-                              {member.name}
-                            </h3>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                              {member.position}
-                            </p>
-                          </div>
-
-                          {/* Decorative Line */}
-                          <div className="mt-4 flex justify-center">
-                            <div className="h-1 w-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                          </div>
-                        </div>
+                      <div className="relative h-64">
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <h4 className="text-xl font-semibold mb-1">
+                          {member.name}
+                        </h4>
+                        <p className="text-accent mb-4">{member.position}</p>
+                        <p className="text-foreground/70 line-clamp-3">
+                          {member.bio.substring(0, 150)}...
+                        </p>
+                        <button className="mt-4 text-accent hover:text-accent/80 transition-colors duration-200 inline-flex items-center">
+                          Read More <ArrowRight className="ml-2 h-4 w-4" />
+                        </button>
                       </div>
                     </motion.div>
                   ))}
@@ -321,112 +317,49 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
             ))}
           </motion.div>
         </div>
+      </section>
 
-        {/* Modal */}
+      {/* Team Member Modal */}
+      {selectedMember && (
         <Modal
           isOpen={!!selectedMember}
           onClose={() => setSelectedMember(null)}
         >
-          {selectedMember && (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="max-h-[90vh] overflow-y-auto"
+          <div className="relative">
+            <button
+              onClick={() => setSelectedMember(null)}
+              className="absolute top-0 right-0 p-2 text-foreground/70 hover:text-foreground transition-colors duration-200"
             >
-              <div className="relative bg-white dark:bg-gray-900 rounded-2xl overflow-hidden">
-                {/* Background Pattern */}
-                <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-                
-                {/* Close Button */}
-                <button
-                  onClick={() => setSelectedMember(null)}
-                  className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:bg-white dark:hover:bg-gray-800"
-                >
-                  <X className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-                </button>
-
-                {/* Profile Header with Gradient Background */}
-                <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 p-8">
-                  <div className="absolute inset-0 bg-grid-white-pattern opacity-10" />
-                  <div className="relative flex flex-col items-center">
-                    <div className="relative w-48 h-48 mb-6">
-                      <div className="absolute inset-0 bg-gradient-to-br from-white to-emerald-200 rounded-full blur-2xl opacity-30" />
-                      <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full blur-xl opacity-20" />
-                      <Image
-                        src={selectedMember.image}
-                        alt={selectedMember.name}
-                        fill
-                        className="rounded-full object-cover ring-4 ring-white/80 shadow-2xl"
-                      />
-                    </div>
-                    <h3 className="text-4xl font-bold text-center mb-2 text-white">
-                      {selectedMember.name}
-                    </h3>
-                    <p className="text-lg text-white/90 mb-4">
-                      {selectedMember.position}
-                    </p>
-                    <div className="h-1 w-32 bg-white/30 rounded-full" />
-                  </div>
+              <X className="h-6 w-6" />
+            </button>
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="md:w-1/3">
+                <div className="relative h-64 md:h-full rounded-lg overflow-hidden">
+                  <Image
+                    src={selectedMember.image}
+                    alt={selectedMember.name}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-
-                {/* Content Section */}
-                <div className="p-8">
-                  {/* Bio Content */}
-                  <div className="prose prose-lg dark:prose-invert max-w-none">
-                    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 mb-8">
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className="w-1 h-6 bg-gradient-to-b from-green-500 to-emerald-500 rounded-full" />
-                        <h4 className="text-xl font-semibold text-gray-900 dark:text-white">About</h4>
-                      </div>
-                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
-                        {selectedMember.bio}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Decorative Bottom Border */}
-                <div className="h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-green-500" />
               </div>
-            </motion.div>
-          )}
-        </Modal>
-      </section>
-
-      {/* CTA Section with Innovative Design */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="relative bg-white dark:bg-gray-800 rounded-3xl p-12 overflow-hidden eco-shadow"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent" />
-            <div className="relative z-10 text-center max-w-4xl mx-auto">
-              <h2 className="gradient-text mb-6">Join Our Movement</h2>
-              <p className="text-xl text-foreground/80 mb-8">
-                Be part of a transformative journey towards climate justice in
-                Africa. Apply now to become a Climate Justice Fellow.
-              </p>
-              <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
-                <Link
-                  href="/fellowship"
-                  className="btn btn-primary group relative overflow-hidden"
-                >
-                  <span className="relative z-10">
-                    Learn About the Fellowship
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                  <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </motion.div>
+              <div className="md:w-2/3">
+                <h3 className="text-2xl font-semibold mb-1">
+                  {selectedMember.name}
+                </h3>
+                <p className="text-accent mb-6">{selectedMember.position}</p>
+                <div className="prose dark:prose-invert max-w-none">
+                  {selectedMember.bio.split("\n\n").map((paragraph, i) => (
+                    <p key={i} className="mb-4">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </Modal>
+      )}
     </main>
   );
 }

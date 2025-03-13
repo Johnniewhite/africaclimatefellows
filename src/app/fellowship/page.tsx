@@ -4,31 +4,40 @@ import { motion } from "framer-motion"
 import { ArrowRight, Users2, Globe2, BookOpen, Target } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { useState, useEffect } from "react"
+import { useLanguage } from "@/context/LanguageContext"
 
 const coreComponents = [
   {
     icon: BookOpen,
-    title: "Capacity Building",
-    description: "Workshops on climate justice, storytelling, data visualization, and project management."
+    titleKey: "capacity_building",
+    descriptionKey: "capacity_building_description"
   },
   {
     icon: Users2,
-    title: "Mentorship and Faculty",
-    description: "Paired with seasoned African climate experts and global facilitators for guidance."
+    titleKey: "mentorship_faculty",
+    descriptionKey: "mentorship_faculty_description"
   },
   {
     icon: Globe2,
-    title: "Global Representation",
-    description: "Participation in international and African climate forums."
+    titleKey: "global_representation",
+    descriptionKey: "global_representation_description"
   },
   {
     icon: Target,
-    title: "Community Project Development",
-    description: "Grants to implement localized climate action projects."
+    titleKey: "community_project",
+    descriptionKey: "community_project_description"
   }
 ]
 
 export default function Fellowship() {
+  const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <main className="min-h-screen">
       {/* Hero Section with Parallax */}
@@ -52,22 +61,25 @@ export default function Fellowship() {
               className="max-w-4xl"
             >
               <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-6 text-white">
-                Lake Chad Climate Justice Youth Fellowship
+                {mounted ? t('lake_chad_fellowship_title') : 'Lake Chad Climate Justice Youth Fellowship'}
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-6 md:mb-8 leading-relaxed">
-                A transformative 24-month fellowship empowering young African leaders to address climate justice 
-                and environmental challenges in the Lake Chad region.
+                {mounted ? t('lake_chad_fellowship_description') : 'A transformative 24-month fellowship empowering young African leaders to address climate justice and environmental challenges in the Lake Chad region.'}
               </p>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                 {[
-                  { label: "Duration", value: "24 Months" },
-                  { label: "Fellows", value: "20 Leaders" },
-                  { label: "Focus", value: "Lake Chad Basin" },
-                  { label: "Countries", value: "4 Nations" }
+                  { labelKey: "duration", valueKey: "months_24" },
+                  { labelKey: "fellows", valueKey: "youth_leaders_20" },
+                  { labelKey: "focus", valueKey: "lake_chad_basin" },
+                  { labelKey: "countries", valueKey: "four_nations" }
                 ].map((stat) => (
-                  <div key={stat.label} className="bg-white/10 backdrop-blur-sm rounded-lg p-4 md:p-6 border border-white/20">
-                    <div className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">{stat.value}</div>
-                    <div className="text-xs md:text-sm text-white/70">{stat.label}</div>
+                  <div key={stat.labelKey} className="bg-white/10 backdrop-blur-sm rounded-lg p-4 md:p-6 border border-white/20">
+                    <div className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">
+                      {mounted ? t(stat.valueKey) : stat.valueKey}
+                    </div>
+                    <div className="text-xs md:text-sm text-white/70">
+                      {mounted ? t(stat.labelKey) : stat.labelKey}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -87,16 +99,14 @@ export default function Fellowship() {
               viewport={{ once: true }}
               className="space-y-4 md:space-y-6"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-green-800 dark:text-green-400">Background</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-green-800 dark:text-green-400">
+                {mounted ? t('background') : 'Background'}
+              </h2>
               <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                The Lake Chad region faces severe challenges stemming from climate change, including a 90% reduction 
-                in the lake&apos;s size, leading to desertification, resource scarcity, and the collapse of traditional 
-                livelihoods such as agriculture and fishing. These environmental impacts have heightened social tensions, 
-                fueled insecurity, and displaced communities, leaving women and girls particularly vulnerable.
+                {mounted ? t('lake_chad_background_p1') : 'The Lake Chad region faces severe challenges stemming from climate change, including a 90% reduction in the lake\'s size, leading to desertification, resource scarcity, and the collapse of traditional livelihoods such as agriculture and fishing. These environmental impacts have heightened social tensions, fueled insecurity, and displaced communities, leaving women and girls particularly vulnerable.'}
               </p>
               <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                Youth in the region, though disproportionately affected, are underrepresented in climate action due 
-                to barriers like limited resources, inadequate skills, and lack of access to advocacy platforms.
+                {mounted ? t('lake_chad_background_p2') : 'Youth in the region, though disproportionately affected, are underrepresented in climate action due to barriers like limited resources, inadequate skills, and lack of access to advocacy platforms.'}
               </p>
             </motion.div>
             <motion.div
@@ -152,17 +162,17 @@ export default function Fellowship() {
             className="max-w-3xl mx-auto text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-              Core Components
+              {mounted ? t('core_components') : 'Core Components'}
             </h2>
             <p className="text-xl text-foreground/80">
-              Our comprehensive program is designed to equip fellows with the skills, networks, and resources needed for impact.
+              {mounted ? t('core_components_description') : 'Our comprehensive program is designed to equip fellows with the skills, networks, and resources needed for impact.'}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {coreComponents.map((component, index) => (
               <motion.div
-                key={component.title}
+                key={component.titleKey}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -172,8 +182,12 @@ export default function Fellowship() {
                 <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4">
                   <component.icon className="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{component.title}</h3>
-                <p className="text-foreground/70">{component.description}</p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {mounted ? t(component.titleKey) : component.titleKey}
+                </h3>
+                <p className="text-foreground/70">
+                  {mounted ? t(component.descriptionKey) : component.descriptionKey}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -191,10 +205,10 @@ export default function Fellowship() {
             className="max-w-3xl mx-auto text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-              Application Process
+              {mounted ? t('application_process') : 'Application Process'}
             </h2>
             <p className="text-xl text-foreground/80">
-              Join our inaugural cohort of climate leaders through our comprehensive selection process.
+              {mounted ? t('application_process_description') : 'Join our inaugural cohort of climate leaders through our comprehensive selection process.'}
             </p>
           </motion.div>
 

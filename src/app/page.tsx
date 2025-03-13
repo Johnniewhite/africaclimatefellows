@@ -7,29 +7,30 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 import { Modal } from "../components/Modal"
+import { useLanguage } from "@/context/LanguageContext"
 
 const features = [
   {
-    title: "Climate Action",
-    description: "Drive meaningful change through innovative climate solutions",
+    titleKey: "feature_climate_action_title",
+    descriptionKey: "feature_climate_action_desc",
     icon: Leaf,
     gradient: "from-green-500 to-emerald-600",
   },
   {
-    title: "Pan-African Network",
-    description: "Connect with climate leaders across the continent",
+    titleKey: "feature_pan_african_title",
+    descriptionKey: "feature_pan_african_desc",
     icon: Globe2,
     gradient: "from-emerald-500 to-green-600",
   },
   {
-    title: "Expert Mentorship",
-    description: "Learn from seasoned climate justice advocates",
+    titleKey: "feature_mentorship_title",
+    descriptionKey: "feature_mentorship_desc",
     icon: Users2,
     gradient: "from-green-600 to-emerald-500",
   },
   {
-    title: "Project Funding",
-    description: "Access resources to implement your climate initiatives",
+    titleKey: "feature_funding_title",
+    descriptionKey: "feature_funding_desc",
     icon: Sparkles,
     gradient: "from-emerald-600 to-green-500",
   },
@@ -37,6 +38,8 @@ const features = [
 
 
 export default function Home() {
+  const { t, language, isLoaded } = useLanguage()
+  const [mounted, setMounted] = useState(false)
   const [currentImage, setCurrentImage] = useState(0)
   const heroImages = [
     '/images/ClimateConvofold/Climate Convo12.jpeg',
@@ -56,6 +59,8 @@ export default function Home() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   useEffect(() => {
+    setMounted(true)
+    
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % heroImages.length)
     }, 5000) // Change image every 5 seconds
@@ -80,6 +85,18 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []); // Empty dependency array means this runs once on mount
 
+  useEffect(() => {
+    if (mounted) {
+      console.log("Home component mounted, language:", language);
+      console.log("Translations loaded:", isLoaded);
+      console.log("Sample translation - climate_justice_youth_fellowship:", t('climate_justice_youth_fellowship'));
+    }
+  }, [mounted, language, isLoaded, t]);
+
+  // Get the translated or fallback text
+  const bannerHeadline = mounted ? t('banner_headline') : "Empowering Africa's Youth for Climate Justice Action";
+  const bannerSubtext = mounted ? t('banner_subtext') : "A transformative fellowship and action equipping young African leaders to champion climate justice, tackle systemic challenges, and drive grassroots resilience.";
+
   return (
     <main className="min-h-screen">
       {/* Hero Banner - Mobile Friendly */}
@@ -95,10 +112,10 @@ export default function Home() {
         </div>
         <div className="relative z-10">
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 md:mb-8 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] animate-fade-in-up">
-            Climate Justice <span className="text-green-400">Youth Fellowship</span>
+            {mounted && t('climate_justice_youth_fellowship')}
           </h1>
           <p className="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto text-white font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] animate-fade-in-up-delay px-4">
-            Empowering Africa&apos;s Youth for Climate Justice Action
+            {mounted && t('banner_headline')}
           </p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-green-400/40 via-white/60 to-green-400/40"></div>
@@ -156,26 +173,26 @@ export default function Home() {
             className="space-y-6"
           >
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-950 dark:text-green-50">
-              The Climate Justice Youth Fellowship
+              {mounted && t('climate_justice_youth_fellowship')}
             </h2>
             <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
-              A transformative initiative dedicated to harnessing the adventurous spirit, resilience, and innovative leadership of African youth. We connect young climate advocates with critical resources, sharpened skills, professional networks, and international exposure.
+              {mounted && t('fellowship_description_1')}
             </p>
             <div className="space-y-6">
             <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
-              At the heart of this program lies a commitment to addressing climate justice and alleviating the burden of care that disproportionately affects African communities. We recognize the immense potential of Africa&apos;s youth as changemakers and aim to empower them to rise above systemic challenges and amplify their voices on the global stage.
+              {mounted && t('fellowship_description_2')}
               </p>
             </div>
             <div className="space-y-6">
               <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
-              Through tailored capacity-building sessions, mentorship by seasoned experts, research engagements, funding and opportunities to engage in global forums, the Climate Justice Youth Fellowship is more than a program—it is a movement for creating leaders who will shape a resilient and equitable future for Africa.
+              {mounted && t('fellowship_description_3')}
               </p>
             </div>
             <Link 
               href="/fellowship"
               className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md"
             >
-              Learn More
+              {mounted && t('learn_more')}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </motion.div>
@@ -188,7 +205,7 @@ export default function Home() {
           className="inline-flex items-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors duration-300 border border-white/20"
         >
           <PlayCircle className="w-5 h-5 mr-2" />
-          Watch Video
+          {mounted && t('watch_video')}
         </button>
       </div>
 
@@ -198,7 +215,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {features.map((feature, index) => (
               <motion.div
-                key={feature.title}
+                key={feature.titleKey}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -210,10 +227,10 @@ export default function Home() {
                     <feature.icon className="w-full h-full text-white" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
-                    {feature.title}
+                    {mounted && t(feature.titleKey)}
                   </h3>
                   <p className="text-muted-foreground group-hover:text-foreground transition-colors">
-                    {feature.description}
+                    {mounted && t(feature.descriptionKey)}
                   </p>
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-green-300 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                 </div>
@@ -277,53 +294,55 @@ export default function Home() {
           >
             <div className="inline-block mb-4 md:mb-6 px-4 py-2 bg-green-100 dark:bg-green-900/30 rounded-full">
               <span className="text-sm font-medium text-green-800 dark:text-green-200">
-                First Fellowship Call
+                {mounted && t('first_fellowship_call')}
               </span>
             </div>
             
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-950 dark:text-green-50">
-              The Lake Chad Climate Justice Youth Fellowship
+              {mounted && t('lake_chad_title')}
             </h2>
             
             <p className="text-base sm:text-lg text-green-800/80 dark:text-green-100/80 leading-relaxed">
-              The Lake Chad region faces severe challenges from climate change, including a 90% reduction in lake size, leading to desertification and resource scarcity. Our fellowship aims to empower youth to address these critical issues.
+              {mounted && t('lake_chad_description')}
             </p>
             
             <div className="space-y-6">
               <div className="space-y-4">
-                <h3 className="font-semibold text-green-700 dark:text-green-300">Key Challenges:</h3>
+                <h3 className="font-semibold text-green-700 dark:text-green-300">
+                  {mounted && t('key_challenges_section')}
+                </h3>
                 <ul className="space-y-2 text-green-800/80 dark:text-green-100/80">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                    Desertification and water scarcity
+                    {mounted && t('challenge_desertification')}
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                    Displacement and resource conflicts
+                    {mounted && t('challenge_displacement')}
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                    Gender-based vulnerabilities
+                    {mounted && t('challenge_gender')}
                   </li>
                 </ul>
               </div>
               
               <div className="grid grid-cols-2 gap-4 text-sm sm:text-base text-green-800/80 dark:text-green-100/80">
                 <div>
-                  <span className="font-medium block">Target Region</span>
-                  <span>Lake Chad Basin</span>
+                  <span className="font-medium block">{mounted && t('target_region')}</span>
+                  <span>{mounted && t('lake_chad_basin')}</span>
                 </div>
                 <div>
-                  <span className="font-medium block">Countries</span>
-                  <span>4 Nations</span>
+                  <span className="font-medium block">{mounted && t('countries')}</span>
+                  <span>{mounted && t('four_nations')}</span>
                 </div>
                 <div>
-                  <span className="font-medium block">Duration</span>
-                  <span>24 Months</span>
+                  <span className="font-medium block">{mounted && t('duration')}</span>
+                  <span>{mounted && t('months_24')}</span>
                 </div>
                 <div>
-                  <span className="font-medium block">Fellows</span>
-                  <span>20 Youth Leaders</span>
+                  <span className="font-medium block">{mounted && t('fellows')}</span>
+                  <span>{mounted && t('youth_leaders_20')}</span>
                 </div>
               </div>
             </div>
@@ -332,7 +351,7 @@ export default function Home() {
               href="/fellowship"
               className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 text-base sm:text-lg font-medium text-white bg-green-700 hover:bg-green-800 transition-colors rounded-md shadow-lg hover:shadow-xl"
             >
-              Learn More
+              {mounted && t('learn_more')}
               <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
             </Link>
           </motion.div>
@@ -343,14 +362,14 @@ export default function Home() {
       <section className="py-12 md:py-24">
       <BlogSection 
         postsToShow={3}
-        title="Latest Insights"
-        subtitle="Explore our latest articles on climate action and environmental justice"
+        title={mounted ? t('latest_insights') : "Latest Insights"}
+        subtitle={mounted ? t('explore_articles') : "Explore our latest articles on climate action and environmental justice"}
       />
         
       </section>
 
-{/* Partners Section */}
-<section id="partners" className="py-24">
+      {/* Partners Section */}
+      <section id="partners" className="py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -360,18 +379,18 @@ export default function Home() {
             className="max-w-3xl mx-auto text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-              Our Partners
+              {mounted && t('our_partners')}
             </h2>
             <p className="text-xl text-foreground/80">
-              Collaborating with leading organizations to create lasting impact in climate action.
+              {mounted && t('partners_description')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { name: "CJRF", image: "/images/partners/cjrf.JPG", label: "Project Funded by" },
-              { name: "DEAN", image: "/images/partners/dean.png", label: "This is a Project and Initiative of" },
-              { name: "CDBLT", image: "/images/partners/cdblt.JPG", label: "Partners" }
+              { name: "CJRF", image: "/images/partners/cjrf.JPG", labelKey: "project_funded_by" },
+              { name: "DEAN", image: "/images/partners/dean.png", labelKey: "project_initiative_of" },
+              { name: "CDBLT", image: "/images/partners/cdblt.JPG", labelKey: "partners" }
             ].map((partner, index) => (
               <motion.div
                 key={partner.name}
@@ -382,7 +401,7 @@ export default function Home() {
                 className="bg-white dark:bg-gray-800 rounded-xl p-8 flex flex-col items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
               >
                 <p className="text-foreground/80 font-medium mb-4 text-center">
-                  {partner.label}
+                  {mounted && t(partner.labelKey)}
                 </p>
                 <div className="relative w-full aspect-[4/3]">
                   <Image
@@ -412,17 +431,17 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent" />
             <div className="relative z-10 max-w-4xl mx-auto text-center">
               <h2 className="gradient-text mb-6">
-                Ready to Make an Impact?
+                {mounted && t('ready_to_make_impact')}
               </h2>
               <p className="text-xl text-foreground/80 mb-12">
-                Join a community of passionate climate leaders and be part of Africa&apos;s sustainable future.
+                {mounted && t('join_community')}
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link
                   href="/get-involved"
                   className="btn btn-primary group relative overflow-hidden"
                 >
-                  <span className="relative z-10">Get Involved</span>
+                  <span className="relative z-10">{mounted && t('get_involved_cta')}</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                   <ArrowRight className="ml-2 w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -430,7 +449,7 @@ export default function Home() {
                   href="/contact"
                   className="btn btn-secondary group relative overflow-hidden"
                 >
-                  <span className="relative z-10">Contact Us</span>
+                  <span className="relative z-10">{mounted && t('contact_us')}</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white dark:from-gray-800 dark:to-gray-700 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 </Link>
               </div>

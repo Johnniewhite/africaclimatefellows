@@ -7,11 +7,14 @@ import { useTheme } from 'next-themes'
 import { Sun, Moon, Menu, X, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname } from 'next/navigation'
+import { useLanguage } from '@/context/LanguageContext'
+import { LanguageSwitch } from './LanguageSwitch'
 
 interface NavItem {
   name: string;
+  translationKey: string;
   href: string;
-  dropdownItems?: { name: string; href: string }[];
+  dropdownItems?: { name: string; translationKey: string; href: string }[];
 }
 
 function ThemeToggle() {
@@ -43,79 +46,94 @@ function ThemeToggle() {
 }
 
 export function Header() {
+  const { t } = useLanguage()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const navigation: NavItem[] = [
     { 
       name: "Home", 
+      translationKey: "home",
       href: "/",
     },
     { 
       name: "About", 
+      translationKey: "about",
       href: "/about",
       dropdownItems: [
-        { name: "Our Mission", href: "/about#mission" },
-        { name: "Our Team", href: "/about#team" },
-        { name: "Partners", href: "/about#partners" },
+        { name: "Our Mission", translationKey: "our_mission", href: "/about#mission" },
+        { name: "Our Team", translationKey: "our_team", href: "/about#team" },
+        { name: "Partners", translationKey: "partners", href: "/about#partners" },
       ]
     },
     { 
       name: "Fellowship", 
+      translationKey: "fellowship",
       href: "/fellowship",
       dropdownItems: [
-        { name: "Program Overview", href: "/fellowship#overview" },
-        { name: "Background", href: "/fellowship#background" },
-        { name: "Core Components", href: "/fellowship#components" },
-        { name: "Application Process", href: "/fellowship#apply" },
-        { name: "Key Challenges", href: "/fellowship#challenges" },
+        { name: "Program Overview", translationKey: "program_overview", href: "/fellowship#overview" },
+        { name: "Background", translationKey: "background", href: "/fellowship#background" },
+        { name: "Core Components", translationKey: "core_components", href: "/fellowship#components" },
+        { name: "Application Process", translationKey: "application_process", href: "/fellowship#apply" },
+        { name: "Key Challenges", translationKey: "key_challenges", href: "/fellowship#challenges" },
       ]
     },
     { 
       name: "Faculty", 
+      translationKey: "faculty",
       href: "/faculty",
       dropdownItems: [
-        { name: "Meet Our Faculty", href: "/faculty#meet" },
-        { name: "Research Areas", href: "/faculty#research" },
-        { name: "Join Us", href: "/faculty#join" },
+        { name: "Meet Our Faculty", translationKey: "meet_our_faculty", href: "/faculty#meet" },
+        { name: "Research Areas", translationKey: "research_areas", href: "/faculty#research" },
+        { name: "Join Us", translationKey: "join_us", href: "/faculty#join" },
       ]
     },
     { 
       name: "Impact", 
+      translationKey: "impact",
       href: "/impact",
       dropdownItems: [
-        { name: "Success Stories", href: "/impact#stories" },
-        { name: "Projects", href: "/impact#projects" },
-        { name: "Reports", href: "/impact#reports" },
+        { name: "Success Stories", translationKey: "success_stories", href: "/impact#stories" },
+        { name: "Projects", translationKey: "projects", href: "/impact#projects" },
+        { name: "Reports", translationKey: "reports", href: "/impact#reports" },
       ]
     },
     { 
       name: "Get Involved", 
+      translationKey: "get_involved",
       href: "/get-involved",
       dropdownItems: [
-        { name: "Apply Now", href: "/get-involved#apply" },
-        { name: "Support Us", href: "/get-involved#support" },
-        { name: "Partner With Us", href: "/get-involved#partner" },
+        { name: "Apply Now", translationKey: "apply_now", href: "/get-involved#apply" },
+        { name: "Support Us", translationKey: "support_us", href: "/get-involved#support" },
+        { name: "Partner With Us", translationKey: "partner_with_us", href: "/get-involved#partner" },
       ]
     },
     { 
       name: "Gallery", 
+      translationKey: "gallery",
       href: "/gallery" 
     },
     { 
       name: "Contact", 
+      translationKey: "contact",
       href: "/contact",
       dropdownItems: [
-        { name: "General Inquiries", href: "/contact#general" },
-        { name: "Media Relations", href: "/contact#media" },
-        { name: "Support", href: "/contact#support" },
+        { name: "General Inquiries", translationKey: "general_inquiries", href: "/contact#general" },
+        { name: "Media Relations", translationKey: "media_relations", href: "/contact#media" },
+        { name: "Support", translationKey: "support", href: "/contact#support" },
       ]
     },
     { 
       name: "Blog", 
+      translationKey: "blog",
       href: "/blog" 
     },
   ]
@@ -175,8 +193,42 @@ export function Header() {
     }
   }
 
+  // Handle server-side rendering and hydration
+  if (!mounted) {
+    return (
+      <header className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg z-50 border-b border-gray-200 dark:border-gray-800">
+        <div className="bg-gray-100 dark:bg-gray-800 py-1">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-end">
+            {/* Placeholder for language switch */}
+            <div className="h-8 w-24"></div>
+          </div>
+        </div>
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center space-x-2 h-10 w-32"></div>
+            <div className="hidden md:flex items-center space-x-1">
+              {/* Placeholder for navigation */}
+              <div className="h-8 w-64"></div>
+            </div>
+            <div className="flex md:hidden items-center space-x-2">
+              {/* Placeholder for mobile menu button */}
+              <div className="h-8 w-8"></div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    )
+  }
+
   return (
     <header className="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg z-50 border-b border-gray-200 dark:border-gray-800">
+      {/* Language switcher bar */}
+      <div className="bg-gray-100 dark:bg-gray-800 py-1">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-end">
+          <LanguageSwitch />
+        </div>
+      </div>
+      
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link 
@@ -212,7 +264,7 @@ export function Header() {
                           : 'text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400'
                         }`}
                     >
-                      <span>{item.name}</span>
+                      <span>{t(item.translationKey)}</span>
                       <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
                         activeDropdown === item.name || hoveredItem === item.name ? 'rotate-180' : ''
                       }`} />
@@ -237,7 +289,7 @@ export function Header() {
                                   text-gray-700 dark:text-gray-200"
                                 onClick={() => setActiveDropdown(null)}
                               >
-                                {dropdownItem.name}
+                                {t(dropdownItem.translationKey)}
                               </Link>
                             ))}
                           </div>
@@ -248,114 +300,115 @@ export function Header() {
                 ) : (
                   <Link
                     href={item.href}
-                    className={`px-4 py-2 rounded-md transition-all duration-200 ${
-                      item.name === 'Blog' 
-                        ? 'ml-4 bg-green-600 text-white hover:bg-green-700 hover:shadow-lg' 
-                        : isActive(item.href)
-                          ? 'text-green-600 dark:text-green-400'
-                          : 'text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30'
-                    }`}
+                    className={`px-4 py-2 rounded-md transition-colors duration-200
+                      ${isActive(item.href) 
+                        ? 'text-green-600 dark:text-green-400' 
+                        : 'text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400'
+                      }`}
                   >
-                    {item.name}
+                    {t(item.translationKey)}
                   </Link>
                 )}
               </div>
             ))}
-            <ThemeToggle />
+            <div className="ml-4">
+              <ThemeToggle />
+            </div>
           </div>
 
-          {/* Mobile Navigation Button */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile Navigation */}
+          <div className="flex md:hidden items-center space-x-2">
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors duration-200 ml-2"
+              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors duration-200"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
-
-        {/* Mobile Navigation Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={mobileMenuVariants}
-              className="md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 overflow-hidden"
-            >
-              <div className="px-2 pt-2 pb-3 space-y-1">
-                {navigation.map((item) => (
-                  <div key={item.name}>
-                    {item.dropdownItems ? (
-                      <div className="space-y-1">
-                        <button
-                          onClick={() => handleDropdownClick(item.name)}
-                          className={`w-full flex items-center justify-between px-4 py-2 rounded-md transition-colors duration-200
-                            ${isActive(item.href)
-                              ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30'
-                              : 'text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30'
-                            }`}
-                        >
-                          <span>{item.name}</span>
-                          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
-                            activeDropdown === item.name ? 'rotate-180' : ''
-                          }`} />
-                        </button>
-                        <AnimatePresence>
-                          {activeDropdown === item.name && (
-                            <motion.div
-                              initial={{ opacity: 0, y: -10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -10 }}
-                              transition={{ duration: 0.2 }}
-                              className="pl-4 space-y-1"
-                            >
-                              {item.dropdownItems.map((dropdownItem) => (
-                                <Link
-                                  key={dropdownItem.name}
-                                  href={dropdownItem.href}
-                                  className="block px-4 py-2 rounded-md text-sm transition-colors duration-200
-                                    text-gray-600 dark:text-gray-300 
-                                    hover:text-green-600 dark:hover:text-green-400
-                                    hover:bg-green-50 dark:hover:bg-green-900/30"
-                                  onClick={() => {
-                                    setIsMenuOpen(false)
-                                    setActiveDropdown(null)
-                                  }}
-                                >
-                                  {dropdownItem.name}
-                                </Link>
-                              ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        className={`block px-4 py-2 rounded-md transition-colors duration-200 ${
-                          item.name === 'Blog'
-                            ? 'bg-green-600 text-white hover:bg-green-700 my-2'
-                            : isActive(item.href)
-                              ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30'
-                              : 'text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30'
-                        }`}
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={mobileMenuVariants}
+            className="md:hidden bg-white dark:bg-gray-900 overflow-hidden"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              {navigation.map((item) => (
+                <div key={item.name} className="py-1">
+                  {item.dropdownItems ? (
+                    <div>
+                      <button
+                        onClick={() => handleDropdownClick(item.name)}
+                        className={`w-full text-left px-3 py-2 rounded-md flex items-center justify-between transition-colors duration-200
+                          ${isActive(item.href) 
+                            ? 'bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400' 
+                            : 'text-gray-600 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/30'
+                          }`}
+                      >
+                        <span>{t(item.translationKey)}</span>
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
+                          activeDropdown === item.name ? 'rotate-180' : ''
+                        }`} />
+                      </button>
+                      <AnimatePresence>
+                        {activeDropdown === item.name && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="ml-4 mt-1 space-y-1"
+                          >
+                            {item.dropdownItems.map((dropdownItem) => (
+                              <Link
+                                key={dropdownItem.name}
+                                href={dropdownItem.href}
+                                className="block px-3 py-2 rounded-md text-sm transition-colors duration-200
+                                  hover:bg-green-50 dark:hover:bg-green-900/30
+                                  text-gray-600 dark:text-gray-300"
+                                onClick={() => {
+                                  setActiveDropdown(null)
+                                  setIsMenuOpen(false)
+                                }}
+                              >
+                                {t(dropdownItem.translationKey)}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={`block px-3 py-2 rounded-md transition-colors duration-200
+                        ${isActive(item.href) 
+                          ? 'bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400' 
+                          : 'text-gray-600 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/30'
+                        }`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {t(item.translationKey)}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 } 
