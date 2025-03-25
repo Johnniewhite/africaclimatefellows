@@ -287,26 +287,29 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
                         delay: memberIndex * 0.1,
                       }}
                       viewport={{ once: true }}
-                      className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                      whileHover={{ y: -5, scale: 1.02 }}
+                      className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group"
                       onClick={() => setSelectedMember(member)}
                     >
-                      <div className="relative h-64">
+                      <div className="relative h-64 overflow-hidden">
                         <Image
                           src={member.image}
                           alt={member.name}
                           fill
-                          className="object-cover"
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
                         />
+                        {/* Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                       <div className="p-6">
-                        <h4 className="text-xl font-semibold mb-1">
+                        <h4 className="text-xl font-semibold mb-1 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
                           {member.name}
                         </h4>
                         <p className="text-accent mb-4">{member.position}</p>
                         <p className="text-foreground/70 line-clamp-3">
                           {member.bio.substring(0, 150)}...
                         </p>
-                        <button className="mt-4 text-accent hover:text-accent/80 transition-colors duration-200 inline-flex items-center">
+                        <button className="mt-4 text-accent hover:text-accent/80 transition-colors duration-200 inline-flex items-center group-hover:translate-x-1 transition-transform">
                           Read More <ArrowRight className="ml-2 h-4 w-4" />
                         </button>
                       </div>
@@ -324,33 +327,54 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
         <Modal
           isOpen={!!selectedMember}
           onClose={() => setSelectedMember(null)}
+          className="max-w-4xl w-full mx-auto"
         >
-          <div className="relative">
+          <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden">
+            {/* Close Button */}
             <button
               onClick={() => setSelectedMember(null)}
-              className="absolute top-0 right-0 p-2 text-foreground/70 hover:text-foreground transition-colors duration-200"
+              className="absolute top-4 right-4 z-10 p-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 shadow-lg"
+              aria-label="Close modal"
             >
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" />
             </button>
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="md:w-1/3">
-                <div className="relative h-64 md:h-full rounded-lg overflow-hidden">
+
+            {/* Content Layout */}
+            <div className="flex flex-col md:flex-row">
+              {/* Image Section */}
+              <div className="md:w-2/5 relative">
+                <div className="relative h-[300px] md:h-[450px]">
                   <Image
                     src={selectedMember.image}
                     alt={selectedMember.name}
                     fill
                     className="object-cover"
+                    priority
                   />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                </div>
+                {/* Position Badge */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                      {selectedMember.name}
+                    </h3>
+                    <p className="text-green-600 dark:text-green-400 font-medium text-sm md:text-base">
+                      {selectedMember.position}
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div className="md:w-2/3">
-                <h3 className="text-2xl font-semibold mb-1">
-                  {selectedMember.name}
-                </h3>
-                <p className="text-accent mb-6">{selectedMember.position}</p>
-                <div className="prose dark:prose-invert max-w-none">
+
+              {/* Bio Section */}
+              <div className="md:w-3/5 p-5 md:p-6 overflow-y-auto max-h-[300px] md:max-h-[450px]">
+                <div className="prose dark:prose-invert prose-sm md:prose-base max-w-none">
                   {selectedMember.bio.split("\n\n").map((paragraph, i) => (
-                    <p key={i} className="mb-4">
+                    <p 
+                      key={i} 
+                      className="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed"
+                    >
                       {paragraph}
                     </p>
                   ))}
