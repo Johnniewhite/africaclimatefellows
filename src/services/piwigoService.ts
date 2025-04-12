@@ -2,16 +2,21 @@ import { PiwigoCategoriesResponse, PiwigoImagesResponse } from '@/types/piwigo';
 
 // Helper to get the base API URL
 const getBaseUrl = () => {
-  // Prefer the explicit env var if available
+  // Browser-side: Use the actual origin of the page
+  if (typeof window !== 'undefined' && window.location) {
+    return window.location.origin;
+  }
+  
+  // Server-side only from here
   if (process.env.NEXT_PUBLIC_APP_URL) {
     return process.env.NEXT_PUBLIC_APP_URL;
   }
-  // Vercel system env var
+  
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  // Default for local development
-  return 'http://localhost:3000'; 
+  
+  return 'http://localhost:3000';
 };
 
 /**

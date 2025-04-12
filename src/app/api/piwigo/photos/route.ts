@@ -5,6 +5,20 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const PIWIGO_API_URL = 'https://gallery.africaclimatefellows.com/ws.php';
 
+// Add CORS headers helper
+function corsHeaders() {
+  return {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  };
+}
+
+// Add OPTIONS handler for CORS preflight requests
+export async function OPTIONS() {
+  return NextResponse.json({}, { headers: corsHeaders() });
+}
+
 // Update GET handler to be dynamic and fetch from Piwigo
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -15,7 +29,10 @@ export async function GET(request: NextRequest) {
   if (!albumId) {
     return NextResponse.json(
       { error: 'Missing albumId parameter' },
-      { status: 400 }
+      { 
+        status: 400,
+        headers: corsHeaders()
+      }
     );
   }
 
@@ -34,14 +51,19 @@ export async function GET(request: NextRequest) {
     }
 
     const data = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: corsHeaders()
+    });
     
   } catch (error) {
     console.error('Error fetching photos:', error);
     const errorMessage = error instanceof Error ? error.message : 'Failed to fetch photos';
     return NextResponse.json(
       { error: errorMessage },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: corsHeaders()
+      }
     );
   }
 } 

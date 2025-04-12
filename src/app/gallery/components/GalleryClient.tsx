@@ -16,19 +16,17 @@ export default function GalleryClient() {
     const loadAlbums = async () => {
       try {
         setLoading(true);
-        // Use the fetchAlbums service instead of direct fetch
+        console.log('About to fetch albums using service'); // Additional debug logging
         const data = await fetchAlbums();
         
-        // fetchAlbums already returns the parsed data
         if (data.stat === 'ok') {
+          console.log('Albums fetched successfully:', data.result.categories.length);
           setAlbums(data.result.categories);
           setError(null);
         } else {
-          // Throw a generic error if Piwigo response status is not 'ok'
-          console.error('Piwigo API error:', data); // Log the full response for debugging
+          console.error('Piwigo API error:', data);
           throw new Error('Failed to fetch albums from Piwigo API');
         }
-
       } catch (err) {
         console.error('Error fetching albums:', err);
         const errorMessage = err instanceof Error ? err.message : 'Failed to load albums. Please try again later.';
