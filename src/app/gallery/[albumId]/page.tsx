@@ -9,12 +9,6 @@ import { ArrowLeft } from 'lucide-react';
 // TODO: Fetch album details (name) - requires adjusting album API or new service
 // TODO: Implement proper error handling if fetches fail
 
-interface AlbumPageProps {
-  params: {
-    albumId: string;
-  };
-}
-
 // Decide on Revalidation strategy if needed (e.g., time-based)
 // export const revalidate = 3600; // Revalidate every hour
 
@@ -38,7 +32,7 @@ async function fetchAlbumData(albumId: number): Promise<{ photos: PiwigoImage[],
   }
 }
 
-export default async function AlbumPage({ params }: AlbumPageProps) {
+export default async function AlbumPage({ params }: { params: { albumId: string } }) {
   const albumId = parseInt(params.albumId, 10);
 
   if (isNaN(albumId)) {
