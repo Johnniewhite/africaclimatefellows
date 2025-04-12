@@ -32,6 +32,7 @@ async function fetchAlbumData(albumId: number): Promise<{ photos: PiwigoImage[],
   }
 }
 
+// Revert to inline type for params
 export default async function AlbumPage({ params }: { params: { albumId: string } }) {
   const albumId = parseInt(params.albumId, 10);
 
