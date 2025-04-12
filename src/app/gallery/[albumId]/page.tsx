@@ -1,18 +1,28 @@
 import { Suspense } from 'react';
-import Loading from '../components/Loading'; // Corrected path
-import AlbumPhotoGrid from './components/AlbumPhotoGrid'; // Import the new component
+import Loading from '../components/Loading';
+import AlbumPhotoGrid from './components/AlbumPhotoGrid';
 import { fetchPhotos } from '@/services/piwigoService';
 import { PiwigoImage } from '@/types/piwigo';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
+// Add explicit runtime directive
+export const dynamic = 'force-dynamic';
+
+// Add revalidate directive (optional)
+export const revalidate = 3600; // Revalidate every hour
+
 // TODO: Fetch album details (name) - requires adjusting album API or new service
 // TODO: Implement proper error handling if fetches fail
 
-// Decide on Revalidation strategy if needed (e.g., time-based)
-// export const revalidate = 3600; // Revalidate every hour
-
 const PHOTOS_PER_PAGE = 50; // Define consistently
+
+// Type for the component props - simpler approach
+type PageProps = {
+  params: {
+    albumId: string;
+  };
+};
 
 async function fetchAlbumData(albumId: number): Promise<{ photos: PiwigoImage[], hasMore: boolean }> {
   try {
@@ -32,8 +42,8 @@ async function fetchAlbumData(albumId: number): Promise<{ photos: PiwigoImage[],
   }
 }
 
-// Revert to inline type for params
-export default async function AlbumPage({ params }: { params: { albumId: string } }) {
+// Use the simplified page props type
+export default async function Page({ params }: PageProps) {
   const albumId = parseInt(params.albumId, 10);
 
   if (isNaN(albumId)) {
