@@ -1,25 +1,46 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Make this route static for export
-export const dynamic = "force-static";
+// Remove static export configuration
+// export const dynamic = "force-static";
 
 const PIWIGO_API_URL = 'https://gallery.africaclimatefellows.com/ws.php';
 
-// For static export, we'll create a static response
-export async function GET() {
+// Update GET handler to be dynamic and fetch from Piwigo
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const albumId = searchParams.get('albumId');
+  const page = searchParams.get('page') || '0'; // Default to page 0
+  const perPage = searchParams.get('perPage') || '100'; // Default to 100 per page
+
+  if (!albumId) {
+    return NextResponse.json(
+      { error: 'Missing albumId parameter' },
+      { status: 400 }
+    );
+  }
+
   try {
-    // Return a static response for the static export
-    // In a real app, you might want to pre-generate data for common album IDs
-    return NextResponse.json({
-      result: {
-        images: []
-      },
-      stat: 'ok'
-    });
+    const url = new URL(PIWIGO_API_URL);
+    url.searchParams.append('method', 'pwg.categories.getImages');
+    url.searchParams.append('format', 'json');
+    url.searchParams.append('cat_id', albumId); 
+    url.searchParams.append('page', page);
+    url.searchParams.append('per_page', perPage);
+
+    const response = await fetch(url.toString());
+
+    if (!response.ok) {
+      throw new Error(`Piwigo API call failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data);
+    
   } catch (error) {
     console.error('Error fetching photos:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to fetch photos';
     return NextResponse.json(
-      { error: 'Failed to fetch photos' },
+      { error: errorMessage },
       { status: 500 }
     );
   }

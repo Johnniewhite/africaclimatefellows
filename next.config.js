@@ -8,8 +8,6 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove the static export
-  output: 'export',
   images: { 
     domains: ['images.unsplash.com', 'blog.africaclimatefellows.com', 'gallery.africaclimatefellows.com'],
     unoptimized: true 

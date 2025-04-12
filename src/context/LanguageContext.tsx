@@ -34,14 +34,14 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Load translations
     const loadTranslations = async () => {
+      setIsLoaded(false); // Ensure loading state is false initially
       try {
         console.log("Loading translations...");
         
-        // Force dynamic imports to ensure fresh data
-        const enModule = await import('@/translations/en?t=' + new Date().getTime());
-        const frModule = await import('@/translations/fr?t=' + new Date().getTime());
+        // Use statically analyzable paths for dynamic imports
+        const enModule = await import('@/translations/en');
+        const frModule = await import('@/translations/fr');
         
         const enTranslations = enModule.default;
         const frTranslations = frModule.default;
@@ -86,24 +86,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         console.log("Translations loaded successfully");
       } catch (error) {
         console.error("Failed to load translations:", error);
-        // Try to load translations directly as a fallback
-        try {
-          // Import directly from the files
-          const enTranslations = require('@/translations/en').default;
-          const frTranslations = require('@/translations/fr').default;
-          
-          console.log("Fallback: EN translations loaded:", Object.keys(enTranslations).length);
-          console.log("Fallback: FR translations loaded:", Object.keys(frTranslations).length);
-          
-          setTranslations({
-            en: enTranslations,
-            fr: frTranslations,
-          });
-        } catch (fallbackError) {
-          console.error("Fallback translation loading also failed:", fallbackError);
-        }
-        
-        setIsLoaded(true); // Still set loaded to true to prevent infinite loading
+        // Set loaded to true even on error to avoid infinite loading states
+        // but keep translations empty, relying on the `t` function's fallback logic.
+        setTranslations({ en: {}, fr: {} }); 
+        setIsLoaded(true);
+        // Removed the complex require() fallback logic
       }
     };
     

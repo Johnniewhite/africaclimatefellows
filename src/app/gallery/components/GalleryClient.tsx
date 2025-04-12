@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AlbumGrid from './AlbumGrid';
+// import AlbumGrid from './AlbumGrid'; // Remove AlbumGrid import
 import Loading from './Loading';
 import { PiwigoCategory } from '@/types/piwigo';
+import { fetchAlbums } from '@/services/piwigoService';
+import AlbumCard from './AlbumCard'; // Import the new AlbumCard component
 
 export default function GalleryClient() {
   const [albums, setAlbums] = useState<PiwigoCategory[]>([]);
@@ -11,28 +13,32 @@ export default function GalleryClient() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchAlbums = async () => {
+    const loadAlbums = async () => {
       try {
         setLoading(true);
-        // Use the fetchAlbums service or fetch directly
-        const response = await fetch('https://gallery.africaclimatefellows.com/ws.php?method=pwg.categories.getList&format=json');
+        // Use the fetchAlbums service instead of direct fetch
+        const data = await fetchAlbums();
         
-        if (!response.ok) {
-          throw new Error(`API call failed: ${response.statusText}`);
+        // fetchAlbums already returns the parsed data
+        if (data.stat === 'ok') {
+          setAlbums(data.result.categories);
+          setError(null);
+        } else {
+          // Throw a generic error if Piwigo response status is not 'ok'
+          console.error('Piwigo API error:', data); // Log the full response for debugging
+          throw new Error('Failed to fetch albums from Piwigo API');
         }
-        
-        const data = await response.json();
-        setAlbums(data.result.categories);
-        setError(null);
+
       } catch (err) {
         console.error('Error fetching albums:', err);
-        setError('Failed to load albums. Please try again later.');
+        const errorMessage = err instanceof Error ? err.message : 'Failed to load albums. Please try again later.';
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAlbums();
+    loadAlbums();
   }, []);
 
   if (loading) {
@@ -58,5 +64,12 @@ export default function GalleryClient() {
     );
   }
 
-  return <AlbumGrid albums={albums} />;
+  // Render the grid of AlbumCards
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {albums.map((album) => (
+        <AlbumCard key={album.id} album={album} />
+      ))}
+    </div>
+  );
 } 
