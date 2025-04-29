@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Building2, Globe2, Users2, X } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Modal } from "@/components/Modal";
@@ -267,7 +266,7 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
               {mounted ? t('our_team_title') : 'Our Team'}
             </h2>
 
-            {teamLayers.map((layer, layerIndex) => (
+            {teamLayers.map((layer) => (
               <div key={layer.title} className="mb-20">
                 <h3 className="text-2xl font-semibold text-center mb-10">
                   {mounted ? 
@@ -296,7 +295,7 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
                           src={member.image}
                           alt={member.name}
                           fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                          className="object-contain object-top transition-transform duration-700 group-hover:scale-110"
                         />
                         {/* Gradient Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -348,7 +347,7 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
                     src={selectedMember.image}
                     alt={selectedMember.name}
                     fill
-                    className="object-cover"
+                    className="object-cover items-start"
                     priority
                   />
                   {/* Gradient Overlay */}
