@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { ArrowRight, Users2, Globe2, BookOpen, Target } from "lucide-react"
-import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 import { useLanguage } from "@/context/LanguageContext"
@@ -312,13 +311,13 @@ export default function Fellowship() {
               viewport={{ once: true }}
               className="text-center mt-12"
             >
-              <Link
-                href="/get-involved#apply"
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLScIXcYhmgtj-35tquKbSERPWgFuBts5-0akuuqcpYXKEIGszw/viewform"
                 className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg transition-colors"
               >
                 Apply Now
                 <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
+              </a>
             </motion.div>
           </div>
         </div>
@@ -403,13 +402,13 @@ export default function Fellowship() {
             <p className="text-base md:text-xl text-white/80 mb-6 md:mb-8">
               Be part of the solution. Apply now to become a Climate Justice Youth Fellow.
             </p>
-            <Link 
-              href="/get-involved#apply"
+            <a 
+              href="https://docs.google.com/forms/d/e/1FAIpQLScIXcYhmgtj-35tquKbSERPWgFuBts5-0akuuqcpYXKEIGszw/viewform"
               className="inline-flex items-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-medium text-green-900 bg-white hover:bg-green-50 rounded-lg transition-colors shadow-lg"
             >
               Apply Now
               <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
-            </Link>
+            </a>
           </motion.div>
         </div>
       </section>
