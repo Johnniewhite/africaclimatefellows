@@ -91,7 +91,7 @@ export function Header() {
       translationKey: "faculty",
       href: "/faculty",
       dropdownItems: [
-        { name: "Meet Our Faculty", translationKey: "meet_our_faculty", href: "/faculty#meet" },
+        { name: "Meet Our Facilitators", translationKey: "meet_our_faculty", href: "/faculty#meet" },
         { name: "Research Areas", translationKey: "research_areas", href: "/faculty#research" },
         { name: "Join Us", translationKey: "join_us", href: "/faculty#join" },
       ]

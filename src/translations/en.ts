@@ -29,7 +29,7 @@ const translations = {
   'key_challenges': 'Key Challenges',
   
   // Faculty dropdown
-  'meet_our_faculty': 'Meet Our Faculty',
+  'meet_our_faculty': 'Meet Our Facilitators',
   'research_areas': 'Research Areas',
   'join_us': 'Join Us',
   

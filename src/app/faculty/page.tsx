@@ -173,7 +173,7 @@ sustainable development.`,
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              {mounted ? t("meet_our_faculty") : "Meet Our Faculty"}
+              {mounted ? t("meet_our_faculty") : "Meet Our Facilitators"}
             </h1>
             <p className="text-xl md:text-2xl text-white/90">
               {mounted
