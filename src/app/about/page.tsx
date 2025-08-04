@@ -26,18 +26,18 @@ export default function About() {
 
   useEffect(() => {
     setMounted(true);
-    
+
     // Log translation keys to help debug
     if (mounted && isLoaded) {
       console.log("Translation check:", {
-        youth_empowerment_title: t('youth_empowerment_title'),
-        youth_empowerment_description: t('youth_empowerment_description'),
-        community_impact_title: t('community_impact_title'),
-        community_impact_description: t('community_impact_description'),
-        our_team_title: t('our_team_title'),
-        project_team: t('project_team'),
-        project_strategy_support_team: t('project_strategy_support_team'),
-        project_advisors: t('project_advisors')
+        youth_empowerment_title: t("youth_empowerment_title"),
+        youth_empowerment_description: t("youth_empowerment_description"),
+        community_impact_title: t("community_impact_title"),
+        community_impact_description: t("community_impact_description"),
+        our_team_title: t("our_team_title"),
+        project_team: t("project_team"),
+        project_strategy_support_team: t("project_strategy_support_team"),
+        project_advisors: t("project_advisors"),
       });
     }
   }, [mounted, isLoaded, t]);
@@ -47,10 +47,16 @@ export default function About() {
       title: "Project Team",
       members: [
         {
-          name: "Ngozi Edum",
+          name: "Taiye Ojo",
           position: "Project Manager",
-          image: "/images/faculty/ngozi.jpg",
-          bio: `Ngozi leads the Partnership and Innovation at the Development of Educational Action Network. She has over five years of experience leading sustainable development projects, including climate action, gender equality, youth leadership, governance, and education. As a climate justice advocate, she amplifies the voices of marginalised communities and groups in climate discourse to ensure the inclusion of perspectives from those on the frontlines disproportionately affected by the climate crisis. Ngozi has a background in Forestry and Environmental Management, graduating with First Class Honours. She has received multiple scholarships and recently completed an advanced degree in Forest Science with full funding through the Erasmus Mundus Joint Masters Degree Award. Ngozi is an excellent public speaker and facilitator, as evidenced by her role as a panel speaker and facilitator at global and international events.`,
+          image: "/images/Taiye.jpg",
+          bio: `Taiye Ojo is a dynamic Programme Manager with over three years of experience in the development sector, leading impactful initiatives at the intersection of education, governance, youth leadership, and climate action. Known for designing and managing high-impact programs across Nigeria, Taiye has successfully coordinated multi-stakeholder projects, including the Students-Open Gov Fellowship, Global Children Designathon (2023 & 2025), Youth Health Access, Election Observation Mission, and the Young Climate Activist Summer Camp, alongside several community mobilization campaigns focused on civic education and environmental sustainability.
+
+He brings a robust skill set in project design and implementation, community engagement, stakeholder coordination, facilitation and strategic planning. Taiye’s ability to translate complex ideas into actionable community programs has earned him recognition and partnerships with notable organizations such as Center LSD, the World’s Largest Lesson, and the Open Government Partnership (OGP).
+
+As Programme Manager at DEAN Initiative, Taiye leads innovative youth-centered programs that strengthen democratic participation and drive grassroots impact, managing diverse teams and ensuring timely delivery of program goals. He is a passionate advocate for inclusive development, he is committed to empowering local actors, nurturing youth leadership, and building sustainable, community-led solutions that create lasting change.
+
+`,
         },
         {
           name: "Doreen Mennom Oho",
@@ -65,10 +71,10 @@ She currently oversees the Lake Chad Climate Justice Fellowship, a project aimed
 With extensive experience in NGO leadership, community development, and fundraising, her skill set includes program design, grant proposal writing, and program coordination. She is passionate about climate finance, governance, and ensuring communities in the Lake Chad region have access to resources needed to strengthen their resilience against climate change.`,
         },
         {
-          name: "Uche Arinze",
+          name: "Dorcas Mokikan",
           position: "Project Communications Officer",
-          image: "/images/faculty/uche.jpeg",
-          bio: `Uche Arinze is a dynamic educator, development strategist, and communications expert passionately shaping narratives that drive impact. As Communications Manager at Dean Initiative, a youth-led NGO championing transformational change, she leads with creativity and purpose, crafting powerful stories that amplify the organization's mission and influence.`,
+          image: "/images/Dorcas.jpeg",
+          bio: `Dorcas Mokikan is a dynamic educator, development strategist, and communications expert with a passion for climate action and social transformation. As Communications and Visual/Data Creative Officer at the Dean Initiative, a youth-led NGO championing sustainable development, she blends storytelling, design, and data to craft impactful narratives that drive change. Dorcas uses her creative vision to spotlight climate issues, engage young people, and amplify underrepresented voices, making complex ideas accessible and actionable.`,
         },
       ],
     },
@@ -171,7 +177,7 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-300 blur-2xl opacity-20" />
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                  {mounted ? t('about_the_fellowship') : 'About the Fellowship'}
+                  {mounted ? t("about_the_fellowship") : "About the Fellowship"}
                 </h1>
               </motion.div>
               <motion.p
@@ -180,7 +186,9 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
                 transition={{ delay: 0.5 }}
                 className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed"
               >
-                {mounted ? t('about_fellowship_description') : 'A transformative initiative dedicated to harnessing the adventurous spirit, resilience, and innovative leadership of African youth.'}
+                {mounted
+                  ? t("about_fellowship_description")
+                  : "A transformative initiative dedicated to harnessing the adventurous spirit, resilience, and innovative leadership of African youth."}
               </motion.p>
             </motion.div>
           </div>
@@ -201,10 +209,12 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
             className="max-w-3xl mx-auto text-center mb-16"
           >
             <h1 className="text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-              {mounted ? t('our_mission_title') : 'Our Mission'}
+              {mounted ? t("our_mission_title") : "Our Mission"}
             </h1>
             <p className="text-xl text-foreground/80">
-              {mounted ? t('our_mission_description') : 'To equip young African climate activists with the tools, networks, funding and mentorship needed to address the intersectional challenges of climate change across the continent.'}
+              {mounted
+                ? t("our_mission_description")
+                : "To equip young African climate activists with the tools, networks, funding and mentorship needed to address the intersectional challenges of climate change across the continent."}
             </p>
           </motion.div>
 
@@ -212,18 +222,18 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
             {[
               {
                 icon: Globe2,
-                title: 'climate_action_title',
-                description: 'climate_action_description',
+                title: "climate_action_title",
+                description: "climate_action_description",
               },
               {
                 icon: Users2,
-                title: 'youth_empowerment_title',
-                description: 'youth_empowerment_description',
+                title: "youth_empowerment_title",
+                description: "youth_empowerment_description",
               },
               {
                 icon: Building2,
-                title: 'community_impact_title',
-                description: 'community_impact_description',
+                title: "community_impact_title",
+                description: "community_impact_description",
               },
             ].map((item, index) => (
               <motion.div
@@ -263,16 +273,18 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
             className="max-w-7xl mx-auto"
           >
             <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-              {mounted ? t('our_team_title') : 'Our Team'}
+              {mounted ? t("our_team_title") : "Our Team"}
             </h2>
 
             {teamLayers.map((layer) => (
               <div key={layer.title} className="mb-20">
                 <h3 className="text-2xl font-semibold text-center mb-10">
-                  {mounted ? 
-                    (layer.title === "Project Team" ? t('project_team') : 
-                     layer.title === "Project Strategy Support Team" ? t('project_strategy_support_team') : 
-                     t('project_advisors')) 
+                  {mounted
+                    ? layer.title === "Project Team"
+                      ? t("project_team")
+                      : layer.title === "Project Strategy Support Team"
+                      ? t("project_strategy_support_team")
+                      : t("project_advisors")
                     : layer.title}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -370,8 +382,8 @@ Semiye travels widely speaking at conferences and inspiring young people to lead
               <div className="md:w-3/5 p-5 md:p-6 overflow-y-auto max-h-[300px] md:max-h-[450px]">
                 <div className="prose dark:prose-invert prose-sm md:prose-base max-w-none">
                   {selectedMember.bio.split("\n\n").map((paragraph, i) => (
-                    <p 
-                      key={i} 
+                    <p
+                      key={i}
                       className="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed"
                     >
                       {paragraph}

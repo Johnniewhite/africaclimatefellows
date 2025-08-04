@@ -114,9 +114,17 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-muted-foreground/20">
-          <p className="text-sm text-center text-foreground/60">
-            {mounted ? t('copyright') : '© 2024 Africa Climate Fellows. All rights reserved.'}
-          </p>
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
+            <p className="text-sm text-foreground/60">
+              {mounted ? t('copyright') : '© 2024 Africa Climate Fellows. All rights reserved.'}
+            </p>
+            <Link
+              href="/policies"
+              className="text-sm text-foreground/60 hover:text-accent transition-colors duration-200"
+            >
+              Policies
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
