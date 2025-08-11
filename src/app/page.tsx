@@ -6,7 +6,7 @@ import { ArrowRight, Leaf, Globe2, Users2, Sparkles, PlayCircle } from "lucide-r
 import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
-import { Modal } from "../components/Modal"
+
 import { useLanguage } from "@/context/LanguageContext"
 
 const features = [
@@ -458,19 +458,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Modal isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)}>
-        <div className="aspect-video w-full">
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/aJbkSjZuLfw"
-            title="Lake Chad Climate Justice Fellowship Video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="rounded-lg"
-          />
-        </div>
-      </Modal>
+      
     </main>
   )
 }

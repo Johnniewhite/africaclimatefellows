@@ -108,6 +108,7 @@ const translations = {
   'quick_links': 'Quick Links',
   'resources': 'Resources',
   'connect_with_us': 'Connect With Us',
+  'policies': 'Policies',
 
   // About page
   'about_the_fellowship': 'About the Fellowship',

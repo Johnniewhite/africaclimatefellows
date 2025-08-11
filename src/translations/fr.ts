@@ -108,6 +108,7 @@ const translations = {
   'quick_links': 'Liens Rapides',
   'resources': 'Ressources',
   'connect_with_us': 'Connectez-Vous avec Nous',
+  'policies': 'Politiques',
 
   // About page
   'about_the_fellowship': 'À Propos du Programme de Bourse',

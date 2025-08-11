@@ -58,22 +58,16 @@ As Programme Manager at DEAN Initiative, Taiye leads innovative youth-centered p
 `,
     },
     {
-      name: "Doreen Mennom Oho",
+      name: "Blessing Agu",
       position: "Project Officer",
-      image: "/images/faculty/doreen.jpeg",
+      image: "/images/faculty/Blessing.png",
       background: "/images/LakeChadPhotos/lake3.png",
-      bio: `Doreen Mennom Oho is a development practitioner currently serving as the Technical Programs Lead at DEAN Initiative, a youth-led organization dedicated to enhancing healthy communities for young people. In her role, she spearheads projects focused on governance, democracy, youth leadership, climate action, and education.
-
-She holds a Master's degree in International Affairs and Diplomacy and a Bachelor of Arts in English Language from Ahmadu Bello University, Nigeria. She is a People Powered Climate Democracy Accelerator Fellow, focused on using participatory budgeting to help marginalized communities access resources for climate adaptation and mitigation. Doreen is also a Carrington Youth Fellow of the United States Government in Nigeria and a participant in the African Group of Negotiators Experts Support (AGNES) 2025 Climate Governance, Diplomacy, and Negotiations Leadership Program.
-
-She currently oversees the Lake Chad Climate Justice Fellowship, a project aimed at equipping young leaders with the knowledge and tools to advocate for climate justice and resilience in the region.
-
-With extensive experience in NGO leadership, community development, and fundraising, her skill set includes program design, grant proposal writing, and program coordination. She is passionate about climate finance, governance, and ensuring communities in the Lake Chad region have access to resources needed to strengthen their resilience against climate change.`,
+      bio: `Blessing C. Agu aka Newest is a development practitioner and policy advocate passionate about climate justice, democratic governance, inclusion, and policy reforms. She currently serves as the Strategy and Research Lead at DEAN Initiative, where she drives data-driven research, evidence-based advocacy, strategic alignment, and grassroots engagement. She also doubles as the Community Manager where she coordinates team, pool of volunteers, and external and development partners. With a strong background in civic innovation, monitoring and evaluation, she is committed to amplifying marginalised voices, promoting climate resilience, and shaping inclusive public policy.`,
     },
     {
       name: "Dorcas Mokikan",
       position: "Project Communications Officer",
-      image: "/images/Dorcas.jpeg",
+      image: "/images/Dorcas.jpg",
       background: "/images/LakeChadPhotos/lake1.png",
       bio: `Dorcas Mokikan is a dynamic educator, development strategist, and communications expert with a passion for climate action and social transformation. As Communications and Visual/Data Creative Officer at the Dean Initiative, a youth-led NGO championing sustainable development, she blends storytelling, design, and data to craft impactful narratives that drive change. Dorcas uses her creative vision to spotlight climate issues, engage young people, and amplify underrepresented voices, making complex ideas accessible and actionable.`,
     },

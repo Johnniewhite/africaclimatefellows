@@ -18,6 +18,7 @@ export function Footer() {
       { name: mounted ? t('about') : 'About', href: '/about' },
       { name: mounted ? t('fellowship') : 'Fellowship', href: '/fellowship' },
       { name: mounted ? t('faculty') : 'Faculty', href: '/faculty' },
+      { name: mounted ? t('policies') : 'Policies', href: '/policies' },
       { name: mounted ? t('impact') : 'Impact', href: '/impact' },
       { name: mounted ? t('get_involved') : 'Get Involved', href: '/get-involved' },
       { name: mounted ? t('contact') : 'Contact', href: '/contact' },
@@ -63,7 +64,7 @@ export function Footer() {
               {mounted ? t('quick_links') : 'Quick Links'}
             </h3>
             <ul className="space-y-2">
-              {navigation.main.slice(0, 3).map((item) => (
+              {navigation.main.slice(0, 4).map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
@@ -80,7 +81,7 @@ export function Footer() {
               {mounted ? t('resources') : 'Resources'}
             </h3>
             <ul className="space-y-2">
-              {navigation.main.slice(3).map((item) => (
+              {navigation.main.slice(4).map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
@@ -122,7 +123,7 @@ export function Footer() {
               href="/policies"
               className="text-sm text-foreground/60 hover:text-accent transition-colors duration-200"
             >
-              Policies
+              {mounted ? t('policies') : 'Policies'}
             </Link>
           </div>
         </div>
