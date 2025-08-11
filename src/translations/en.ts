@@ -67,6 +67,9 @@ const translations = {
   'feature_mentorship_desc': 'Learn from seasoned climate justice advocates',
   'feature_funding_title': 'Project Funding',
   'feature_funding_desc': 'Access resources to implement your climate initiatives',
+  'meet_our_fellows': 'Meet Our Fellows',
+  'meet_our_fellows_subtext': 'Discover youth leaders driving climate justice across the Lake Chad Basin',
+  'see_more': 'See more',
   
   // Lake Chad section
   'first_fellowship_call': 'First Fellowship Call',

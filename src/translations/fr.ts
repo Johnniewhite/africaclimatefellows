@@ -67,6 +67,9 @@ const translations = {
   'feature_mentorship_desc': 'Apprenez des défenseurs chevronnés de la justice climatique',
   'feature_funding_title': 'Financement de Projets',
   'feature_funding_desc': 'Accédez aux ressources pour mettre en œuvre vos initiatives climatiques',
+  'meet_our_fellows': 'Rencontrez Nos Boursiers',
+  'meet_our_fellows_subtext': 'Découvrez les jeunes leaders qui font avancer la justice climatique dans le bassin du Lac Tchad',
+  'see_more': 'Voir plus',
   
   // Lake Chad section
   'first_fellowship_call': 'Premier Appel à Candidatures',

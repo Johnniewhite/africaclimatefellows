@@ -30,15 +30,7 @@ const coreComponents = [
   }
 ]
 
-interface Fellow {
-  name: string
-  age: number
-  country: string
-  location: string
-  image: string
-  shortBio: string
-  fullBio: string
-}
+import type { Fellow } from "@/data/fellows"
 
 const fellows: Fellow[] = [
   // Chad Fellows
@@ -427,7 +419,7 @@ export default function Fellowship() {
             </p>
             
             {/* Country Filter */}
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
+            <div className="flex flex-wrap justify-center gap-2 mb-4">
               {countries.map((country) => (
                 <button
                   key={country}

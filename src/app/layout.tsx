@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${GeistSans.variable} antialiased min-h-screen`}>
+      <body suppressHydrationWarning className={`${GeistSans.variable} antialiased min-h-screen`}>
         <Providers>
           <div className="relative min-h-screen flex flex-col">
             <Header />

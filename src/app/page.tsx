@@ -2,7 +2,7 @@
 
 import BlogSection from "../components/BlogSection";
 import { motion } from "framer-motion"
-import { ArrowRight, Leaf, Globe2, Users2, Sparkles, PlayCircle } from "lucide-react"
+import { ArrowRight, Leaf, Globe2, Users2, Sparkles, PlayCircle, MapPin } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
@@ -40,6 +40,10 @@ const features = [
 export default function Home() {
   const { t, language, isLoaded } = useLanguage()
   const [mounted, setMounted] = useState(false)
+  
+  // Fellows preview
+  // Lazy import type only; runtime import below to avoid SSR issues in client component
+  // We'll select first 4 fellows for homepage preview
   const [currentImage, setCurrentImage] = useState(0)
   const heroImages = [
     '/images/ClimateConvofold/Climate Convo12.jpeg',
@@ -96,6 +100,39 @@ export default function Home() {
   // Get the translated or fallback text
   const bannerHeadline = mounted ? t('banner_headline') : "Empowering Africa's Youth for Climate Justice Action";
   const bannerSubtext = mounted ? t('banner_subtext') : "A transformative fellowship and action equipping young African leaders to champion climate justice, tackle systemic challenges, and drive grassroots resilience.";
+
+  // Inline component to avoid extra files; reads shared data client-side
+  function FellowsPreview() {
+    const [preview, setPreview] = useState<Array<{name: string; image: string; location: string; country: string}>>([])
+    useEffect(() => {
+      import('@/data/fellows').then((mod) => {
+        const sample = mod.fellows.slice(0, 4).map(f => ({
+          name: f.name, image: f.image, location: f.location, country: f.country
+        }))
+        setPreview(sample)
+      }).catch(() => {})
+    }, [])
+
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {preview.map((fellow) => (
+          <div key={fellow.name} className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+            <div className="relative h-48">
+              <Image src={fellow.image} alt={fellow.name} fill className="object-cover" />
+            </div>
+            <div className="p-4">
+              <h3 className="font-semibold line-clamp-1">{fellow.name}</h3>
+              <div className="mt-1 flex items-center gap-2 text-sm text-foreground/70">
+                <MapPin className="w-4 h-4" />
+                <span className="line-clamp-1">{fellow.location}</span>
+              </div>
+              <span className="mt-2 inline-block text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-1 rounded-full">{fellow.country}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
 
   return (
     <main className="min-h-screen">
@@ -208,6 +245,36 @@ export default function Home() {
           {mounted && t('watch_video')}
         </button>
       </div>
+
+      {/* Meet Our Fellows - inserted before Features Grid */}
+      <section className="py-12 md:py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center mb-10"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              {mounted ? t('meet_our_fellows') : 'Meet Our Fellows'}
+            </h2>
+            <p className="text-foreground/80">
+              {mounted ? t('meet_our_fellows_subtext') : 'Discover youth leaders driving climate justice across the Lake Chad Basin'}
+            </p>
+          </motion.div>
+
+          {/* Lightweight preview using first four fellows */}
+          <FellowsPreview />
+
+          <div className="mt-8 text-center">
+            <Link href="/fellowship/fellows" className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-green-700 hover:bg-green-800 rounded-md">
+              {mounted ? t('see_more') : 'See more'}
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Features Grid - Mobile Friendly */}
       <section className="py-12 md:py-24 bg-muted">

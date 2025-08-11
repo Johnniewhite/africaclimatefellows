@@ -84,6 +84,7 @@ export function Header() {
         { name: "Core Components", translationKey: "core_components", href: "/fellowship#components" },
         { name: "Application Process", translationKey: "application_process", href: "/fellowship#apply" },
         { name: "Key Challenges", translationKey: "key_challenges", href: "/fellowship#challenges" },
+        { name: "Meet Our Fellows", translationKey: "meet_our_fellows", href: "/fellowship/fellows" },
       ]
     },
     { 
