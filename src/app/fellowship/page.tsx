@@ -44,12 +44,18 @@ export default function Fellowship() {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    console.log('Modal state changed:', { isModalOpen, selectedFellow: selectedFellow?.name });
+  }, [isModalOpen, selectedFellow]);
+
   const openFellowModal = (fellow: Fellow) => {
+    console.log('Opening modal for fellow:', fellow.name);
     setSelectedFellow(fellow);
     setIsModalOpen(true);
   };
 
   const closeFellowModal = () => {
+    console.log('Closing modal');
     setIsModalOpen(false);
     setTimeout(() => setSelectedFellow(null), 300);
   };
@@ -58,6 +64,8 @@ export default function Fellowship() {
   const filteredFellows = selectedCountry === "All" 
     ? fellows 
     : fellows.filter(fellow => fellow.country === selectedCountry);
+
+  console.log('Fellows data:', { totalFellows: fellows.length, filteredFellows: filteredFellows.length, selectedCountry });
 
   return (
     <main className="min-h-screen">
@@ -232,6 +240,14 @@ export default function Fellowship() {
               Meet the 20 exceptional youth leaders from Chad, Cameroon, Niger, and Nigeria who are driving climate justice and resilience in the Lake Chad Basin.
             </p>
             
+            {/* Test Modal Button */}
+            <button
+              onClick={() => openFellowModal(fellows[0])}
+              className="mb-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Test Modal (Debug)
+            </button>
+            
             {/* Country Filter */}
             <div className="flex flex-wrap justify-center gap-2 mb-4">
               {countries.map((country) => (
@@ -304,11 +320,10 @@ export default function Fellowship() {
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="md:w-1/3">
                   <div className="relative h-64 md:h-80 rounded-lg overflow-hidden">
-                    <Image
+                    <img
                       src={selectedFellow.image}
                       alt={selectedFellow.name}
-                      fill
-                      className="object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="mt-4 space-y-2">

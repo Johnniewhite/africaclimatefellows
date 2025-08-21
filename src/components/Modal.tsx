@@ -8,6 +8,8 @@ interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, children, className = '' }: ModalProps) {
+  console.log('Modal render:', { isOpen, className });
+  
   return (
     <AnimatePresence>
       {isOpen && (
@@ -24,7 +26,8 @@ export function Modal({ isOpen, onClose, children, className = '' }: ModalProps)
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               onClick={(e) => e.stopPropagation()}
-              className={`relative max-h-[90vh] bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50 ${className}`}
+              className={`relative max-h-[90vh] bg-white dark:bg-gray-800 rounded-lg shadow-xl z-[60] ${className}`}
+              style={{ minHeight: '200px' }}
             >
               {children}
             </motion.div>
