@@ -16,7 +16,20 @@ interface Post {
   _embedded?: {
     "wp:featuredmedia"?: [{
       source_url: string;
-    }]
+      alt_text?: string;
+      media_details?: {
+        width: number;
+        height: number;
+      };
+    }];
+    "wp:term"?: Array<Array<{
+      id: number;
+      name: string;
+      slug: string;
+    }>>;
+    author?: [{
+      name: string;
+    }];
   };
 }
 
@@ -63,7 +76,16 @@ export default function BlogSection({
           "https://blog.africaclimatefellows.com/wp-json/wp/v2/posts?_embed&per_page=" + postsToShow
         );
         const postsData = await postsResponse.json();
-        setPosts(postsData);
+        
+        // Process posts for better display
+        const processedPosts = postsData.map((post: Post) => {
+          // Decode HTML entities
+          post.title.rendered = decodeHTMLEntities(post.title.rendered);
+          post.excerpt.rendered = stripHtmlAndTruncate(post.excerpt.rendered, 150);
+          return post;
+        });
+        
+        setPosts(processedPosts);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -73,6 +95,27 @@ export default function BlogSection({
 
     fetchData();
   }, [showCategories, postsToShow]);
+
+  // Helper functions
+  function decodeHTMLEntities(text: string) {
+    if (typeof window === 'undefined') return text;
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
+  }
+
+  function stripHtmlAndTruncate(html: string, maxLength: number) {
+    if (typeof window === 'undefined') return html;
+    // Remove HTML tags
+    const text = html.replace(/<[^>]*>/g, '');
+    // Decode HTML entities
+    const decoded = decodeHTMLEntities(text);
+    // Truncate if needed
+    if (decoded.length > maxLength) {
+      return decoded.substring(0, maxLength) + '...';
+    }
+    return decoded;
+  }
 
   const filteredPosts = posts.filter(post => {
     const postCategories = post.categories.map(catId => categoryMap[catId] || "");
@@ -164,43 +207,74 @@ export default function BlogSection({
                 viewport={{ once: true }}
                 className="group"
               >
-                <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05"}
-                      alt=""
-                      fill
-                      className="object-contain transform group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <article className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                  <div className="relative h-56 overflow-hidden bg-gray-100 dark:bg-gray-900">
+                    {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ? (
+                      <Image
+                        src={post._embedded["wp:featuredmedia"][0].source_url}
+                        alt={post._embedded["wp:featuredmedia"][0].alt_text || post.title.rendered}
+                        fill
+                        className="object-cover transform group-hover:scale-110 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-green-400 to-green-600">
+                        <span className="text-white text-6xl font-bold opacity-20">
+                          {post.title.rendered.charAt(0)}
+                        </span>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-center mb-4">
-                      <span className="text-sm text-green-600 dark:text-green-400 font-medium">
-                        {categoryMap[post.categories[0]] || "Uncategorized"}
+                  
+                  <div className="p-6 flex-1 flex flex-col">
+                    {/* Meta Information */}
+                    <div className="flex items-center gap-2 mb-3 text-xs">
+                      {post._embedded?.["wp:term"]?.[0]?.[0] && (
+                        <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full font-medium">
+                          {post._embedded["wp:term"][0][0].name}
+                        </span>
+                      )}
+                      <span className="text-gray-500 dark:text-gray-400">
+                        {new Date(post.date).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })}
                       </span>
-                      <span className="mx-2 text-foreground/30">•</span>
-                      <span className="text-sm text-foreground/60">
-                        {new Date(post.date).toLocaleDateString()}
-                      </span>
+                      {post._embedded?.author?.[0] && (
+                        <>
+                          <span className="text-gray-400">•</span>
+                          <span className="text-gray-500 dark:text-gray-400">
+                            {post._embedded.author[0].name}
+                          </span>
+                        </>
+                      )}
                     </div>
-                    <h3 
-                      className="text-xl font-bold mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300"
-                      dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-                    />
-                    <div 
-                      className="text-foreground/70 mb-4 line-clamp-2"
-                      dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-                    />
+                    
+                    {/* Title */}
+                    <h3 className="text-xl font-bold mb-3 line-clamp-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">
+                      {decodeHTMLEntities(post.title.rendered)}
+                    </h3>
+                    
+                    {/* Excerpt */}
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 flex-1">
+                      {post.excerpt.rendered}
+                    </p>
+                    
+                    {/* Read More Link */}
                     <Link 
                       href={`/blog/${post.id}`}
-                      className="inline-flex items-center text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors"
+                      className="inline-flex items-center text-green-600 dark:text-green-400 font-semibold hover:text-green-700 dark:hover:text-green-300 transition-colors group/link"
                     >
-                      Read More
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <span className="relative">
+                        Read Full Article
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 dark:bg-green-400 group-hover/link:w-full transition-all duration-300"></span>
+                      </span>
+                      <ArrowRight className="ml-2 w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" />
                     </Link>
                   </div>
-                </div>
+                </article>
               </motion.div>
             ))
           ) : (

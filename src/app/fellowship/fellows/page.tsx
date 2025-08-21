@@ -7,6 +7,7 @@ import { motion } from "framer-motion"
 import { MapPin, ArrowRight } from "lucide-react"
 import { useLanguage } from "@/context/LanguageContext"
 import type { Fellow } from "@/data/fellows"
+import { getShortBio } from "@/data/fellows"
 
 export default function FellowsPage() {
   const { t } = useLanguage()
@@ -76,7 +77,7 @@ export default function FellowsPage() {
                     <MapPin className="w-4 h-4" />
                     <span className="line-clamp-1">{fellow.location}</span>
                   </div>
-                  <p className="mt-2 text-sm text-foreground/70 line-clamp-3">{fellow.shortBio}</p>
+                  <p className="mt-2 text-sm text-foreground/70 line-clamp-3">{getShortBio(fellow.fullBio)}</p>
                 </div>
               </motion.div>
             ))}

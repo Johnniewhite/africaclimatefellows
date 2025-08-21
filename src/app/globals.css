@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import WordPress content styles for blog posts */
+@import '../styles/wordpress-content.css';
+
 @layer base {
   :root {
     --background: 0 0% 100%;
